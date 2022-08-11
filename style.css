@@ -19,12 +19,12 @@ body {
 header {
   align-items: center;
   background-color: var(--black-color);
-  display: flex;
-  height: 120px;
-  justify-content: space-between;
   background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
     transparent no-repeat;
   background-size: 100% 1px;
+  display: flex;
+  height: 120px;
+  justify-content: space-between;
   padding-bottom: 1px;
   width: 100%;
 }
@@ -107,30 +107,30 @@ header .search-container {
   color: var(--white-color);
   font-family: inherit;
   margin: 20px 0 30px 30px;
-  width: 40%;
+  width: 50%;
 }
 .movies-description h1 {
-  font-size: 4rem;
+  font-size: 6rem;
   letter-spacing: 5px;
 }
 .movies-description .quote-author {
-  margin-left: 80%;
+  margin-top: 20px;
 }
-/********************** Divider Section **********************/
-.quote-movies-divider {
+/********************** Divider **********************/
+.divider {
   background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
     transparent no-repeat;
-  background-size: 100% 1px;
+  background-size: 100% 3px;
   left: 50%;
-  margin: 15px 0 15px 0;
+  margin: 30px 0 30px 0;
   padding: 1px;
   position: relative;
   transform: translate(-50%, -50%);
-  width: 80%;
+  width: 90%;
 }
 /********************** Movies container **********************/
 .movies-container {
-  border: 1px solid var(--white-color);
+  /* border: 1px solid var(--white-color); */
   margin: 0 20px 0 20px;
 }
 /********************** Carousel Section **********************/
@@ -141,9 +141,12 @@ header .search-container {
   letter-spacing: 3px;
   margin-left: 10px;
 }
-.movies-section {
+.popular-movies,
+.popular-tvshows,
+.top-rated-movies,
+.top-rated-tvshows,
+.trending-lastweek {
   align-items: center;
-  border: 1px solid #12c2e9;
   display: flex;
   justify-content: center;
   overflow: hidden;
@@ -156,13 +159,14 @@ header .search-container {
   color: #fff;
   cursor: pointer;
   flex: 0.5;
-  height: 50vh;
+  height: 40vh;
   margin: 10px;
   position: relative;
-  transition: all 700ms ease-in;
+  transition: all 500ms ease-in;
 }
-.panel.active {
-  flex: 3;
+.panel.active,
+.panel:hover {
+  flex: 2.5;
 }
 
 /* @media (max-width: 480px) {
@@ -361,4 +365,4 @@ div.movies {
 /* 320px — 480px: Mobile devices */
 /* 481px — 768px: iPads, Tablets */
 /* 769px — 1024px: Small screens, laptops */
-/* 1025px — 1200px: Desktops, large screens */
+/* 1025px — 1200px: Desktops, large screens */ ;

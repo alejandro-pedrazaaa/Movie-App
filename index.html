@@ -15,37 +15,64 @@
   </head>
 
   <body>
-    <header class="header">
-      <h1>MoviesApp</h1>
-      <div class="search-container">
-        <input type="text" class="input" placeholder="Search..." />
-        <button class="btn">
-          <i class="fas fa-search"></i>
-        </button>
+    <div>
+      <header class="header">
+        <h1>MoviesApp</h1>
+        <div class="search-container">
+          <input type="text" class="input" placeholder="Search..." />
+          <button class="btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="movies-description">
+        <h1>Movies...</h1>
+        <blockquote
+          cite="https://www.brainyquote.com/quotes/walt_disney_131636?src=t_movies"
+        >
+          <p>
+            <i
+              >"Movies can and do have tremendous influence in shaping young
+              lives in the realm of entertainment towards the ideals and
+              objectives of normal adulthood."<br />
+              <p class="quote-author">- Walt Disney</p>
+            </i>
+          </p>
+        </blockquote>
       </div>
-    </header>
 
-    <div class="movies-description">
-      <h1>Movies...</h1>
-      <blockquote
-        cite="https://www.brainyquote.com/quotes/walt_disney_131636?src=t_movies"
-      >
-        <p>
-          <i
-            >"Movies can and do have tremendous influence in shaping young lives
-            in the realm of entertainment towards the ideals and objectives of
-            normal adulthood."<br />
-            <p class="quote-author">- Walt Disney</p>
-          </i>
-        </p>
-      </blockquote>
-    </div>
+      <div class="divider"></div>
 
-    <div class="quote-movies-divider"></div>
+      <div class="movies-container">
+        <h2 class="section-title">Popular Movies</h2>
+        <div class="popular-movies"></div>
+        <div class="divider"></div>
+      </div>
 
-    <div class="movies-container">
-      <h2 class="section-title">Popular Movies</h2>
-      <div class="movies-section"></div>
+      <div class="movies-container">
+        <h2 class="section-title">Popular TV-shows</h2>
+        <div class="popular-tvshows"></div>
+        <div class="divider"></div>
+      </div>
+
+      <div class="movies-container">
+        <h2 class="section-title">Top Rated Movies</h2>
+        <div class="top-rated-movies"></div>
+        <div class="divider"></div>
+      </div>
+
+      <div class="movies-container">
+        <h2 class="section-title">Top Rated TV-shows</h2>
+        <div class="top-rated-tvshows"></div>
+        <div class="divider"></div>
+      </div>
+
+      <div class="movies-container">
+        <h2 class="section-title">Trending Last Week</h2>
+        <div class="trending-lastweek"></div>
+        <div class="divider"></div>
+      </div>
     </div>
   </body>
 </html>

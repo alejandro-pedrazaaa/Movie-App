@@ -1,5 +1,5 @@
 /**
- * @description - Makes search navigation appear and dissapears when user clicks on search button
+ * @description - Makes search input appear and dissapears when user clicks on search button
  */
 const searchContainer = document.querySelector(".search-container");
 const btn = document.querySelector(".btn");
@@ -10,33 +10,51 @@ btn.addEventListener("click", () => {
   input.focus();
 });
 
-const POPULAR_URL =
-  "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
+const POPULAR_MOVIES_URL =
+  "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
+const POPULAR_TVSHOWS_URL =
+  "https://api.themoviedb.org/3/tv/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
+const TOP_RATED_MOVIES_URL =
+  "https://api.themoviedb.org/3/movie/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
+const TOP_RATED_TVSHOWS_URL =
+  "https://api.themoviedb.org/3/tv/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
+const TRENDING_LASTWEEK_URL =
+  "https://api.themoviedb.org/3/trending/all/week?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US";
 // const SEARCH_API =
 //   'https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query="';
 // console.log(API_URL);
 
+const popularMoviesContainer = document.querySelector(".popular-movies");
+const popularTvShowsContainer = document.querySelector(".popular-tvshows");
+const topRatedMoviesContainer = document.querySelector(".top-rated-movies");
+const topRatedTvShowsContainer = document.querySelector(".top-rated-tvshows");
+const trendingLastWeekContainer = document.querySelector(".trending-lastweek");
+``;
+
 /**
  * @description - Populates initial page movies on the page
  */
-displayPopularMovies(POPULAR_URL);
+getAndDisplayData(POPULAR_MOVIES_URL, popularMoviesContainer);
+getAndDisplayData(POPULAR_TVSHOWS_URL, popularTvShowsContainer);
+getAndDisplayData(TOP_RATED_MOVIES_URL, topRatedMoviesContainer);
+getAndDisplayData(TOP_RATED_TVSHOWS_URL, topRatedTvShowsContainer);
+getAndDisplayData(TRENDING_LASTWEEK_URL, trendingLastWeekContainer);
 
 /**
  * @description - Waits for api to respond and then displays the movies
  */
-async function displayPopularMovies(url) {
+async function getAndDisplayData(url, container) {
   const res = await fetch(url);
   const data = await res.json();
 
-  showMovies(data.results);
+  showMovies(data.results, container);
 }
 
 /**
  * @description - Displays movies on when the page is loaded
  */
-const popularMoviesContainer = document.querySelector(".movies-section");
-const showMovies = (movies) => {
+const showMovies = (movies, container) => {
   movies.forEach((movie) => {
     const { poster_path } = movie;
 
@@ -45,37 +63,54 @@ const showMovies = (movies) => {
 
     movies.style.backgroundImage = `url(${IMG_PATH + poster_path})`;
 
-    popularMoviesContainer.appendChild(movies);
+    container.appendChild(movies);
 
     panels = document.querySelectorAll(".panel");
-    addActiveClass(panels);
-    enlargeClickedPoster(panels);
+    addActiveClass(container);
+    enlargeClickedPoster(container);
   });
 };
 
 /**
  * @description - Adds active class to the movie that is displayed
  */
-const addActiveClass = (panels) => {
-  panels[0].classList.add("active");
+const addActiveClass = (container) => {
+  const firstPanel = container.firstElementChild;
+  firstPanel.classList.add("active");
 };
 
 /**
- * @description - Allows the user to click on a movie and enlarge it
+ * @description - Allows the user to hover on the poster and enlarge it
  */
-const enlargeClickedPoster = (panels) => {
+const enlargeClickedPoster = (container) => {
+  const panels = container.querySelectorAll(".panel");
   panels.forEach((panel) => {
-    panel.addEventListener("click", () => {
-      removeActiveClasses();
-      panel.classList.add("active");
-    });
+    if (panel.parentNode.isEqualNode(container)) {
+      panel.addEventListener("mouseover", () => {
+        removeActiveClasses(container);
+        panel.classList.add("active");
+      });
+    }
   });
 };
-const removeActiveClasses = () => {
+
+const removeActiveClasses = (container) => {
+  const panels = container.querySelectorAll(".panel");
   panels.forEach((panel) => {
     panel.classList.remove("active");
   });
 };
+
+// panels.forEach((panel) => {
+//   panel.addEventListener("click", () => {
+//     removeActiveClasses();
+//     panel.classList.add("active");
+//   });
+// });
+
+// panels.forEach((panel) => {
+//   panel.classList.remove("active");
+// });
 
 // /**
 //  * @description - Event that is triggered when the user clicks on the submit button to search for any movie
