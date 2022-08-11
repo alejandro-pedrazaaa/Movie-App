@@ -105,12 +105,17 @@ btn.addEventListener("click", () => {
  * and will decrease in size.
  */
 const header = document.querySelector(".header");
+const footer = document.querySelector("footer");
 window.addEventListener("scroll", fixHeader);
 function fixHeader() {
   if (window.scrollY > header.offsetHeight + 50) {
     header.classList.add("active");
+    footer.classList.add("active");
   } else {
     header.classList.remove("active");
+    footer.classList.remove("active");
+    header.style.transition = "all 0.5s";
+    footer.style.transition = "all 0.5s";
   }
 }
 // panels.forEach((panel) => {
