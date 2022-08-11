@@ -1,15 +1,3 @@
-/**
- * @description - Makes search input appear and dissapears when user clicks on search button
- */
-const searchContainer = document.querySelector(".search-container");
-const btn = document.querySelector(".btn");
-const input = document.querySelector(".input");
-
-btn.addEventListener("click", () => {
-  searchContainer.classList.toggle("active");
-  input.focus();
-});
-
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
 const POPULAR_MOVIES_URL =
   "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
@@ -33,7 +21,7 @@ const trendingLastWeekContainer = document.querySelector(".trending-lastweek");
 ``;
 
 /**
- * @description - Populates initial page movies on the page
+ * @description - Populates initial page movies on the page.
  */
 getAndDisplayData(POPULAR_MOVIES_URL, popularMoviesContainer);
 getAndDisplayData(POPULAR_TVSHOWS_URL, popularTvShowsContainer);
@@ -42,7 +30,7 @@ getAndDisplayData(TOP_RATED_TVSHOWS_URL, topRatedTvShowsContainer);
 getAndDisplayData(TRENDING_LASTWEEK_URL, trendingLastWeekContainer);
 
 /**
- * @description - Waits for api to respond and then displays the movies
+ * @description - Waits for api to respond and then displays the movies.
  */
 async function getAndDisplayData(url, container) {
   const res = await fetch(url);
@@ -52,7 +40,7 @@ async function getAndDisplayData(url, container) {
 }
 
 /**
- * @description - Displays movies on when the page is loaded
+ * @description - Displays movies on when the page is loaded.
  */
 const showMovies = (movies, container) => {
   movies.forEach((movie) => {
@@ -67,12 +55,12 @@ const showMovies = (movies, container) => {
 
     panels = document.querySelectorAll(".panel");
     addActiveClass(container);
-    enlargeClickedPoster(container);
+    enlargeHoveredPoster(container);
   });
 };
 
 /**
- * @description - Adds active class to the movie that is displayed
+ * @description - Adds active class to the first movie of each section.
  */
 const addActiveClass = (container) => {
   const firstPanel = container.firstElementChild;
@@ -80,9 +68,9 @@ const addActiveClass = (container) => {
 };
 
 /**
- * @description - Allows the user to hover on the poster and enlarge it
+ * @description - Allows the user to hover on the poster and enlarge it.
  */
-const enlargeClickedPoster = (container) => {
+const enlargeHoveredPoster = (container) => {
   const panels = container.querySelectorAll(".panel");
   panels.forEach((panel) => {
     if (panel.parentNode.isEqualNode(container)) {
@@ -101,6 +89,30 @@ const removeActiveClasses = (container) => {
   });
 };
 
+/**
+ * @description - Makes search input appear and dissapears when user clicks on search button
+ */
+const searchContainer = document.querySelector(".search-container");
+const btn = document.querySelector(".btn");
+const input = document.querySelector(".input");
+btn.addEventListener("click", () => {
+  searchContainer.classList.toggle("active");
+  input.focus();
+});
+
+/**
+ * @description - When the user scrolls down, the header will stick to the top of the page
+ * and will decrease in size.
+ */
+const header = document.querySelector(".header");
+window.addEventListener("scroll", fixHeader);
+function fixHeader() {
+  if (window.scrollY > header.offsetHeight + 50) {
+    header.classList.add("active");
+  } else {
+    header.classList.remove("active");
+  }
+}
 // panels.forEach((panel) => {
 //   panel.addEventListener("click", () => {
 //     removeActiveClasses();
