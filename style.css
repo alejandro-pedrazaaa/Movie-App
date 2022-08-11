@@ -177,6 +177,37 @@ header .search-container {
 .panel:hover {
   flex: 2.5;
 }
+/********************** Footer section **********************/
+footer {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to left, #f64f59, #c471ed, #12c2e9);
+}
+.footer-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: top;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  gap: 5px;
+}
+.footer-container p {
+  font-family: inherit;
+font-weight: 600;
+margin-right: 5px;
+}
+.tmdb {
+  /* height: 50%;
+  width: 50%; */
+  height: 100%;
+  width: 100%;
+} */
 
 /* @media (max-width: 480px) {
   .container {
