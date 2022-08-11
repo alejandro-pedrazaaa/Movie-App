@@ -1,0 +1,282 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;300;400;500;600&display=swap");
+:root {
+  --black-color: #000000;
+  --white-color: #ffffff;
+  --pink-color: #f64f59;
+  --purple-color: #c471ed;
+  --blue-color: #12c2e9;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: var(--black-color);
+  font-family: "Prompt", sans-serif;
+}
+/********************** Search container **********************/
+header {
+  align-items: center;
+  background-color: var(--black-color);
+  display: flex;
+  height: 120px;
+  justify-content: space-between;
+  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
+    transparent no-repeat;
+  background-size: 100% 1px;
+  padding-bottom: 1px;
+  width: 100%;
+}
+header h1 {
+  background: #800080;
+  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
+  background: --webkit-linear-gradient(right, #f64f59, #c471ed, #12c2e9);
+  background-size: 100%;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 3.5rem;
+  font-weight: 600;
+  letter-spacing: 5px;
+  margin-left: 50px;
+  background-clip: text;
+  -moz-background-clip: text;
+  -fox-background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/********************** Search container **********************/
+header .search-container {
+  font-family: inherit;
+  height: 50px;
+  margin-right: 100px;
+  position: relative;
+}
+/********************** Search button **********************/
+.search-container .btn {
+  background: #12c2e9;
+  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
+  background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 24px;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  text-decoration: none;
+  top: 0;
+  transition: transform 0.3s ease;
+  width: 50px;
+}
+.search-container .btn i {
+  color: var(--black-color);
+}
+.search-container .btn:hover {
+  transform: scale(1.15);
+}
+.search-container.active .btn {
+  transform: translateX(-30px);
+}
+.search-container.active .btn i:hover {
+  transform: scale(1.1);
+}
+/********************** Search input **********************/
+.search-container .input {
+  background-color: var(--black-color);
+  border: 0;
+  font-size: 20px;
+  padding: 10px;
+  transition: width 0.3s ease;
+  width: 50px;
+}
+.search-container.active .input {
+  border-image: linear-gradient(to left, #f64f59, #c471ed, #12c2e9) 1;
+  border-left: none;
+  border-style: solid;
+  border-width: 2px;
+  color: var(--white-color);
+  padding-left: 25px;
+  transform: translateX(0px);
+  width: 200px;
+}
+.btn:focus,
+.input:focus {
+  outline: none;
+}
+/********************** Movies description **********************/
+.movies-description {
+  color: var(--white-color);
+  font-family: inherit;
+  margin: 20px 0 30px 30px;
+  width: 40%;
+}
+.movies-description h1 {
+  font-size: 4rem;
+  letter-spacing: 5px;
+}
+.movies-description .quote-author {
+  margin-left: 80%;
+}
+/********************** Divider Section **********************/
+.divider {
+  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
+    transparent no-repeat;
+  background-size: 100% 1px;
+  left: 50%;
+  margin: 0;
+  padding: 1px;
+  position: relative;
+  transform: translate(-50%, -50%);
+  width: 80%;
+}
+/********************** Main Section **********************/
+main {
+  margin: 35px auto 35px auto;
+  width: 94%;
+  position: relative;
+  border: 1px solid #12c2e9;
+  color: var(--white-color);
+}
+/********************** Main Section **********************/
+.display-carousel {
+  display: flex;
+  width: 90vw;
+}
+/* 
+header > .search-container > input.search-bar {
+  background: var(--primary-color);
+  border-radius: 20px;
+  border: none;
+  color: white;
+  font-family: inherit;
+  font-size: 1em;
+  outline: none;
+  padding: 0.5em 1em;
+  width: 40vh;
+}
+header > .search-container > button#submit {
+  background: var(--tertiary-color);
+  border-radius: 50%;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  height: 40px;
+  margin-left: 1em;
+  outline: none;
+  width: 40px;
+}
+button#submit:hover {
+  opacity: 0.9;
+}
+button#submit:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease-in;
+}
+.error-shake {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+@keyframes shake {
+  10%,
+  90% {
+  transform: translate3d(-1px, 0, 0);
+}
+  20%,
+  80% {
+  transform: translate3d(2px, 0, 0);
+}
+  30%,
+  50%,
+  70% {
+  transform: translate3d(-4px, 0, 0);
+}
+  40%,
+  60% {
+  transform: translate3d(4px, 0, 0);
+}
+}
+body > main#movies-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin: 0 50px 0 50px;
+}
+div.movies {
+  background-color: var(--tertiary-color);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+  cursor: pointer;
+  margin: 35px 35px;
+  overflow: hidden;
+  position: relative;
+  width: 20%;
+}
+.movies img {
+  width: 100%;
+}
+.movies .info-container {
+  align-items: center;
+  color: white;
+  display: flex;
+  height: 130px;
+  justify-content: center;
+  letter-spacing: 0.5px;
+  padding: 0 1rem 0 1rem;
+}
+.movies .info-container .movie_title {
+  font-size: 1.5rem;
+  inline-size: 200px;
+  left: 5px;
+  overflow-wrap: break-word;
+  position: absolute;
+  text-align: center;
+  word-break: break-word;
+  word-wrap: break-word;
+}
+.movies .info-container #votes {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  position: absolute;
+  right: 5px;
+}
+.green-vote {
+  background-color: #00ff00;
+}
+.orange-vote {
+  background-color: #ffa500;
+}
+.red-vote {
+  background-color: #ff0000;
+}
+.movies .overview {
+  background-color: var(--secondary-color);
+  bottom: 0;
+  color: var(--primary-color);
+  font-size: 1em;
+  font-weight: bold;
+  left: 0;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 2rem;
+  position: absolute;
+  right: 0;
+  transform: translateY(101%);
+  transition: transform 0.4s ease-in;
+}
+.movies:hover .overview {
+  transform: translateY(0);
+}
+.no-movies-found {
+  color: red;
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+/* 320px — 480px: Mobile devices */
+/* 481px — 768px: iPads, Tablets */
+/* 769px — 1024px: Small screens, laptops */
+/* 1025px — 1200px: Desktops, large screens */
