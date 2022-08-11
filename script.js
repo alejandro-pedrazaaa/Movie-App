@@ -1,3 +1,6 @@
+/**
+ * @description - Makes search navigation appear and dissapears when user clicks on search button
+ */
 const searchContainer = document.querySelector(".search-container");
 const btn = document.querySelector(".btn");
 const input = document.querySelector(".input");
@@ -7,45 +10,72 @@ btn.addEventListener("click", () => {
   input.focus();
 });
 
-//////////////////////////////////////////////////////////////
+const POPULAR_URL =
+  "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
+const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
+// const SEARCH_API =
+//   'https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query="';
+// console.log(API_URL);
 
-const panels = document.querySelectorAll(".panel");
+/**
+ * @description - Populates initial page movies on the page
+ */
+displayPopularMovies(POPULAR_URL);
 
-panels.forEach((panel) => {
-  panel.addEventListener("click", () => {
-    removeActiveClasses();
-    panel.classList.add("active");
+/**
+ * @description - Waits for api to respond and then displays the movies
+ */
+async function displayPopularMovies(url) {
+  const res = await fetch(url);
+  const data = await res.json();
+
+  showMovies(data.results);
+}
+
+/**
+ * @description - Displays movies on when the page is loaded
+ */
+const popularMoviesContainer = document.querySelector(".movies-section");
+const showMovies = (movies) => {
+  movies.forEach((movie) => {
+    const { poster_path } = movie;
+
+    const movies = document.createElement("div");
+    movies.classList.add("panel");
+
+    movies.style.backgroundImage = `url(${IMG_PATH + poster_path})`;
+
+    popularMoviesContainer.appendChild(movies);
+
+    panels = document.querySelectorAll(".panel");
+    addActiveClass(panels);
+    enlargeClickedPoster(panels);
   });
-});
+};
 
-function removeActiveClasses() {
+/**
+ * @description - Adds active class to the movie that is displayed
+ */
+const addActiveClass = (panels) => {
+  panels[0].classList.add("active");
+};
+
+/**
+ * @description - Allows the user to click on a movie and enlarge it
+ */
+const enlargeClickedPoster = (panels) => {
+  panels.forEach((panel) => {
+    panel.addEventListener("click", () => {
+      removeActiveClasses();
+      panel.classList.add("active");
+    });
+  });
+};
+const removeActiveClasses = () => {
   panels.forEach((panel) => {
     panel.classList.remove("active");
   });
-}
-
-// const header = document.getElementById("header");
-// const websiteTitle = document.getElementById("title");
-// const search = document.getElementById("search");
-// const submit = document.getElementById("submit");
-// const moviesContainer = document.getElementById("movies-container");
-
-const API_URL =
-  "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=3fd2be6f0c70a2a598f084ddfb75487c&page=1";
-const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
-const SEARCH_API =
-  'https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query="';
-console.log(API_URL);
-
-const API_URL2 =
-  "https://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key=3fd2be6f0c70a2a598f084ddfb75487c&page=1";
-console.log(API_URL2);
-// /**
-//  * @description - First function to be called when the page is loaded. Function is used to get and movies movies from the API
-//  * @param {string} url
-//  * @returns {Promise} - Promise
-//  */
-// getMovies(API_URL);
+};
 
 // /**
 //  * @description - Event that is triggered when the user clicks on the submit button to search for any movie
@@ -65,49 +95,6 @@ console.log(API_URL2);
 // });
 
 // /**
-//  * @description - This function is used to get information from the API to movies the movies on the page
-//  * @param {string} url
-//  * @returns {Promise} - Promise
-//  */
-// async function getMovies(url) {
-//   const res = await fetch(url);
-//   const data = await res.json();
-
-//   showMovies(data.results);
-
-//   if (data.results.length === 0) {
-//     noMoviesFound();
-//   }
-// }
-
-// /**
-//  * @description - This function is used to movies movies on the page
-//  * @param {array} movies
-//  */
-// const showMovies = (movies) => {
-//   moviesContainer.innerHTML = "";
-
-//   movies.forEach((movie) => {
-//     const { title, poster_path, vote_average, overview } = movie;
-
-//     const movies = document.createElement("div");
-//     movies.classList.add("movies");
-
-//     movies.innerHTML = `
-//       <img src="${IMG_PATH + poster_path}" alt="${title}">
-//       <div class="info-container">
-//         <h3 class="movie_title">${title}</h3>
-//         <span id="votes" class="${getClassByRate(
-//           vote_average
-//         )}">${vote_average.toFixed(1)}</span>
-//       </div>
-//       <div class="overview">${overview}</div>`;
-
-//     moviesContainer.appendChild(movies);
-//   });
-// };
-
-// /**
 //  * @description - This function is used to search for movies based on user input
 //  * @param {string} search
 //  */
@@ -123,9 +110,6 @@ console.log(API_URL2);
 
 // /**
 //  * @description - This function is used to determine the color of the vote average (background of
-//  * the vote average)
-//  * @param {number} rate
-//  * @returns {string} - Color to be added to the background of the vote average
 //  */
 // const getClassByRate = (vote) => {
 //   if (vote >= 8) {

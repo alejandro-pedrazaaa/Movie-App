@@ -15,7 +15,7 @@ body {
   background-color: var(--black-color);
   font-family: "Prompt", sans-serif;
 }
-/********************** Search container **********************/
+/********************** Title section **********************/
 header {
   align-items: center;
   background-color: var(--black-color);
@@ -70,9 +70,6 @@ header .search-container {
   transition: transform 0.3s ease;
   width: 50px;
 }
-.search-container .btn i {
-  color: var(--black-color);
-}
 .search-container .btn:hover {
   transform: scale(1.15);
 }
@@ -80,7 +77,7 @@ header .search-container {
   transform: translateX(-30px);
 }
 .search-container.active .btn i:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 /********************** Search input **********************/
 .search-container .input {
@@ -105,7 +102,7 @@ header .search-container {
 .input:focus {
   outline: none;
 }
-/********************** Movies description **********************/
+/********************** Movies quote **********************/
 .movies-description {
   color: var(--white-color);
   font-family: inherit;
@@ -120,30 +117,115 @@ header .search-container {
   margin-left: 80%;
 }
 /********************** Divider Section **********************/
-.divider {
+.quote-movies-divider {
   background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
     transparent no-repeat;
   background-size: 100% 1px;
   left: 50%;
-  margin: 0;
+  margin: 15px 0 15px 0;
   padding: 1px;
   position: relative;
   transform: translate(-50%, -50%);
   width: 80%;
 }
-/********************** Main Section **********************/
-main {
-  margin: 35px auto 35px auto;
-  width: 94%;
-  position: relative;
+/********************** Movies container **********************/
+.movies-container {
+  border: 1px solid var(--white-color);
+  margin: 0 20px 0 20px;
+}
+/********************** Carousel Section **********************/
+.movies-container h2 {
+  color: white;
+  font-family: inherit;
+  font-size: 2rem;
+  letter-spacing: 3px;
+  margin-left: 10px;
+}
+.movies-section {
+  align-items: center;
   border: 1px solid #12c2e9;
-  color: var(--white-color);
-}
-/********************** Main Section **********************/
-.display-carousel {
   display: flex;
-  width: 90vw;
+  justify-content: center;
+  overflow: hidden;
 }
+.panel {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  flex: 0.5;
+  height: 50vh;
+  margin: 10px;
+  position: relative;
+  transition: all 700ms ease-in;
+}
+.panel.active {
+  flex: 3;
+}
+
+/* @media (max-width: 480px) {
+  .container {
+    width: 100vw;
+  }
+
+  .panel:nth-of-type(4),
+  .panel:nth-of-type(5) {
+    display: none;
+  }
+} */
+/* 
+.image {
+  height: 120px;
+  width: 200px;
+  padding: 3px;
+  transition: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+
+.items {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  transition: left 0.5s;
+  transition-timing-function: ease-in-out;
+  position: fixed;
+}
+
+.image:hover {
+  height: 220px;
+  width: 350px;
+  transition: 0.3s;
+  transition-timing-function: ease-in-out;
+  z-index: -10;
+}
+
+.button-overlay {
+  z-index: 10;
+  position: absolute;
+  height: 120px;
+  width: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 3em;
+  align-items: center;
+  display: flex;
+  opacity: 0.9;
+  top: 40%;
+  cursor: pointer;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+} */
 /* 
 header > .search-container > input.search-bar {
   background: var(--primary-color);
