@@ -117,8 +117,6 @@ const POPULAR_TVSHOWS_URL =
   "https://api.themoviedb.org/3/tv/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
 const TOP_RATED_MOVIES_URL =
   "https://api.themoviedb.org/3/movie/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
-const TOP_RATED_TVSHOWS_URL =
-  "https://api.themoviedb.org/3/tv/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
 const TRENDING_LASTWEEK_URL =
   "https://api.themoviedb.org/3/trending/all/week?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US";
 // const SEARCH_API =
@@ -130,7 +128,6 @@ const TRENDING_LASTWEEK_URL =
 const popularMoviesContainer = document.querySelector(".popular-movies");
 const popularTvShowsContainer = document.querySelector(".popular-tvshows");
 const topRatedMoviesContainer = document.querySelector(".top-rated-movies");
-const topRatedTvShowsContainer = document.querySelector(".top-rated-tvshows");
 const trendingLastWeekContainer = document.querySelector(".trending-lastweek");
 
 /**
@@ -139,7 +136,6 @@ const trendingLastWeekContainer = document.querySelector(".trending-lastweek");
 getAndDisplayMovies(POPULAR_MOVIES_URL, popularMoviesContainer);
 getAndDisplayMovies(POPULAR_TVSHOWS_URL, popularTvShowsContainer);
 getAndDisplayMovies(TOP_RATED_MOVIES_URL, topRatedMoviesContainer);
-getAndDisplayMovies(TOP_RATED_TVSHOWS_URL, topRatedTvShowsContainer);
 getAndDisplayMovies(TRENDING_LASTWEEK_URL, trendingLastWeekContainer);
 
 /**
