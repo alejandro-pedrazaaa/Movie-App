@@ -1,4 +1,81 @@
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
+
+const CAROUSEL_API =
+  "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&query=avengers";
+const carouselContainer = document.querySelector(".carousel");
+getAndDisplayCarousel(CAROUSEL_API);
+
+/**
+ * @description - Retreaves and wait for data from the API
+ */
+async function getAndDisplayCarousel(url) {
+  const res = await fetch(url);
+  const data = await res.json();
+
+  createCarousel(data.results);
+}
+
+/**
+ * @description - Creates the carousel
+ */
+const createCarousel = (movies) => {
+  movies.slice(0, 3).forEach((movie) => {
+    const { poster_path } = movie;
+    const cards = document.createElement("div");
+
+    cards.classList.add("card");
+    cards.style.backgroundImage = `url(${IMG_PATH + poster_path})`;
+    carouselContainer.appendChild(cards);
+  });
+
+  const cards = document.querySelectorAll(".card");
+  rotateCarousel(cards);
+};
+
+const transforms = [
+  { x: 0, z: 0, scale: 1, opacity: 1 },
+  { x: "-55%", z: "-50px", scale: 0.8, opacity: 0.8 },
+  {
+    x: "55%",
+    z: "-50px",
+    scale: 0.8,
+    opacity: 0.8,
+  },
+];
+
+const nextTransform = (x) => {
+  if (x >= 3 - 1) {
+    x = 0;
+  } else {
+    x++;
+  }
+  return x;
+};
+
+const next = (cards) => {
+  console.log(cards);
+  for (i = 0; i < cards.length; i++) {
+    cards[i].style.transform =
+      "translateX(" +
+      transforms[nextTransform(i)].x +
+      ")" +
+      "translateZ(" +
+      transforms[nextTransform(i)].z +
+      ")" +
+      "scale(" +
+      transforms[nextTransform(i)].scale +
+      ")";
+    cards[i].style.opacity = transforms[nextTransform(i)].opacity;
+  }
+  transforms.push(transforms.shift());
+};
+
+const rotateCarousel = (cards) => {
+  setInterval(() => {
+    next(cards);
+  }, 3000);
+};
+
 const POPULAR_MOVIES_URL =
   "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
 const POPULAR_TVSHOWS_URL =
@@ -11,6 +88,8 @@ const TRENDING_LASTWEEK_URL =
   "https://api.themoviedb.org/3/trending/all/week?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US";
 // const SEARCH_API =
 //   'https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query="';
+// const SEARCH_API =
+//   "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&query=avengers";
 // console.log(API_URL);
 
 const popularMoviesContainer = document.querySelector(".popular-movies");
@@ -23,16 +102,16 @@ const trendingLastWeekContainer = document.querySelector(".trending-lastweek");
 /**
  * @description - Populates initial page movies on the page.
  */
-getAndDisplayData(POPULAR_MOVIES_URL, popularMoviesContainer);
-getAndDisplayData(POPULAR_TVSHOWS_URL, popularTvShowsContainer);
-getAndDisplayData(TOP_RATED_MOVIES_URL, topRatedMoviesContainer);
-getAndDisplayData(TOP_RATED_TVSHOWS_URL, topRatedTvShowsContainer);
-getAndDisplayData(TRENDING_LASTWEEK_URL, trendingLastWeekContainer);
+getAndDisplayMovies(POPULAR_MOVIES_URL, popularMoviesContainer);
+getAndDisplayMovies(POPULAR_TVSHOWS_URL, popularTvShowsContainer);
+getAndDisplayMovies(TOP_RATED_MOVIES_URL, topRatedMoviesContainer);
+getAndDisplayMovies(TOP_RATED_TVSHOWS_URL, topRatedTvShowsContainer);
+getAndDisplayMovies(TRENDING_LASTWEEK_URL, trendingLastWeekContainer);
 
 /**
  * @description - Waits for api to respond and then displays the movies.
  */
-async function getAndDisplayData(url, container) {
+async function getAndDisplayMovies(url, container) {
   const res = await fetch(url);
   const data = await res.json();
 
@@ -118,6 +197,7 @@ function fixHeader() {
     footer.style.transition = "all 0.5s";
   }
 }
+
 // panels.forEach((panel) => {
 //   panel.addEventListener("click", () => {
 //     removeActiveClasses();
