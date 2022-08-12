@@ -141,7 +141,7 @@ header .search-container {
   /* border: 1px solid var(--white-color); */
   margin: 0 20px 0 20px;
 }
-/********************** Carousel Section **********************/
+/********************** Movies display section **********************/
 .movies-container h2 {
   color: white;
   font-family: inherit;
@@ -158,6 +158,8 @@ header .search-container {
   display: flex;
   justify-content: center;
   overflow: hidden;
+  padding-bottom: 20px;
+  padding-top: 20px;
 }
 .panel {
   background-position: center;
@@ -170,10 +172,12 @@ header .search-container {
   height: 35vh;
   margin: 10px;
   position: relative;
-  transition: all 400ms ease-in;
+  transition: all 500ms ease-in;
 }
-.panel.active,
-.panel:hover {
+.panel.active {
+  box-shadow: 0 0 15px 0 white;
+  border-radius: 5px;
+  border: 1px solid var(--black-color);
   flex: 2;
 }
 /********************** Footer section **********************/

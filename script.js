@@ -68,13 +68,13 @@ const addActiveClass = (container) => {
 };
 
 /**
- * @description - Allows the user to hover on the poster and enlarge it.
+ * @description - Allows the user to click on the posters and enlarge them.
  */
 const enlargeHoveredPoster = (container) => {
   const panels = container.querySelectorAll(".panel");
   panels.forEach((panel) => {
     if (panel.parentNode.isEqualNode(container)) {
-      panel.addEventListener("mouseover", () => {
+      panel.addEventListener("click", () => {
         removeActiveClasses(container);
         panel.classList.add("active");
       });
@@ -110,10 +110,10 @@ window.addEventListener("scroll", fixHeader);
 function fixHeader() {
   if (window.scrollY > header.offsetHeight + 50) {
     header.classList.add("active");
-    footer.classList.add("active");
+    footer.classList.remove("active");
   } else {
     header.classList.remove("active");
-    footer.classList.remove("active");
+    footer.classList.add("active");
     header.style.transition = "all 0.5s";
     footer.style.transition = "all 0.5s";
   }
