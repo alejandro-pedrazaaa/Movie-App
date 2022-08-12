@@ -110,10 +110,10 @@ window.addEventListener("scroll", fixHeader);
 function fixHeader() {
   if (window.scrollY > header.offsetHeight + 50) {
     header.classList.add("active");
-    footer.classList.remove("active");
+    footer.classList.add("active");
   } else {
     header.classList.remove("active");
-    footer.classList.add("active");
+    footer.classList.remove("active");
     header.style.transition = "all 0.5s";
     footer.style.transition = "all 0.5s";
   }
