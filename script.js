@@ -1,13 +1,42 @@
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
 
+/**
+ * @description - Makes search input appear and dissapears when user clicks on search button
+ */
+const searchContainer = document.querySelector(".search-container");
+const btn = document.querySelector(".btn");
+const input = document.querySelector(".input");
+btn.addEventListener("click", () => {
+  searchContainer.classList.toggle("active");
+  input.focus();
+});
+
+/**
+ * @description - When the user scrolls down, the header will stick to the top of the page
+ * and will decrease in size.
+ */
+const header = document.querySelector(".header");
+const footer = document.querySelector("footer");
+window.addEventListener("scroll", fixHeader);
+function fixHeader() {
+  if (window.scrollY > header.offsetHeight + 50) {
+    header.classList.add("active");
+    footer.classList.add("active");
+  } else {
+    header.classList.remove("active");
+    footer.classList.remove("active");
+    header.style.transition = "all 0.5s";
+    footer.style.transition = "all 0.5s";
+  }
+}
+
+/**
+ * @description - Retreaves and wait for data from the API.
+ */
 const CAROUSEL_API =
   "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&query=avengers";
 const carouselContainer = document.querySelector(".carousel");
 getAndDisplayCarousel(CAROUSEL_API);
-
-/**
- * @description - Retreaves and wait for data from the API
- */
 async function getAndDisplayCarousel(url) {
   const res = await fetch(url);
   const data = await res.json();
@@ -16,7 +45,7 @@ async function getAndDisplayCarousel(url) {
 }
 
 /**
- * @description - Creates the carousel
+ * @description - Creates the carousel section and setus up carousel functionality.
  */
 const createCarousel = (movies) => {
   movies.slice(0, 3).forEach((movie) => {
@@ -52,6 +81,9 @@ const nextTransform = (x) => {
   return x;
 };
 
+/**
+ * @description - Transitions the carousel to the next available card.
+ */
 const next = (cards) => {
   console.log(cards);
   for (i = 0; i < cards.length; i++) {
@@ -70,6 +102,9 @@ const next = (cards) => {
   transforms.push(transforms.shift());
 };
 
+/**
+ * @description - Rotates the carousel automatically every 3 seconds.
+ */
 const rotateCarousel = (cards) => {
   setInterval(() => {
     next(cards);
@@ -97,10 +132,9 @@ const popularTvShowsContainer = document.querySelector(".popular-tvshows");
 const topRatedMoviesContainer = document.querySelector(".top-rated-movies");
 const topRatedTvShowsContainer = document.querySelector(".top-rated-tvshows");
 const trendingLastWeekContainer = document.querySelector(".trending-lastweek");
-``;
 
 /**
- * @description - Populates initial page movies on the page.
+ * @description - Populates landing page upon page load.
  */
 getAndDisplayMovies(POPULAR_MOVIES_URL, popularMoviesContainer);
 getAndDisplayMovies(POPULAR_TVSHOWS_URL, popularTvShowsContainer);
@@ -109,7 +143,7 @@ getAndDisplayMovies(TOP_RATED_TVSHOWS_URL, topRatedTvShowsContainer);
 getAndDisplayMovies(TRENDING_LASTWEEK_URL, trendingLastWeekContainer);
 
 /**
- * @description - Waits for api to respond and then displays the movies.
+ * @description - Waits for api to respond and then displays all of the movies on the page.
  */
 async function getAndDisplayMovies(url, container) {
   const res = await fetch(url);
@@ -119,7 +153,7 @@ async function getAndDisplayMovies(url, container) {
 }
 
 /**
- * @description - Displays movies on when the page is loaded.
+ * @description - Creates the movies's containers and setus up thier functionality.
  */
 const showMovies = (movies, container) => {
   movies.forEach((movie) => {
@@ -147,7 +181,7 @@ const addActiveClass = (container) => {
 };
 
 /**
- * @description - Allows the user to click on the posters and enlarge them.
+ * @description - Allows the user to click on the posters and enlarge while minimizing the other posters.
  */
 const enlargeHoveredPoster = (container) => {
   const panels = container.querySelectorAll(".panel");
@@ -167,36 +201,6 @@ const removeActiveClasses = (container) => {
     panel.classList.remove("active");
   });
 };
-
-/**
- * @description - Makes search input appear and dissapears when user clicks on search button
- */
-const searchContainer = document.querySelector(".search-container");
-const btn = document.querySelector(".btn");
-const input = document.querySelector(".input");
-btn.addEventListener("click", () => {
-  searchContainer.classList.toggle("active");
-  input.focus();
-});
-
-/**
- * @description - When the user scrolls down, the header will stick to the top of the page
- * and will decrease in size.
- */
-const header = document.querySelector(".header");
-const footer = document.querySelector("footer");
-window.addEventListener("scroll", fixHeader);
-function fixHeader() {
-  if (window.scrollY > header.offsetHeight + 50) {
-    header.classList.add("active");
-    footer.classList.add("active");
-  } else {
-    header.classList.remove("active");
-    footer.classList.remove("active");
-    header.style.transition = "all 0.5s";
-    footer.style.transition = "all 0.5s";
-  }
-}
 
 // panels.forEach((panel) => {
 //   panel.addEventListener("click", () => {
