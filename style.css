@@ -106,6 +106,7 @@ header .search-container {
   padding-left: 25px;
   transform: translateX(0px);
   width: 200px;
+  transition: width 0.3s ease;
 }
 .btn:focus,
 .input:focus {
@@ -173,7 +174,7 @@ header .search-container {
     transparent no-repeat;
   background-size: 100% 2px;
   left: 50%;
-  margin: 50px 0 50px 0;
+  margin: 35px 0 50px 0;
   padding: 2px;
   position: relative;
   transform: translate(-50%, -50%);

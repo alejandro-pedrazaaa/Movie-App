@@ -4,11 +4,11 @@ const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
  * @description - Makes search input appear and dissapears when user clicks on search button
  */
 const searchContainer = document.querySelector(".search-container");
-const btn = document.querySelector(".btn");
-const input = document.querySelector(".input");
-btn.addEventListener("click", () => {
+const searchBtn = document.querySelector(".btn");
+const userInput = document.querySelector(".input");
+searchBtn.addEventListener("click", () => {
   searchContainer.classList.toggle("active");
-  input.focus();
+  searchContainer.focus();
 });
 
 /**
@@ -103,7 +103,7 @@ const next = (cards) => {
 const rotateCarousel = (cards) => {
   setInterval(() => {
     next(cards);
-  }, 4000);
+  }, 3000);
 };
 
 /**
@@ -192,87 +192,44 @@ const swiper = new Swiper(".swiper-container", {
     },
   },
 });
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// panels.forEach((panel) => {
-//   panel.addEventListener("click", () => {
-//     removeActiveClasses();
-//     panel.classList.add("active");
-//   });
-// });
 
-// panels.forEach((panel) => {
-//   panel.classList.remove("active");
-// });
+/**
+ * @description - Function that searched for a movies and displays the results.
+ * @param {string} search
+ */
+const SEARCH_API =
+  'https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&query="';
+// get html search page
 
-// /**
-//  * @description - Event that is triggered when the user clicks on the submit button to search for any movie
-//  * @param {Event} e
-//  */
-// submit.addEventListener("click", () => {
-//   searchMovies(search);
-// });
+// const searchContainer = document.querySelector(".search-container");
+// const searchBtn = document.querySelector(".btn");
+// const userInput = document.querySelector(".input");
 
-// /**
-//  * @description - Event that is triggered when the user clicks on title of the page to go back to the main page
-//  * @param {Event} e
-//  */
-// websiteTitle.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   window.location.reload();
-// });
+displaySearchPage = () => {};
 
-// /**
-//  * @description - This function is used to search for movies based on user input
-//  * @param {string} search
-//  */
-// const searchMovies = (search) => {
-//   const searchTerm = search.value.trim();
+// const displaySearchPage = (url) => {
+//   const res = await fetch(url);
+//   const data = await res.json();
 
-//   if (searchTerm && searchTerm !== "") {
-//     getMovies(SEARCH_API + searchTerm);
-//   } else if (searchTerm === "") {
-//     showErrorInInput();
-//   }
-// };
+//   createSearchPage(data.results, container);
+// }
 
-// /**
-//  * @description - This function is used to determine the color of the vote average (background of
-//  */
-// const getClassByRate = (vote) => {
-//   if (vote >= 8) {
-//     return "green-vote";
-//   } else if (vote >= 5) {
-//     return "orange-vote";
-//   } else {
-//     return "red-vote";
-//   }
-// };
+const searchMovies = () => {
+  const searchTerm = userInput.value.trim();
 
-// /**
-//  * @description - This function is used to create and movies an error message if there are no movies found
-//  * as well as to throw error in input field
-//  * @param {string} url
-//  */
-// const noMoviesFound = () => {
-//   const error = document.createElement("div");
-//   error.classList.add("no-movies-found");
-//   error.innerHTML = `<h1>No movies found</h1>`;
-//   moviesContainer.appendChild(error);
+  if (searchTerm && searchTerm !== "") {
+    // go to search page
+    window.location.href = `/search.html`;
+    displaySearchPage(SEARCH_API + searchTerm);
+  } else if (searchTerm === "") {
+    // open search html page
+    window.location.href = "search.html";
+  }
+};
 
-//   showErrorInInput();
-// };
-
-// /**
-//  * @description - This function is used shake and change the background color of the input field when
-//  * the input field is empty or contains only whitespaces
-//  * @param {string} url
-//  */
-// const showErrorInInput = () => {
-//   search.style.backgroundColor = "red";
-//   search.classList.add("error-shake");
-//   setTimeout(() => {
-//     search.classList.remove("error-shake");
-//     search.style.removeProperty("background-color");
-//   }, 1000);
-// };
-// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//add event to searchBtn only when it contains class active
+searchBtn.addEventListener("click", (e) => {
+  if (!searchContainer.classList.contains("active")) {
+    searchMovies(userInput);
+  }
+});
