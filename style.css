@@ -168,13 +168,13 @@ header .search-container {
 .divider {
   background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
     transparent no-repeat;
-  background-size: 100% 3px;
+  background-size: 100% 2px;
   left: 50%;
   margin: 50px 0 50px 0;
-  padding: 1px;
+  padding: 2px;
   position: relative;
   transform: translate(-50%, -50%);
-  width: 80%;
+  width: 70%;
 }
 /********************** Movies section **********************/
 .all-sections-container {
