@@ -16,7 +16,7 @@ body {
   padding-top: 100px;
   overflow-x: hidden;
 }
-/********************** Page title **********************/
+/********** Page title **********/
 header {
   align-items: center;
   background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
@@ -54,14 +54,14 @@ header h1 {
 header.active {
   height: 90px;
 }
-/********************** Search container **********************/
+/********** Search container **********/
 header .search-container {
   font-family: inherit;
   height: 50px;
   margin-right: 100px;
   position: relative;
 }
-/********************** Search button **********************/
+/********** Search button **********/
 .search-container .btn {
   background: #12c2e9;
   background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
@@ -88,7 +88,7 @@ header .search-container {
 .search-container.active .btn i:hover {
   transform: scale(1.15);
 }
-/********************** Search input **********************/
+/********** Search input **********/
 .search-container .input {
   background-color: var(--black-color);
   border: 0;
@@ -112,7 +112,7 @@ header .search-container {
 .input:focus {
   outline: none;
 }
-/********************** Movies quote **********************/
+/********** Movies quote **********/
 .quote-and-carousel {
   display: flex;
   padding-bottom: 30px;
@@ -135,7 +135,7 @@ header .search-container {
 .movies-description .quote-author {
   margin-top: 20px;
 }
-/********************** Carousel section **********************/
+/********** Carousel section **********/
 .carousel {
   align-items: baseline;
   display: flex;
@@ -168,7 +168,7 @@ header .search-container {
   transform: translateX(50%) translateZ(-50px) scale(0.8);
 } */
 
-/********************** Divider **********************/
+/********** Divider **********/
 .divider {
   background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
     transparent no-repeat;
@@ -180,7 +180,7 @@ header .search-container {
   transform: translate(-50%, -50%);
   width: 70%;
 }
-/********************** Movies section **********************/
+/********** Movies section **********/
 .all-sections-container {
   margin: auto 35px auto 35px;
 }
@@ -214,7 +214,7 @@ header .search-container {
 .swiper-slide:hover img {
   transition-delay: 300ms;
 }
-/********************** Footer section **********************/
+/********** Footer section **********/
 .footer {
   background: linear-gradient(to left, #f64f59, #c471ed, #12c2e9);
   bottom: 0;
@@ -242,7 +242,7 @@ header .search-container {
   height: 100%;
   width: auto;
 }
-/********************** Loader section **********************/
+/********** Loader section **********/
 .loader {
   background: linear-gradient(to left, #f64f59, #c471ed, #12c2e9);
   /* Show only 10px from the border */
@@ -258,7 +258,7 @@ header .search-container {
     transform: rotate(360deg);
   }
 }
-/********************** Loader section **********************/
+/****************************** MOVIE INFO PAGE ******************************/
 
 /* 320px — 480px: Mobile devices */
 /* 481px — 768px: iPads, Tablets */

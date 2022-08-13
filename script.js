@@ -93,7 +93,7 @@ for (let i = 0; i < swiperWrappers.length; i++) {
 
 const showMovies = (movies, container) => {
   movies.forEach((movie) => {
-    const { poster_path } = movie;
+    const { poster_path, id } = movie;
 
     const movies = document.createElement("div");
     movies.classList.add("swiper-slide");
@@ -176,6 +176,49 @@ function fixHeader() {
     footer.style.transition = "all 0.5s";
   }
 }
+////////////////////////////////////////////////////////////////////////////////////////////
+
+// when double clicked on the movie, it will open the movie details page
+const working = async (id) => {
+  const res =
+    await fetch`https://api.themoviedb.org/3/movie/${id}?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`;
+  const data = await res.json();
+  return data;
+};
+
+// get the json id of the clicked movie and pass it to the working function
+const movieClick = document.querySelectorAll(".swiper-slide");
+for (let i = 0; i < movieClick.length; i++) {
+  movieClick[i].addEventListener("dblclick", (e) => {
+    const id = movieClick[i].querySelector("img").getAttribute("data-id");
+    console.log(id);
+    working(id);
+  });
+}
+
+// swiper.on("dbclick", (e) => {
+//   if (e.target.tagName === "IMG") {
+//     const movieId = e.target.parentElement.getAttribute("data-id");
+//     window.location.href = `/movie.info.html?id=${movieId}`;
+//   }
+// });
+
+// get all data of clicked movie
+
+// const searchMovies = () => {
+//   const searchTerm = userInput.value.trim();
+
+//   if (searchTerm && searchTerm !== "") {
+//     // go to search page
+//     window.location.href = `/search.html`;
+//     displaySearchPage(SEARCH_API + searchTerm);
+//   } else if (searchTerm === "") {
+//     // open search html page
+//     window.location.href = "search.html";
+//   }
+// };
+
+// get the
 
 // const swiperWrappers = document.querySelectorAll(".swiper-wrapper");
 
