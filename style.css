@@ -226,25 +226,22 @@ header .search-container {
   z-index: 2;
 }
 .footer.active {
-  height: 50px;
+  height: 30px;
 }
 .footer-container {
-  align-items: top;
+  bottom: 0;
   display: flex;
-  gap: 5px;
-  height: 100%;
   justify-content: flex-end;
-  padding: 10px;
-  width: 100%;
+  width: 99%;
+  gap: 10px;
 }
+
 .footer-container p {
   font-family: inherit;
-  font-weight: 600;
-  margin-right: 5px;
 }
 .tmdb {
   height: 100%;
-  width: 100%;
+  width: auto;
 }
 
 /* 320px — 480px: Mobile devices */

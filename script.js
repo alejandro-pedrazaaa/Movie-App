@@ -110,29 +110,21 @@ const rotateCarousel = (cards) => {
  * @description - Retreaves and waits for data from the to populate the entire landing page.
  */
 const allAPIs = [
-  (POPULAR_MOVIES_URL =
-    "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US"),
-  (POPULAR_TVSHOWS_URL =
-    "https://api.themoviedb.org/3/tv/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US"),
-  (TOP_RATED_MOVIES_URL =
-    "https://api.themoviedb.org/3/movie/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US"),
-  (TRENDING_LASTWEEK_URL =
-    "https://api.themoviedb.org/3/trending/all/week?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US"),
+  "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
+  "https://api.themoviedb.org/3/tv/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
+  "https://api.themoviedb.org/3/movie/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
+  "https://api.themoviedb.org/3/trending/all/week?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US",
 ];
 
-const swiperWrappers = document.querySelectorAll(".swiper-wrapper");
-
-for (let i = 0; i < swiperWrappers.length; i++) {
-  getAndDisplayMovies(allAPIs[i], swiperWrappers[i]);
-}
-
-getAndDisplayMovies(POPULAR_MOVIES_URL, swiperWrappers);
-
-async function getAndDisplayMovies(url, container) {
+const getAndDisplayMovies = async (url, swiperWrapper) => {
   const res = await fetch(url);
   const data = await res.json();
+  showMovies(data.results, swiperWrapper);
+};
 
-  showMovies(data.results, container);
+const swiperWrappers = document.querySelectorAll(".swiper-wrapper");
+for (let i = 0; i < swiperWrappers.length; i++) {
+  getAndDisplayMovies(allAPIs[i], swiperWrappers[i]);
 }
 
 const showMovies = (movies, container) => {
@@ -145,10 +137,38 @@ const showMovies = (movies, container) => {
     movies.innerHTML = `<img src="${IMG_PATH + poster_path}">`;
 
     container.appendChild(movies);
-
-    panels = document.querySelectorAll(".swiper-slide");
   });
 };
+
+// const swiperWrappers = document.querySelectorAll(".swiper-wrapper");
+
+// for (let i = 0; i < swiperWrappers.length; i++) {
+//   getAndDisplayMovies(allAPIs[i], swiperWrappers[i]);
+// }
+
+// getAndDisplayMovies(POPULAR_MOVIES_URL, swiperWrappers);
+
+// async function getAndDisplayMovies(url, container) {
+//   const res = await fetch(url);
+//   const data = await res.json();
+
+//   showMovies(data.results, container);
+// }
+
+// const showMovies = (movies, container) => {
+//   movies.forEach((movie) => {
+//     const { poster_path } = movie;
+
+//     const movies = document.createElement("div");
+//     movies.classList.add("swiper-slide");
+
+//     movies.innerHTML = `<img src="${IMG_PATH + poster_path}">`;
+
+//     container.appendChild(movies);
+
+//     panels = document.querySelectorAll(".swiper-slide");
+//   });
+// };
 
 const swiper = new Swiper(".swiper-container", {
   // slidesPerView: 2,
@@ -193,43 +213,54 @@ const swiper = new Swiper(".swiper-container", {
   },
 });
 
-/**
- * @description - Function that searched for a movies and displays the results.
- * @param {string} search
- */
-const SEARCH_API =
-  'https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&query="';
-// get html search page
+// /**
+//  * @description - Function that searched for a movies and displays the results.
+//  * @param {string} search
+//  */
+// const SEARCH_API =
+//   'https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&query="';
+// // get html search page
 
-// const searchContainer = document.querySelector(".search-container");
-// const searchBtn = document.querySelector(".btn");
-// const userInput = document.querySelector(".input");
+// // const searchContainer = document.querySelector(".search-container");
+// // const searchBtn = document.querySelector(".btn");
+// // const userInput = document.querySelector(".input");
 
-displaySearchPage = () => {};
+// displaySearchPage = () => {};
 
-// const displaySearchPage = (url) => {
-//   const res = await fetch(url);
-//   const data = await res.json();
+// // const displaySearchPage = (url) => {
+// //   const res = await fetch(url);
+// //   const data = await res.json();
 
-//   createSearchPage(data.results, container);
-// }
+// //   createSearchPage(data.results, container);
+// // }
 
-const searchMovies = () => {
-  const searchTerm = userInput.value.trim();
+// const searchMovies = () => {
+//   const searchTerm = userInput.value.trim();
 
-  if (searchTerm && searchTerm !== "") {
-    // go to search page
-    window.location.href = `/search.html`;
-    displaySearchPage(SEARCH_API + searchTerm);
-  } else if (searchTerm === "") {
-    // open search html page
-    window.location.href = "search.html";
-  }
-};
+//   if (searchTerm && searchTerm !== "") {
+//     // go to search page
+//     window.location.href = `/search.html`;
+//     displaySearchPage(SEARCH_API + searchTerm);
+//   } else if (searchTerm === "") {
+//     // open search html page
+//     window.location.href = "search.html";
+//   }
+// };
 
-//add event to searchBtn only when it contains class active
-searchBtn.addEventListener("click", (e) => {
-  if (!searchContainer.classList.contains("active")) {
-    searchMovies(userInput);
-  }
-});
+// //add event to searchBtn only when it contains class active
+// searchBtn.addEventListener("click", (e) => {
+//   if (!searchContainer.classList.contains("active")) {
+//     searchMovies(userInput);
+//   }
+// });
+
+// const allAPIs = [
+//   (POPULAR_MOVIES_URL =
+//     "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US"),
+//   (POPULAR_TVSHOWS_URL =
+//     "https://api.themoviedb.org/3/tv/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US"),
+//   (TOP_RATED_MOVIES_URL =
+//     "https://api.themoviedb.org/3/movie/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US"),
+//   (TRENDING_LASTWEEK_URL =
+//     "https://api.themoviedb.org/3/trending/all/week?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US"),
+// ];
