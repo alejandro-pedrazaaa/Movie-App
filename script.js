@@ -48,7 +48,7 @@ async function getAndDisplayCarousel(url) {
  * @description - Creates the carousel section and setus up carousel functionality.
  */
 const createCarousel = (movies) => {
-  movies.slice(0, 3).forEach((movie) => {
+  movies.slice(0, 4).forEach((movie) => {
     const { poster_path } = movie;
     const cards = document.createElement("div");
 
@@ -62,18 +62,23 @@ const createCarousel = (movies) => {
 };
 
 const transforms = [
+  // { x: 0, z: 0, scale: 1, opacity: 1 },
+  // { x: "-55%", z: "-50px", scale: 0.8, opacity: 0.8 },
+  // {
+  //   x: "55%",
+  //   z: "-50px",
+  //   scale: 0.8,
+  //   opacity: 0.8,
+  // },
+  // transform for 4 instead of 3
   { x: 0, z: 0, scale: 1, opacity: 1 },
-  { x: "-55%", z: "-50px", scale: 0.8, opacity: 0.8 },
-  {
-    x: "55%",
-    z: "-50px",
-    scale: 0.8,
-    opacity: 0.8,
-  },
+  { x: "-50%", z: "-50px", scale: 0.8, opacity: 1 },
+  { x: 0, z: 0, scale: 0, opacity: 0 },
+  { x: "50%", z: "-50px", scale: 0.8, opacity: 1 },
 ];
 
 const nextTransform = (x) => {
-  if (x >= 3 - 1) {
+  if (x >= 4 - 1) {
     x = 0;
   } else {
     x++;
@@ -85,7 +90,6 @@ const nextTransform = (x) => {
  * @description - Transitions the carousel to the next available card.
  */
 const next = (cards) => {
-  console.log(cards);
   for (i = 0; i < cards.length; i++) {
     cards[i].style.transform =
       "translateX(" +
@@ -108,39 +112,103 @@ const next = (cards) => {
 const rotateCarousel = (cards) => {
   setInterval(() => {
     next(cards);
-  }, 3000);
+  }, 4000);
 };
+
+// const POPULAR_MOVIES_URL =
+//   "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
+// const POPULAR_TVSHOWS_URL =
+//   "https://api.themoviedb.org/3/tv/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
+// const TOP_RATED_MOVIES_URL =
+//   "https://api.themoviedb.org/3/movie/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
+// const TRENDING_LASTWEEK_URL =
+//   "https://api.themoviedb.org/3/trending/all/week?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US";
+// // const SEARCH_API =
+// //   'https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query="';
+// // const SEARCH_API =
+// //   "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&query=avengers";
+// // console.log(API_URL);
+
+// const popularMoviesContainer = document.querySelector(".popular-movies");
+// const popularTvShowsContainer = document.querySelector(".popular-tvshows");
+// const topRatedMoviesContainer = document.querySelector(".top-rated-movies");
+// const trendingLastWeekContainer = document.querySelector(".trending-lastweek");
+
+// /**
+//  * @description - Populates landing page upon page load.
+//  */
+// getAndDisplayMovies(POPULAR_MOVIES_URL, popularMoviesContainer);
+// getAndDisplayMovies(POPULAR_TVSHOWS_URL, popularTvShowsContainer);
+// getAndDisplayMovies(TOP_RATED_MOVIES_URL, topRatedMoviesContainer);
+// getAndDisplayMovies(TRENDING_LASTWEEK_URL, trendingLastWeekContainer);
+
+// /**
+//  * @description - Waits for api to respond and then displays all of the movies on the page.
+//  */
+// async function getAndDisplayMovies(url, container) {
+//   const res = await fetch(url);
+//   const data = await res.json();
+
+//   showMovies(data.results, container);
+// }
+
+// /**
+//  * @description - Creates the movies's containers and setus up thier functionality.
+//  */
+// const showMovies = (movies, container) => {
+//   movies.forEach((movie) => {
+//     const { poster_path } = movie;
+
+//     const movies = document.createElement("div");
+//     movies.classList.add("panel");
+
+//     movies.style.backgroundImage = `url(${IMG_PATH + poster_path})`;
+
+//     container.appendChild(movies);
+
+//     panels = document.querySelectorAll(".panel");
+//     addActiveClass(container);
+//     enlargeHoveredPoster(container);
+//   });
+// };
+
+// /**
+//  * @description - Adds active class to the first movie of each section.
+//  */
+// const addActiveClass = (container) => {
+//   const firstPanel = container.firstElementChild;
+//   firstPanel.classList.add("active");
+// };
+
+// /**
+//  * @description - Allows the user to click on the posters and enlarge while minimizing the other posters.
+//  */
+// const enlargeHoveredPoster = (container) => {
+//   const panels = container.querySelectorAll(".panel");
+//   panels.forEach((panel) => {
+//     if (panel.parentNode.isEqualNode(container)) {
+//       panel.addEventListener("click", () => {
+//         removeActiveClasses(container);
+//         panel.classList.add("active");
+//       });
+//     }
+//   });
+// };
+
+// const removeActiveClasses = (container) => {
+//   const panels = container.querySelectorAll(".panel");
+//   panels.forEach((panel) => {
+//     panel.classList.remove("active");
+//   });
+// };
 
 const POPULAR_MOVIES_URL =
   "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
-const POPULAR_TVSHOWS_URL =
-  "https://api.themoviedb.org/3/tv/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
-const TOP_RATED_MOVIES_URL =
-  "https://api.themoviedb.org/3/movie/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US";
-const TRENDING_LASTWEEK_URL =
-  "https://api.themoviedb.org/3/trending/all/week?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US";
-// const SEARCH_API =
-//   'https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query="';
-// const SEARCH_API =
-//   "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&query=avengers";
-// console.log(API_URL);
 
-const popularMoviesContainer = document.querySelector(".popular-movies");
-const popularTvShowsContainer = document.querySelector(".popular-tvshows");
-const topRatedMoviesContainer = document.querySelector(".top-rated-movies");
-const trendingLastWeekContainer = document.querySelector(".trending-lastweek");
+const popularMoviesContainer = document.querySelector(".swiper-wrapper");
 
-/**
- * @description - Populates landing page upon page load.
- */
 getAndDisplayMovies(POPULAR_MOVIES_URL, popularMoviesContainer);
-getAndDisplayMovies(POPULAR_TVSHOWS_URL, popularTvShowsContainer);
-getAndDisplayMovies(TOP_RATED_MOVIES_URL, topRatedMoviesContainer);
-getAndDisplayMovies(TRENDING_LASTWEEK_URL, trendingLastWeekContainer);
 
-/**
- * @description - Waits for api to respond and then displays all of the movies on the page.
- */
 async function getAndDisplayMovies(url, container) {
   const res = await fetch(url);
   const data = await res.json();
@@ -148,55 +216,65 @@ async function getAndDisplayMovies(url, container) {
   showMovies(data.results, container);
 }
 
-/**
- * @description - Creates the movies's containers and setus up thier functionality.
- */
 const showMovies = (movies, container) => {
   movies.forEach((movie) => {
     const { poster_path } = movie;
 
     const movies = document.createElement("div");
-    movies.classList.add("panel");
+    movies.classList.add("swiper-slide");
 
-    movies.style.backgroundImage = `url(${IMG_PATH + poster_path})`;
+    movies.innerHTML = `<img src="${IMG_PATH + poster_path}">`;
 
     container.appendChild(movies);
 
-    panels = document.querySelectorAll(".panel");
-    addActiveClass(container);
-    enlargeHoveredPoster(container);
+    panels = document.querySelectorAll(".swiper-slide");
+    // addActiveClass(container);
+    // enlargeHoveredPoster(container);
   });
 };
 
-/**
- * @description - Adds active class to the first movie of each section.
- */
-const addActiveClass = (container) => {
-  const firstPanel = container.firstElementChild;
-  firstPanel.classList.add("active");
-};
-
-/**
- * @description - Allows the user to click on the posters and enlarge while minimizing the other posters.
- */
-const enlargeHoveredPoster = (container) => {
-  const panels = container.querySelectorAll(".panel");
-  panels.forEach((panel) => {
-    if (panel.parentNode.isEqualNode(container)) {
-      panel.addEventListener("click", () => {
-        removeActiveClasses(container);
-        panel.classList.add("active");
-      });
-    }
-  });
-};
-
-const removeActiveClasses = (container) => {
-  const panels = container.querySelectorAll(".panel");
-  panels.forEach((panel) => {
-    panel.classList.remove("active");
-  });
-};
+const swiper = new Swiper(".swiper-container", {
+  // slidesPerView: 2,
+  // slidesPerGroup: 1,
+  centeredSlides: true,
+  loop: true,
+  breakpoints: {
+    // when window width is >= 600px
+    // 600: {
+    //   slidesPerView: 2,
+    //   slidesPerGroup: 2,
+    //   spaceBetween: 5,
+    //   centeredSlides: true,
+    // },
+    // // when window width is >= 900px
+    // 900: {
+    //   slidesPerView: 3,
+    //   slidesPerGroup: 3,
+    //   spaceBetween: 5,
+    //   centeredSlides: false,
+    // },
+    // // when window width is >= 1200px
+    // 1200: {
+    //   slidesPerView: 4,
+    //   slidesPerGroup: 4,
+    //   spaceBetween: 5,
+    //   centeredSlides: false,
+    // },
+    // when window width is >= 1500px
+    1500: {
+      slidesPerView: 8,
+      spaceBetween: 1,
+      centeredSlides: false,
+    },
+    // when window width is >= 1800px
+    // 1800: {
+    //   slidesPerView: 6,
+    //   slidesPerGroup: 6,
+    //   spaceBetween: 5,
+    //   centeredSlides: true,
+    // },
+  },
+});
 
 // panels.forEach((panel) => {
 //   panel.addEventListener("click", () => {

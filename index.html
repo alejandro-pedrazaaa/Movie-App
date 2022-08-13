@@ -9,6 +9,11 @@
       integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="style.css" />
     <script defer src="script.js"></script>
     <title>Movie App</title>
@@ -45,10 +50,11 @@
 
         <div class="carousel"></div>
       </div>
+    </div>
 
-      <div class="divider"></div>
+    <div class="divider"></div>
 
-      <div class="movies-container">
+    <!-- <div class="movies-container">
         <h2 class="section-title">Popular Movies</h2>
         <div class="popular-movies"></div>
         <div class="divider"></div>
@@ -71,6 +77,17 @@
         <div class="trending-lastweek"></div>
         <div class="divider"></div>
       </div>
+    <!-- </div> -->
+    <div class="all-sections-container">
+      <div class="individual-section">
+        <h2 class="section-title">Popular Movies</h2>
+        <div class="container">
+          <div class="swiper-container">
+            <div class="swiper-wrapper"></div>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
     </div>
 
     <footer class="footer">
