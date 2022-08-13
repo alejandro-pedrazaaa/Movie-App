@@ -120,13 +120,16 @@ header .search-container {
 .movies-description {
   color: var(--white-color);
   font-family: inherit;
-  width: 50%;
-  margin-left: 30px;
+  width: 55%;
+  margin-left: 40px;
   margin-top: 20px;
 }
 .movies-description h1 {
   font-size: 6rem;
   letter-spacing: 5px;
+}
+.movies-description p {
+  line-height: 2rem;
 }
 .movies-description .quote-author {
   margin-top: 20px;
@@ -138,7 +141,7 @@ header .search-container {
   justify-content: center;
   padding-top: 40px;
   transform-style: preserve-3d;
-  width: 50%;
+  width: 45%;
 }
 .card {
   background-position: center;
