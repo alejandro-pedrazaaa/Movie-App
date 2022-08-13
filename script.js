@@ -1,52 +1,19 @@
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
 
 /**
- * @description - Makes search input appear and dissapears when user clicks on search button
- */
-const searchContainer = document.querySelector(".search-container");
-const searchBtn = document.querySelector(".btn");
-const userInput = document.querySelector(".input");
-searchBtn.addEventListener("click", () => {
-  searchContainer.classList.toggle("active");
-  searchContainer.focus();
-});
-
-/**
- * @description - When the user scrolls down, the header will stick to the top of the page
- * and will decrease in size.
- */
-const header = document.querySelector(".header");
-const footer = document.querySelector("footer");
-window.addEventListener("scroll", fixHeader);
-function fixHeader() {
-  if (window.scrollY > header.offsetHeight + 50) {
-    header.classList.add("active");
-    footer.classList.add("active");
-  } else {
-    header.classList.remove("active");
-    footer.classList.remove("active");
-    header.style.transition = "all 0.5s";
-    footer.style.transition = "all 0.5s";
-  }
-}
-
-/**
- * @description - Retreaves and wait for data from the API.
+ * @description - Retreaves and waits for API data to create the carousel.
  */
 const CAROUSEL_API =
   "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&query=avengers";
 const carouselContainer = document.querySelector(".carousel");
-getAndDisplayCarousel(CAROUSEL_API);
-async function getAndDisplayCarousel(url) {
-  const res = await fetch(url);
+
+async function getAndDisplayCarousel(CAROUSEL_API) {
+  const res = await fetch(CAROUSEL_API);
   const data = await res.json();
 
   createCarousel(data.results);
 }
 
-/**
- * @description - Creates the carousel section and setus up carousel functionality.
- */
 const createCarousel = (movies) => {
   movies.slice(0, 4).forEach((movie) => {
     const { poster_path } = movie;
@@ -77,9 +44,6 @@ const nextTransform = (x) => {
   return x;
 };
 
-/**
- * @description - Transitions the carousel to the next available card.
- */
 const next = (cards) => {
   for (i = 0; i < cards.length; i++) {
     cards[i].style.transform =
@@ -97,17 +61,17 @@ const next = (cards) => {
   transforms.push(transforms.shift());
 };
 
-/**
- * @description - Rotates the carousel automatically every 3 seconds.
- */
 const rotateCarousel = (cards) => {
   setInterval(() => {
     next(cards);
-  }, 3000);
+  }, 3500);
 };
 
+getAndDisplayCarousel(CAROUSEL_API);
+
 /**
- * @description - Retreaves and waits for data from the to populate the entire landing page.
+ * @description - Retreaves and waits for data from the to populate the entire landing page with
+ * movies and tv shows.
  */
 const allAPIs = [
   "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
@@ -115,6 +79,7 @@ const allAPIs = [
   "https://api.themoviedb.org/3/movie/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
   "https://api.themoviedb.org/3/trending/all/week?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US",
 ];
+const swiperWrappers = document.querySelectorAll(".swiper-wrapper");
 
 const getAndDisplayMovies = async (url, swiperWrapper) => {
   const res = await fetch(url);
@@ -122,7 +87,6 @@ const getAndDisplayMovies = async (url, swiperWrapper) => {
   showMovies(data.results, swiperWrapper);
 };
 
-const swiperWrappers = document.querySelectorAll(".swiper-wrapper");
 for (let i = 0; i < swiperWrappers.length; i++) {
   getAndDisplayMovies(allAPIs[i], swiperWrappers[i]);
 }
@@ -139,36 +103,6 @@ const showMovies = (movies, container) => {
     container.appendChild(movies);
   });
 };
-
-// const swiperWrappers = document.querySelectorAll(".swiper-wrapper");
-
-// for (let i = 0; i < swiperWrappers.length; i++) {
-//   getAndDisplayMovies(allAPIs[i], swiperWrappers[i]);
-// }
-
-// getAndDisplayMovies(POPULAR_MOVIES_URL, swiperWrappers);
-
-// async function getAndDisplayMovies(url, container) {
-//   const res = await fetch(url);
-//   const data = await res.json();
-
-//   showMovies(data.results, container);
-// }
-
-// const showMovies = (movies, container) => {
-//   movies.forEach((movie) => {
-//     const { poster_path } = movie;
-
-//     const movies = document.createElement("div");
-//     movies.classList.add("swiper-slide");
-
-//     movies.innerHTML = `<img src="${IMG_PATH + poster_path}">`;
-
-//     container.appendChild(movies);
-
-//     panels = document.querySelectorAll(".swiper-slide");
-//   });
-// };
 
 const swiper = new Swiper(".swiper-container", {
   // slidesPerView: 2,
@@ -212,6 +146,66 @@ const swiper = new Swiper(".swiper-container", {
     },
   },
 });
+
+/**
+ * @description - Makes search input appear and dissapears when user clicks on search button
+ */
+const searchContainer = document.querySelector(".search-container");
+const searchBtn = document.querySelector(".btn");
+const userInput = document.querySelector(".input");
+searchBtn.addEventListener("click", () => {
+  searchContainer.classList.toggle("active");
+  searchContainer.focus();
+});
+
+/**
+ * @description - When the user scrolls down, the header will stick to the top of the page
+ * and will decrease in size.
+ */
+const header = document.querySelector(".header");
+const footer = document.querySelector("footer");
+window.addEventListener("scroll", fixHeader);
+function fixHeader() {
+  if (window.scrollY > header.offsetHeight + 50) {
+    header.classList.add("active");
+    footer.classList.add("active");
+  } else {
+    header.classList.remove("active");
+    footer.classList.remove("active");
+    header.style.transition = "all 0.5s";
+    footer.style.transition = "all 0.5s";
+  }
+}
+
+// const swiperWrappers = document.querySelectorAll(".swiper-wrapper");
+
+// for (let i = 0; i < swiperWrappers.length; i++) {
+//   getAndDisplayMovies(allAPIs[i], swiperWrappers[i]);
+// }
+
+// getAndDisplayMovies(POPULAR_MOVIES_URL, swiperWrappers);
+
+// async function getAndDisplayMovies(url, container) {
+//   const res = await fetch(url);
+//   const data = await res.json();
+
+//   showMovies(data.results, container);
+// }
+
+// const showMovies = (movies, container) => {
+//   movies.forEach((movie) => {
+//     const { poster_path } = movie;
+
+//     const movies = document.createElement("div");
+//     movies.classList.add("swiper-slide");
+
+//     movies.innerHTML = `<img src="${IMG_PATH + poster_path}">`;
+
+//     container.appendChild(movies);
+
+//     panels = document.querySelectorAll(".swiper-slide");
+//   });
+// };
 
 // /**
 //  * @description - Function that searched for a movies and displays the results.
