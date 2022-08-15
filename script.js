@@ -1,6 +1,14 @@
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
 
 /**
+ * @description - Clicking on the logo will reload the page to take you back to the home page
+ */
+const logo = document.querySelector(".logo");
+logo.addEventListener("click", () => {
+  window.location.reload();
+});
+
+/**
  * @description - Retreaves and waits for API data to create the carousel.
  */
 const CAROUSEL_API =
@@ -99,8 +107,12 @@ const showMovies = (movies, container) => {
     movies.classList.add("swiper-slide");
 
     movies.innerHTML = `<img src="${IMG_PATH + poster_path}">`;
+    movies.setAttribute("id", id);
 
     container.appendChild(movies);
+
+    const allMovies = document.querySelectorAll(".swiper-slide");
+    displayClickedMovie(allMovies);
   });
 };
 
@@ -177,24 +189,115 @@ function fixHeader() {
   }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////
+// get the id from the attributes with the asynch function
+// const displayClickedMovie = (allMovies) => {
+//   allMovies.forEach((movie) => {
+//     movie.addEventListener("click", () => {
+//       const id = movie.getAttribute("id");
+//       console.log(id);
+//     });
+//   });
+// };
 
-// when double clicked on the movie, it will open the movie details page
-const working = async (id) => {
-  const res =
-    await fetch`https://api.themoviedb.org/3/movie/${id}?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`;
-  const data = await res.json();
-  return data;
+// const ex = `https://api.themoviedb.org/3/movie/766507?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`;
+// console.log(ex);
+
+// Get the id of the clicked movie ONLY once.
+const displayClickedMovie = (allMovies) => {
+  allMovies.forEach((movie) => {
+    movie.addEventListener("dblclick", () => {
+      const id = movie.getAttribute("id");
+      if (!movie.classList.contains("clicked")) {
+        movie.classList.add("clicked");
+        getAndDisplayMovie(id);
+      }
+    });
+  });
 };
 
-// get the json id of the clicked movie and pass it to the working function
-const movieClick = document.querySelectorAll(".swiper-slide");
-for (let i = 0; i < movieClick.length; i++) {
-  movieClick[i].addEventListener("dblclick", (e) => {
-    const id = movieClick[i].querySelector("img").getAttribute("data-id");
-    console.log(id);
-    working(id);
-  });
-}
+const getAndDisplayMovie = async (id) => {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`
+  );
+  const data = await res.json();
+  showMovie(data);
+};
+
+const showMovie = (movie) => {
+  const {
+    backdrop_path,
+    poster_path,
+    tagline,
+    title,
+    overview,
+    vote_average,
+    release_date,
+    homepage,
+    belongs_to_collection,
+  } = movie;
+  const movieContainer = document.querySelector(".individual-page");
+  movieContainer.innerHTML = `
+    <div class="individual-movie-container">
+      <div class="individual-movie-poster">
+        <img src="${IMG_PATH + poster_path}">
+      </div>
+      <div class="individual-movie-info">
+        <p>${tagline}</p>
+        <h1>${title}</h1>
+        <p>${overview}</p>
+        <p>${vote_average}</p>
+        <p>${release_date}</p>
+        <p>${homepage}</p>
+        <p>${belongs_to_collection}</p>
+      </div>
+    </div>
+  `;
+  const moviePoster = document.querySelector(".individual-movie-poster");
+  moviePoster.style.backgroundImage = `url(${IMG_PATH + backdrop_path})`;
+  const allSectionsContainer = document.querySelector(".main-page");
+  allSectionsContainer.style.display = "none";
+
+  // //get the belongs_to_collection and display the collection if it exists
+  // if (belongs_to_collection) {
+  //   const { id } = belongs_to_collection;
+  //   getAndDisplayCollection(id);
+  //   console.log(id);
+  // }
+};
+
+// const collection_API = `
+
+// https://api.themoviedb.org/3/search/collection?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&query=asdf&page=1`;
+
+// getAndDisplayCollection = async (id) => {
+//   const res = await fetch(
+//     `https://api.themoviedb.org/3/collection/${id}?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`
+//   );
+//   const data = await res.json();
+//   showCollection(data);
+// };
+
+// const showCollection = (collection) => {
+//   //display the collection div
+//   const collectionContainer = document.querySelector(".collection");
+//   collectionContainer.style.display = "block";
+//   const { name, backdrop_path, poster_path } = collection;
+//   collectionContainer.innerHTML = `
+
+//     <div class="collection-poster">
+//       <img src="${IMG_PATH + poster_path}">
+//     </div>
+//     <div class="collection-info">
+//       <h1>${name}</h1>
+//     </div>
+//   `;
+//   const collectionPoster = document.querySelector(".collection-poster");
+//   collectionPoster.style.backgroundImage = `url(${IMG_PATH + backdrop_path})`;
+// };
+
+// the the showMOvie function is callaed, hide .all-sections-container
+
+//  `https://api.themoviedb.org/3/movie/${id}?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`;
 
 // swiper.on("dbclick", (e) => {
 //   if (e.target.tagName === "IMG") {
