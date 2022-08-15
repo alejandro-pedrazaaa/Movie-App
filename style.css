@@ -54,7 +54,7 @@ header h1 {
 header.active {
   height: 90px;
 }
-/*******  Search container *******/
+/******* Search container *******/
 header .search-container {
   font-family: inherit;
   height: 50px;
@@ -115,35 +115,22 @@ header .search-container {
 /****************************************************************** MAIN PAGE ******************************************************************/
 .main-page,
 .individual-page {
-  border: 5px solid var(--white-color);
   margin-top: 120px;
   margin-bottom: 30px;
-}
-/******* Divider container *******/
-.divider {
-  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
-    transparent no-repeat;
-  background-size: 100% 2px;
-  left: 50%;
-  margin: 35px 0 50px 0;
-  padding: 2px;
-  position: relative;
-  transform: translate(-50%, -50%);
-  width: 70%;
 }
 /******* Quote and carousel container *******/
 .quote-and-carousel {
   display: flex;
+  height: 350px;
   width: 100%;
-  border: 5px solid green;
 }
 /* Quote  */
 .movies-description {
   color: var(--white-color);
   font-family: inherit;
   width: 55%;
-  margin-left: 40px;
-  margin-top: 20px;
+  padding-left: 40px;
+  padding-top: 20px;
 }
 .movies-description h1 {
   font-size: 6rem;
@@ -168,16 +155,18 @@ header .search-container {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 260px;
+  height: 300px;
   position: absolute;
   transition: 1s;
   transform-style: preserve-3d;
   width: 200px;
   -webkit-box-reflect: below 0 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.9, transparent), to(white));
 }
-/********** Movies swiper container **********/
+/********** Movies display container **********/
 .all-sections-container {
   margin: auto 35px auto 35px;
+}
+.individual-section {
 }
 .individual-section h2 {
   color: var(--white-color);
@@ -246,6 +235,37 @@ header .search-container {
 .individual-movie-info {
   width: 50%;
 }
+/******* Divider container *******/
+.div-container {
+  padding: 35px 0 40px 0;
+  position: relative;
+  width: 100%;
+}
+.divider {
+  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
+    transparent no-repeat;
+  border-radius: 5px;
+  padding: 2px;
+  margin: 0 auto;
+  width: 80%;
+}
+
+/******* Loading icon *******/
+.loader {
+  background: linear-gradient(to left, #f64f59, #c471ed, #12c2e9);
+  /* Show only 10px from the border */
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #fff 0);
+  mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #fff 0);
+  border-radius: 50%;
+  position: fixed;
+  inset: calc(50% - 50px);
+  animation: rot 2s linear infinite;
+}
+@keyframes rot {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 /* 320px — 480px: Mobile devices */
 /* 481px — 768px: iPads, Tablets */
 /* 769px — 1024px: Small screens, laptops */
@@ -267,20 +287,3 @@ header .search-container {
     border-radius: 2px;
   }
 } */
-
-/********** Loader section **********/
-.loader {
-  background: linear-gradient(to left, #f64f59, #c471ed, #12c2e9);
-  /* Show only 10px from the border */
-  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #fff 0);
-  mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #fff 0);
-  border-radius: 50%;
-  position: fixed;
-  inset: calc(50% - 50px);
-  animation: rot 2s linear infinite;
-}
-@keyframes rot {
-  100% {
-    transform: rotate(360deg);
-  }
-}
