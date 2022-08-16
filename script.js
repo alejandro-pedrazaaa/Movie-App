@@ -83,9 +83,9 @@ getAndDisplayCarousel(CAROUSEL_API);
  */
 const allAPIs = [
   "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
-  "https://api.themoviedb.org/3/tv/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
   "https://api.themoviedb.org/3/movie/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
-  "https://api.themoviedb.org/3/trending/all/week?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US",
+  "https://api.themoviedb.org/3/trending/movie/week?api_key=85ade2bd722304de1124d09e0ddfd9b3",
+  "https://api.themoviedb.org/3/action/28/list?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US",
 ];
 const swiperWrappers = document.querySelectorAll(".swiper-wrapper");
 
@@ -145,7 +145,7 @@ const swiper = new Swiper(".swiper-container", {
     },
     // when window width is >= 1500px
     1500: {
-      slidesPerView: 8,
+      slidesPerView: 7,
       spaceBetween: 1,
       centeredSlides: false,
     },
@@ -188,28 +188,22 @@ function fixHeader() {
     footer.style.transition = "all 0.5s";
   }
 }
-////////////////////////////////////////////////////////////////////////////////////////////
-// get the id from the attributes with the asynch function
-// const displayClickedMovie = (allMovies) => {
-//   allMovies.forEach((movie) => {
-//     movie.addEventListener("click", () => {
-//       const id = movie.getAttribute("id");
-//       console.log(id);
-//     });
-//   });
-// };
 
-// const ex = `https://api.themoviedb.org/3/movie/766507?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`;
-// console.log(ex);
-
-// Get the id of the clicked movie ONLY once.
+/**
+ * @description - When the user clicks an image, a new page will open with the movie or tv show details.
+ */
+const mainPage = document.querySelector(".main-page");
+const individualPage = document.querySelector(".individual-page");
 const displayClickedMovie = (allMovies) => {
   allMovies.forEach((movie) => {
     movie.addEventListener("dblclick", () => {
+      individualPage.removeAttribute("hidden");
+      mainPage.setAttribute("hidden", "true");
       const id = movie.getAttribute("id");
       if (!movie.classList.contains("clicked")) {
         movie.classList.add("clicked");
         getAndDisplayMovie(id);
+        // check if id is of movie or tv show
       }
     });
   });
@@ -220,12 +214,12 @@ const getAndDisplayMovie = async (id) => {
     `https://api.themoviedb.org/3/movie/${id}?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`
   );
   const data = await res.json();
+  console.log(res);
   showMovie(data);
 };
 
 const showMovie = (movie) => {
   const {
-    backdrop_path,
     poster_path,
     tagline,
     title,
@@ -235,37 +229,86 @@ const showMovie = (movie) => {
     homepage,
     belongs_to_collection,
   } = movie;
+
+  const voteAverage = Math.round(vote_average * 10) / 10;
+
   const movieContainer = document.querySelector(".individual-page");
   movieContainer.innerHTML = `
-    <div class="individual-movie-container">
-      <div class="individual-movie-poster">
+    <div class="movie-container">
+      <div class="movie-poster">
         <img src="${IMG_PATH + poster_path}">
       </div>
-      <div class="individual-movie-info">
-        <p>${tagline}</p>
+      <div class="movie-info">
         <h1>${title}</h1>
-        <p>${overview}</p>
-        <p>${vote_average}</p>
-        <p>${release_date}</p>
-        <p>${homepage}</p>
-        <p>${belongs_to_collection}</p>
+        <div class="movie-div">
+          <div class="div"></div>
+        </div>
+        <h2>${tagline}<h2>
+        <p class="overview">${overview}</p>
+        <p>Rating: <span class="rating">${voteAverage}</span></p>
+        <p>Released: <span class="released">${release_date}</span></p>
+        <p>Want to watch it? click <a href="${homepage}" target="_blank" class="anchor">here</a></p>
       </div>
     </div>
+    <div class="collection">
+      <p>${belongs_to_collection}</p>
+    </div>
   `;
-  const moviePoster = document.querySelector(".individual-movie-poster");
-  moviePoster.style.backgroundImage = `url(${IMG_PATH + backdrop_path})`;
-  const allSectionsContainer = document.querySelector(".main-page");
-  allSectionsContainer.style.display = "none";
+  const moviePoster = document.querySelector(".movie-poster");
+  moviePoster.style.backgroundImage = `url(${IMG_PATH})`;
 
-  // //get the belongs_to_collection and display the collection if it exists
-  // if (belongs_to_collection) {
-  //   const { id } = belongs_to_collection;
-  //   getAndDisplayCollection(id);
-  //   console.log(id);
-  // }
+  displayCollection(belongs_to_collection);
 };
 
-// const collection_API = `
+const displayCollection = (collection) => {
+  if (collection) {
+    getCollection(collection.id);
+  } else {
+    getSimilarMovies();
+  }
+};
+
+const getCollection = async (id) => {
+  const res = await fetch(
+    ` https://api.themoviedb.org/3/collection/${id}?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`
+  );
+  const data = await res.json();
+  showCollection(data);
+};
+
+const showCollection = (collection) => {
+  const { name, backdrop_path, poster_path } = collection;
+  const collectionContainer = document.querySelector(".collection");
+  collectionContainer.innerHTML = `
+
+    <div class="collection-poster">
+      <img src="${IMG_PATH + poster_path}">
+    </div>
+    <div class="collection-info">
+      <h1>${name}</h1>
+      <div class="collection-div">
+        <div class="div"></div>
+      </div>
+      <p>${backdrop_path}</p>
+    </div>
+  `;
+  const collectionPoster = document.querySelector(".collection-poster");
+  collectionPoster.style.backgroundImage = `url(${IMG_PATH})`;
+};
+
+const getSimilarMovies = async () => {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/similar?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1`
+  );
+  const data = await res.json();
+  showSimilarMovies(data);
+};
+
+const showSimilarMovies = (movies) => {
+  const { results } = movies;
+  const similarMovies = document.querySelector(".similar-movies");
+  showMovie(results, similarMovies);
+};
 
 // https://api.themoviedb.org/3/search/collection?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&query=asdf&page=1`;
 

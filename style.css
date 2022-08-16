@@ -113,8 +113,7 @@ header .search-container {
   outline: none;
 }
 /****************************************************************** MAIN PAGE ******************************************************************/
-.main-page,
-.individual-page {
+.main-page {
   margin-top: 120px;
   margin-bottom: 30px;
 }
@@ -165,8 +164,6 @@ header .search-container {
 /********** Movies display container **********/
 .all-sections-container {
   margin: auto 35px auto 35px;
-}
-.individual-section {
 }
 .individual-section h2 {
   color: var(--white-color);
@@ -228,26 +225,96 @@ header .search-container {
   width: auto;
 }
 /****************************************************************** INDIVIDUAL PAGE ******************************************************************/
-.individual-movie-poster {
-  width: 50%;
+/* divide individual-page in two sections: */
+.individual-page {
+  margin-top: 120px;
+  margin-bottom: 30px;
 }
-
-.individual-movie-info {
-  width: 50%;
+.movie-container {
+  display: flex;
 }
-/******* Divider container *******/
+.movie-poster {
+  padding: 50px;
+}
+.movie-poster img {
+  height: 700px;
+  box-shadow: 0px 0px 90px -25px #fff;
+}
+.movie-info {
+  color: var(--white-color);
+  font-family: inherit;
+  padding: 30px 50px 50px 25px;
+}
+.movie-info h1 {
+  font-family: inherit;
+  font-size: 4rem;
+}
+.movie-div {
+  padding: 0 0 20px 0;
+}
+.div {
+  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9, transparent)
+    left bottom transparent no-repeat;
+  padding: 2px;
+  width: 80%;
+}
+.movie-info h2 {
+  font-family: inherit;
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+.movie-info p {
+  font-family: inherit;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  padding: 15px 125px 0 0;
+  font-weight: 100;
+}
+.movie-info .overview::first-letter {
+  font-size: 2rem;
+  font-weight: 300;
+}
+.movie-info .rating,
+.movie-info .released {
+  font-size: 2rem;
+  font-weight: 300;
+}
+.movie-info .anchor {
+  text-decoration: none;
+  box-shadow: inset 0 0 0 0 #f64f59;
+  color: white;
+  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.movie-info .anchor:hover {
+  font-weight: 300;
+  box-shadow: inset 94px 0 15px 0 rgba(18, 194, 233, 0.75);
+  color: white;
+}
+.collection {
+  color: white;
+  border: 1px solid white;
+}
+/****************************************************************** DIVIDER ******************************************************************/
 .div-container {
   padding: 35px 0 40px 0;
   position: relative;
   width: 100%;
 }
 .divider {
-  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
-    transparent no-repeat;
+  background: linear-gradient(
+      to right,
+      transparent,
+      #f64f59,
+      #c471ed,
+      #12c2e9,
+      transparent
+    )
+    left bottom transparent no-repeat;
   border-radius: 5px;
   padding: 2px;
   margin: 0 auto;
-  width: 80%;
+  width: 90%;
 }
 
 /******* Loading icon *******/
