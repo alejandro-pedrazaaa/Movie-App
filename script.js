@@ -94,25 +94,27 @@ const getAndDisplayMovies = async (url, swiperWrapper) => {
   showMovies(data.results, swiperWrapper);
 };
 
-for (let i = 0; i < swiperWrappers.length; i++) {
+for (let i = 0; i <= 2; i++) {
   getAndDisplayMovies(allAPIs[i], swiperWrappers[i]);
 }
 
 const showMovies = (movies, container) => {
   movies.forEach((movie) => {
-    const { poster_path, id } = movie;
+    // do not allow diplucate movies to be displayed
+    if (!container.querySelector(`[id="${movie.id}"]`)) {
+      const { poster_path, id } = movie;
 
-    const movies = document.createElement("div");
-    movies.classList.add("swiper-slide");
+      const movies = document.createElement("div");
+      movies.classList.add("swiper-slide");
 
-    movies.innerHTML = `<img src="${IMG_PATH + poster_path}">`;
-    movies.setAttribute("id", id);
+      movies.innerHTML = `<img src="${IMG_PATH + poster_path}">`;
+      movies.setAttribute("id", id);
 
-    container.appendChild(movies);
+      container.appendChild(movies);
 
-    const allMovies = document.querySelectorAll(".swiper-slide");
-    displayClickedMovie(allMovies);
-    console.log("done");
+      const allMovies = document.querySelectorAll(".swiper-slide");
+      displayClickedMovie(allMovies);
+    }
   });
 };
 
@@ -194,12 +196,17 @@ function fixHeader() {
  */
 const mainPage = document.querySelector(".main-page");
 const individualPage = document.querySelector(".individual-page");
+const container = document.getElementById("container");
+
 const displayClickedMovie = (allMovies) => {
   allMovies.forEach((movie) => {
+    movie.classList.remove("clicked");
     movie.addEventListener("dblclick", () => {
       individualPage.removeAttribute("hidden");
+      container.removeAttribute("hidden");
       mainPage.setAttribute("hidden", "true");
       const id = movie.getAttribute("id");
+
       if (!movie.classList.contains("clicked")) {
         movie.classList.add("clicked");
         getAndDisplayMovie(id);
@@ -226,12 +233,33 @@ const showMovie = (movie) => {
     release_date,
     homepage,
     belongs_to_collection,
+    id,
   } = movie;
 
   const voteAverage = Math.round(vote_average * 10) / 10;
+  //change release date format to month/day/year
 
-  const movieContainer = document.querySelector(".individual-page");
-  movieContainer.innerHTML = `
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const releaseDate = release_date.split("-");
+  const releaseDateFormatted = `${months[releaseDate[1] - 1]} ${
+    releaseDate[2]
+  }, ${releaseDate[0]}`;
+
+  individualPage.innerHTML = `
     <div class="movie-container">
       <div class="movie-poster">
         <img src="${IMG_PATH + poster_path}">
@@ -244,52 +272,33 @@ const showMovie = (movie) => {
         <h2>${tagline}<h2>
         <p class="overview">${overview}</p>
         <p>Rating: <span class="rating">${voteAverage}</span></p>
-        <p>Released: <span class="released">${release_date}</span></p>
+        <p>Released: <span class="released">${releaseDateFormatted}</span></p>
         <p>Want to watch it? click <a href="${homepage}" target="_blank" class="anchor">here</a></p>
       </div>
-    </div>
-    <div class="container">
-      <div class="swiper-container">
-        <div class="swiper-wrapper"></div>
-      </div>
-    </div>
-  `;
-  const moviePoster = document.querySelector(".movie-poster");
-  moviePoster.style.backgroundImage = `url(${IMG_PATH})`;
+    </div>`;
 
-  const swiperWrapper = document.querySelector(".swiper-wrapper");
-  const collectionid = belongs_to_collection.id;
+  const collectionTitle = document.querySelector(".collection-title");
+  if (belongs_to_collection) {
+    collectionTitle.innerHTML = belongs_to_collection.name;
+  } else {
+    collectionTitle.innerHTML = "More like this:";
+  }
 
-  getCollection(collectionid, swiperWrapper);
+  getMoviesInCollection(belongs_to_collection.id);
 };
 
-/**
- * @description - In the case that the movie belongs to a collection, this function will display the collection details.
- */
-
-const getCollection = async (id, swiperWrapper) => {
+// if belongs_to_collection id and movie id are the same, remove the movie from the collection
+const getMoviesInCollection = async (id) => {
   const res = await fetch(
-    ` https://api.themoviedb.org/3/collection/${id}?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`
+    `https://api.themoviedb.org/3/collection/${id}?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`
   );
   const data = await res.json();
-  sendToShowMovies(data, swiperWrapper);
-};
-
-const sendToShowMovies = (data, swiperWrapper) => {
   const movies = data.parts;
-  showMovies(movies, swiperWrapper);
+
+  displayMoviesInCollection(movies);
 };
 
-// const getSimilarMovies = async () => {
-//   const res = await fetch(
-//     `https://api.themoviedb.org/3/movie/${id}/similar?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1`
-//   );
-//   const data = await res.json();
-//   showSimilarMovies(data);
-// };
-
-// const showSimilarMovies = (movies) => {
-//   const { results } = movies;
-//   const similarMovies = document.querySelector(".similar-movies");
-//   showMovie(results, similarMovies);
-// };
+const displayMoviesInCollection = (movies) => {
+  const wrapper = document.getElementById("wrapper");
+  showMovies(movies, wrapper);
+};
