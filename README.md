@@ -42,10 +42,9 @@ Don't forget to give the project a star! Thanks again!
 ## Acknowledgments
 
 Inspiration, code snippets, etc:
-   * [movie-app](https://github.com/bradtraversy/50projects50days/tree/master/movie-app)
-   * [carousel display](https://codepen.io/doughamlin/pen/Eamrop)
    * [The Movie Database API](https://www.themoviedb.org/)
-   * [Netflix display](https://www.netflix.com/browse/genre/34399)
+   * [movie-app](https://github.com/bradtraversy/50projects50days/tree/master/movie-app)
+   * [arousel Display](https://codepen.io/doughamlin/pen/Eamrop)
    * [Netflix slider](https://codepen.io/comertcimen/pen/bGwoXGZ)
 
 ## Contact Me
