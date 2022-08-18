@@ -44,7 +44,7 @@ Don't forget to give the project a star! Thanks again!
 Inspiration, code snippets, etc:
    * [The Movie Database API](https://www.themoviedb.org/)
    * [movie-app](https://github.com/bradtraversy/50projects50days/tree/master/movie-app)
-   * [arousel Display](https://codepen.io/doughamlin/pen/Eamrop)
+   * [Carousel Display](https://codepen.io/doughamlin/pen/Eamrop)
    * [Netflix slider](https://codepen.io/comertcimen/pen/bGwoXGZ)
 
 ## Contact Me
