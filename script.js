@@ -198,19 +198,15 @@ const mainPage = document.querySelector(".main-page");
 const individualPage = document.querySelector(".individual-page");
 const container = document.getElementById("container");
 
-const displayClickedMovie = (allMovies) => {
+const displayClickedMovie = async (allMovies) => {
   allMovies.forEach((movie) => {
-    movie.classList.remove("clicked");
     movie.addEventListener("dblclick", () => {
+      mainPage.setAttribute("hidden", "true");
       individualPage.removeAttribute("hidden");
       container.removeAttribute("hidden");
-      mainPage.setAttribute("hidden", "true");
       const id = movie.getAttribute("id");
 
-      if (!movie.classList.contains("clicked")) {
-        movie.classList.add("clicked");
-        getAndDisplayMovie(id);
-      }
+      getAndDisplayMovie(id);
     });
   });
 };
@@ -223,7 +219,7 @@ const getAndDisplayMovie = async (id) => {
   showMovie(data);
 };
 
-const showMovie = (movie) => {
+const showMovie = async (movie) => {
   const {
     poster_path,
     tagline,
@@ -237,7 +233,6 @@ const showMovie = (movie) => {
   } = movie;
 
   const voteAverage = Math.round(vote_average * 10) / 10;
-  //change release date format to month/day/year
 
   const months = [
     "January",
@@ -277,28 +272,56 @@ const showMovie = (movie) => {
       </div>
     </div>`;
 
-  const collectionTitle = document.querySelector(".collection-title");
-  if (belongs_to_collection) {
-    collectionTitle.innerHTML = belongs_to_collection.name;
-  } else {
-    collectionTitle.innerHTML = "More like this:";
-  }
-
-  getMoviesInCollection(belongs_to_collection.id);
+  hasCollection(belongs_to_collection, id);
 };
 
-// if belongs_to_collection id and movie id are the same, remove the movie from the collection
+const hasCollection = async (collection, id) => {
+  const collectionTitle = document.querySelector(".collection-title");
+  if (collection) {
+    getMoviesInCollection(collection.id);
+    collectionTitle.innerHTML = collection.name;
+  } else if (collection === null) {
+    getMoreLikeThis(id);
+    collectionTitle.innerHTML = "More like this";
+  }
+};
+
+const wrapper = document.querySelector("#wrapper");
 const getMoviesInCollection = async (id) => {
   const res = await fetch(
     `https://api.themoviedb.org/3/collection/${id}?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`
   );
   const data = await res.json();
   const movies = data.parts;
-
-  displayMoviesInCollection(movies);
+  showMovies(movies, wrapper);
 };
 
-const displayMoviesInCollection = (movies) => {
-  const wrapper = document.getElementById("wrapper");
+const getMoreLikeThis = async (id) => {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/similar?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1`
+  );
+  const data = await res.json();
+  const movies = data.results;
   showMovies(movies, wrapper);
+};
+
+wrapper.addEventListener("dblclick", () => {
+  // scroll to top of page slowly
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
+  const movies = wrapper.querySelectorAll(".movie");
+  updateCollectionOrSimilar(movies);
+});
+
+const updateCollectionOrSimilar = (movies) => {
+  movies.forEach((movie) => {
+    movie.addEventListener("dblclick", () => {
+      const id = movie.getAttribute("id");
+      getAndDisplayMovie(id);
+    });
+  }),
+    (wrapper.innerHTML = "");
 };
