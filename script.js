@@ -306,7 +306,6 @@ const getMoreLikeThis = async (id) => {
 };
 
 wrapper.addEventListener("dblclick", () => {
-  // scroll to top of page slowly
   window.scrollTo({
     top: 0,
     left: 0,
