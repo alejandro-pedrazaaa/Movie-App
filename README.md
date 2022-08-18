@@ -11,7 +11,7 @@ challenge by [Brad Traversy](https://github.com/bradtraversy). With the use of A
 
 1. Open your terminal and then type: 
   ```sh
-   $ git clone https://github.com/alejandro-pedrazaaa/git-hub-profile.git
+   $ git clone https://github.com/alejandro-pedrazaaa/Movies-App.git
    ```
 2. cd into the new folder. 
 3. Install the required dependencies:
@@ -24,7 +24,7 @@ $ npm start
    ```
 ## Dependencies
 
-Make sure you have the latest git version
+Make sure you have the latest git version and the latest Visual Studio Code
 
 ## Contributing
 
@@ -39,11 +39,6 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## Authors
-
-Original author:
-* [Brad Traversy](https://github.com/bradtraversy)
-
 ## Acknowledgments
 
 Inspiration, code snippets, etc:
@@ -51,6 +46,7 @@ Inspiration, code snippets, etc:
    * [carousel display](https://codepen.io/doughamlin/pen/Eamrop)
    * [The Movie Database API](https://www.themoviedb.org/)
    * [Netflix display](https://www.netflix.com/browse/genre/34399)
+   * [Netflix slider](https://codepen.io/comertcimen/pen/bGwoXGZ)
 
 ## Contact Me
 
