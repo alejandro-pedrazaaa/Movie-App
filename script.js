@@ -164,12 +164,10 @@ const swiper = new Swiper(".swiper-container", {
 /**
  * @description - Makes search input appear and dissapears when user clicks on search button
  */
-const searchContainer = document.querySelector(".search-container");
-const searchBtn = document.querySelector(".btn");
+const searchContainer = document.querySelector(".search");
 const userInput = document.querySelector(".input");
-searchBtn.addEventListener("click", () => {
-  searchContainer.classList.toggle("active");
-  searchContainer.focus();
+userInput.addEventListener("click", () => {
+  userInput.focus();
   createSearchResultsDiv();
 });
 
@@ -200,12 +198,15 @@ const populateSearchResultsDiv = (results) => {
   searchResultsList.innerHTML = "";
   results.forEach((result) => {
     //create a list item for each result
-    const listItem = document.createElement("li");
-    listItem.classList.add("results-li");
-    //only return the NAME of the movie
-    listItem.innerHTML = result.title;
-    //add the list item to the searchResultsList
-    searchResultsList.appendChild(listItem);
+    //only allow 5 results to be displayed
+    if (searchResultsList.childElementCount < 7) {
+      const listItem = document.createElement("li");
+      listItem.classList.add("results-li");
+      //only return the NAME of the movie
+      listItem.innerHTML = result.title;
+      //add the list item to the searchResultsList
+      searchResultsList.appendChild(listItem);
+    }
   });
 };
 

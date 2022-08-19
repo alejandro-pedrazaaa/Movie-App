@@ -11,7 +11,7 @@
   margin: 0;
 }
 body {
-  background-color: var(--black-color);
+  background-color: black;
   font-family: "Prompt", sans-serif;
   overflow-x: hidden;
 }
@@ -20,9 +20,10 @@ header {
   align-items: center;
   background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
     transparent no-repeat;
-  background-color: var(--black-color);
+  background-color: black;
   background-size: 100% 1px;
   display: flex;
+  height: 80px;
   height: 120px;
   justify-content: space-between;
   left: 0;
@@ -33,8 +34,11 @@ header {
   width: 100%;
   z-index: 2;
 }
-/******* Header container *******/
-header h1 {
+header.active {
+  height: 90px;
+}
+/******* MoviesApp Logo *******/
+.logo {
   background: #800080;
   background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
   background: --webkit-linear-gradient(right, #f64f59, #c471ed, #12c2e9);
@@ -45,72 +49,87 @@ header h1 {
   font-size: 3.5rem;
   font-weight: 600;
   letter-spacing: 5px;
-  margin-left: 50px;
+  margin: 5%;
   -moz-background-clip: text;
   -fox-background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-header.active {
-  height: 90px;
-}
-/******* Search container *******/
-header .search-container {
-  font-family: inherit;
-  height: 50px;
-  margin-right: 100px;
+
+/******* Search Container *******/
+.search {
+  background: black;
+  border-radius: 10px;
+  margin: 5%;
+  padding: 1px;
   position: relative;
 }
-/* Search button */
-.search-container .btn {
-  background: #12c2e9;
-  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
-  background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 24px;
-  height: 50px;
-  left: 0;
+.search:after {
+  animation: borderAnimation 3s ease alternate infinite;
+  background: linear-gradient(
+    45deg,
+    #f64f59,
+    #c471ed,
+    #12c2e9,
+    #12c2e9,
+    #c471ed,
+    #f64f59
+  );
+  background-size: 600% 600%;
+  border-radius: 10px;
+  content: "";
+  height: calc(100% + 6px);
+  left: -3px;
   position: absolute;
-  text-decoration: none;
-  top: 0;
-  transition: transform 0.3s ease;
-  width: 50px;
+  top: -3px;
+  width: calc(100% + 6px);
+  z-index: -1;
 }
-.search-container .btn:hover {
-  transform: scale(1.15);
+@keyframes borderAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
-.search-container.active .btn {
-  transform: translateX(-30px);
-}
-.search-container.active .btn i:hover {
-  transform: scale(1.15);
-}
-/*Search input */
-.search-container .input {
-  background-color: var(--black-color);
+.input {
+  background-color: black;
   border: 0;
+  border-radius: 10px;
+  color: var(--white-color);
   font-size: 20px;
   padding: 10px;
-  transition: width 0.3s ease;
-  width: 50px;
+  width: 400px;
 }
-.search-container.active .input {
-  border-image: linear-gradient(to left, #f64f59, #c471ed, #12c2e9) 1;
-  border-left: none;
-  border-style: solid;
-  border-width: 2px;
-  color: var(--white-color);
-  padding-left: 25px;
-  transform: translateX(0px);
-  width: 200px;
-  transition: width 0.3s ease;
-}
-.btn:focus,
 .input:focus {
   outline: none;
+}
+/****************************************************************** RESULTS FROM SEARCH MENU ******************************************************************/
+.results-div {
+  margin: 0 auto;
+  padding: 0 0 30px 0;
+  width: 100%;
+  color: white;
+  position: fixed;
+  font-family: inherit;
+  /* border: 3px solid #f64f59; */
+}
+.results-ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+}
+.results-li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0 0 30px 0;
+  width: 100%;
 }
 /****************************************************************** MAIN PAGE ******************************************************************/
 .main-page {
@@ -123,7 +142,7 @@ header .search-container {
   height: 350px;
   width: 100%;
 }
-/* Quote  */
+/******* Movies Quote  *******/
 .movies-description {
   color: var(--white-color);
   font-family: inherit;
@@ -141,7 +160,7 @@ header .search-container {
 .movies-description .quote-author {
   margin-top: 20px;
 }
-/* Carousel  */
+/******* Avengers Carousel *******/
 .carousel {
   align-items: baseline;
   display: flex;
@@ -161,7 +180,7 @@ header .search-container {
   width: 200px;
   -webkit-box-reflect: below 0 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.9, transparent), to(white));
 }
-/********** Movies display container **********/
+/********** Main Page Movies Settings **********/
 .all-sections-container {
   margin: auto 35px auto 35px;
 }
@@ -183,8 +202,8 @@ header .search-container {
   transition: all 300ms ease-in-out;
 }
 .swiper-slide img {
-  max-width: 10rem;
   margin: auto;
+  max-width: 10rem;
 }
 .swiper-slide:hover {
   transform: scale(1.3);
@@ -193,8 +212,8 @@ header .search-container {
   -webkit-box-reflect: below 0 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.9, transparent), to(white));
 }
 .swiper-slide:hover img {
-  transition-delay: 300ms;
   cursor: pointer;
+  transition-delay: 300ms;
 }
 /****************************************************************** FOOTER ******************************************************************/
 .footer {
@@ -228,12 +247,11 @@ header .search-container {
 .individual-page {
   margin-top: 120px;
 }
-/********** Movie display container **********/
 .movie-container {
   display: flex;
   padding: 30px;
 }
-/* movie poster */
+/********** Poster for Chosen Movie **********/
 .movie-poster {
   padding: 50px;
 }
@@ -241,7 +259,7 @@ header .search-container {
   height: 550px;
   box-shadow: 0px 0px 90px -25px #fff;
 }
-/* movie info */
+/********** Individual Movie Info **********/
 .movie-info {
   color: var(--white-color);
   font-family: inherit;
@@ -269,9 +287,9 @@ header .search-container {
 .movie-info p {
   font-family: inherit;
   font-size: 1.4rem;
+  font-weight: 100;
   letter-spacing: 2px;
   padding: 15px 125px 0 0;
-  font-weight: 100;
 }
 .movie-info .overview::first-letter {
   font-weight: 300;
@@ -292,7 +310,7 @@ header .search-container {
   box-shadow: inset 94px 0 15px 0 rgba(18, 194, 233, 0.75);
   color: white;
 }
-/********** Collection display **********/
+/********** Individual Page Collection/Similar Display **********/
 #container {
   margin: 0 50px 90px 50px;
 }
@@ -307,28 +325,6 @@ header .search-container {
   font-size: 2rem;
   letter-spacing: 3px;
   padding-bottom: 35px;
-}
-/****************************************************************** RESULTS FROM SEARCH MENU ******************************************************************/
-.results-div {
-  margin: 0 auto;
-  padding: 0 0 30px 0;
-  width: 100%;
-  color: white;
-  position: fixed;
-  font-family: inherit;
-}
-.results-ul {
-  list-style-type: none;
-  padding: 0;
-  width: 100%;
-}
-.results-li {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
-  padding: 0 0 30px 0;
-  width: 100%;
 }
 /****************************************************************** DIVIDER ******************************************************************/
 .div-container {
@@ -388,3 +384,4 @@ header .search-container {
     border-radius: 2px;
   }
 } */
+8
