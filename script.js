@@ -170,21 +170,43 @@ const userInput = document.querySelector(".input");
 searchBtn.addEventListener("click", () => {
   searchContainer.classList.toggle("active");
   searchContainer.focus();
+  createSearchResultsDiv();
 });
+
+const createSearchResultsDiv = () => {
+  const searchResultsDiv = document.createElement("div");
+  searchResultsDiv.classList.add("results-div");
+  const searchResultsList = document.createElement("ul");
+  searchResultsList.classList.add("results-ul");
+  searchResultsDiv.appendChild(searchResultsList);
+
+  searchContainer.appendChild(searchResultsDiv);
+};
 
 const SEARCH_API =
   "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&query=";
 
-//whne the searchBtn is clicked. get the value of the userInput and make a fetch request to the search API
 userInput.addEventListener("keyup", async () => {
   const userInputValue = userInput.value;
   const res = await fetch(SEARCH_API + userInputValue);
   const data = await res.json();
+
+  populateSearchResultsDiv(data.results);
 });
 
-const createSearchResultsContainer = (searchResults) => {
-  const searchResultsContainer = document.createElement("div");
-  searchResultsContainer.classList.add("search-results-container");
+const populateSearchResultsDiv = (results) => {
+  //populate the searchResultsList with the results from the search API
+  const searchResultsList = document.querySelector(".results-ul");
+  searchResultsList.innerHTML = "";
+  results.forEach((result) => {
+    //create a list item for each result
+    const listItem = document.createElement("li");
+    listItem.classList.add("results-li");
+    //only return the NAME of the movie
+    listItem.innerHTML = result.title;
+    //add the list item to the searchResultsList
+    searchResultsList.appendChild(listItem);
+  });
 };
 
 /**

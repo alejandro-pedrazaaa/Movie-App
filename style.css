@@ -308,6 +308,28 @@ header .search-container {
   letter-spacing: 3px;
   padding-bottom: 35px;
 }
+/****************************************************************** RESULTS FROM SEARCH MENU ******************************************************************/
+.results-div {
+  margin: 0 auto;
+  padding: 0 0 30px 0;
+  width: 100%;
+  color: white;
+  position: fixed;
+  font-family: inherit;
+}
+.results-ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+}
+.results-li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0 0 30px 0;
+  width: 100%;
+}
 /****************************************************************** DIVIDER ******************************************************************/
 .div-container {
   padding: 35px 0 40px 0;
