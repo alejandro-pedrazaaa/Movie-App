@@ -172,6 +172,21 @@ searchBtn.addEventListener("click", () => {
   searchContainer.focus();
 });
 
+const SEARCH_API =
+  "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&query=";
+
+//whne the searchBtn is clicked. get the value of the userInput and make a fetch request to the search API
+userInput.addEventListener("keyup", async () => {
+  const userInputValue = userInput.value;
+  const res = await fetch(SEARCH_API + userInputValue);
+  const data = await res.json();
+});
+
+const createSearchResultsContainer = (searchResults) => {
+  const searchResultsContainer = document.createElement("div");
+  searchResultsContainer.classList.add("search-results-container");
+};
+
 /**
  * @description - When the user scrolls down, the header will stick to the top of the page
  * and will decrease in size.
