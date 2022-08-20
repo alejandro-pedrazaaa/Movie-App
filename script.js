@@ -166,25 +166,34 @@ const swiper = new Swiper(".swiper-container", {
  */
 const searchContainer = document.querySelector(".search");
 const userInput = document.querySelector(".input");
-userInput.addEventListener("click", () => {
+userInput.addEventListener("keyup", () => {
   userInput.focus();
+
+  //if input is not empty
   createSearchResultsDiv();
 });
 
 const createSearchResultsDiv = () => {
-  const searchResultsDiv = document.createElement("div");
-  searchResultsDiv.classList.add("results-div");
-  const searchResultsList = document.createElement("ul");
-  searchResultsList.classList.add("results-ul");
-  searchResultsDiv.appendChild(searchResultsList);
-
-  searchContainer.appendChild(searchResultsDiv);
+  // if there is no search results div, create one
+  if (!searchContainer.querySelector(".results-div")) {
+    const searchResultsDiv = document.createElement("div");
+    searchResultsDiv.classList.add("results-div");
+    const searchResultsList = document.createElement("ul");
+    searchResultsList.classList.add("results-ul");
+    searchResultsDiv.appendChild(searchResultsList);
+    searchContainer.appendChild(searchResultsDiv);
+  }
 };
 
 const SEARCH_API =
   "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&query=";
 
 userInput.addEventListener("keyup", async () => {
+  if (userInput.value.length < 1) {
+    searchContainer.querySelector(".results-div").remove();
+    return;
+  }
+
   const userInputValue = userInput.value;
   const res = await fetch(SEARCH_API + userInputValue);
   const data = await res.json();
@@ -193,22 +202,21 @@ userInput.addEventListener("keyup", async () => {
 });
 
 const populateSearchResultsDiv = (results) => {
-  //populate the searchResultsList with the results from the search API
   const searchResultsList = document.querySelector(".results-ul");
   searchResultsList.innerHTML = "";
   results.forEach((result) => {
-    //create a list item for each result
-    //only allow 5 results to be displayed
-    if (searchResultsList.childElementCount < 7) {
+    if (searchResultsList.childElementCount < 10) {
       const listItem = document.createElement("li");
       listItem.classList.add("results-li");
-      //only return the NAME of the movie
       listItem.innerHTML = result.title;
-      //add the list item to the searchResultsList
+
       searchResultsList.appendChild(listItem);
     }
   });
 };
+
+//function to allow user use the up and down arrow keys to navigate through the search results
+// while popilating that movie on the input field itself
 
 /**
  * @description - When the user scrolls down, the header will stick to the top of the page

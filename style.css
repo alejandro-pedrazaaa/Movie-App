@@ -110,26 +110,23 @@ header.active {
 }
 /****************************************************************** RESULTS FROM SEARCH MENU ******************************************************************/
 .results-div {
-  margin: 0 auto;
-  padding: 0 0 30px 0;
-  width: 100%;
+  font-size: 20px;
+  width: 400px;
   color: white;
   position: fixed;
   font-family: inherit;
-  /* border: 3px solid #f64f59; */
+  background-color: black;
+  border: 1px solid white;
+  border-top: none;
+  z-index: -1;
+  background: linear-gradient(to left, #f64f59, #c471ed, #12c2e9);
 }
 .results-ul {
   list-style-type: none;
-  padding: 0;
-  width: 100%;
+  padding: 0 0 0 5px;
 }
 .results-li {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
-  padding: 0 0 30px 0;
-  width: 100%;
+  padding: 5px;
 }
 /****************************************************************** MAIN PAGE ******************************************************************/
 .main-page {
