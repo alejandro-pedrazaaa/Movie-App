@@ -178,9 +178,9 @@ const createSearchResultsDiv = () => {
   if (!searchContainer.querySelector(".results-div")) {
     const searchResultsDiv = document.createElement("div");
     searchResultsDiv.classList.add("results-div");
-    const searchResultsList = document.createElement("ul");
-    searchResultsList.classList.add("results-ul");
-    searchResultsDiv.appendChild(searchResultsList);
+    const searchResultList = document.createElement("ul");
+    searchResultList.classList.add("results-ul");
+    searchResultsDiv.appendChild(searchResultList);
     searchContainer.appendChild(searchResultsDiv);
   }
 };
@@ -202,22 +202,49 @@ userInput.addEventListener("keyup", async () => {
 });
 
 const populateSearchResultsDiv = (results) => {
-  const searchResultsList = document.querySelector(".results-ul");
-  searchResultsList.innerHTML = "";
+  const searchResultList = document.querySelector(".results-ul");
+
+  searchResultList.innerHTML = "";
   results.forEach((result) => {
-    if (searchResultsList.childElementCount < 10) {
+    if (searchResultList.childElementCount < 10) {
       const listItem = document.createElement("li");
       listItem.classList.add("results-li");
       listItem.innerHTML = result.title;
 
-      searchResultsList.appendChild(listItem);
+      searchResultList.appendChild(listItem);
     }
   });
 };
 
-//function to allow user use the up and down arrow keys to navigate through the search results
-// while popilating that movie on the input field itself
-
+let count = -1;
+userInput.addEventListener("keydown", (e) => {
+  let searchResults = document.querySelectorAll(".results-li");
+  if (e.keyCode === 40) {
+    count++;
+    searchResults.forEach((result) => {
+      result.classList.remove("highlight");
+    });
+    if (count > searchResults.length - 1) {
+      count = 0;
+    }
+    searchResults[count].classList.add("highlight");
+  } else if (e.keyCode === 38) {
+    count--;
+    searchResults.forEach((result) => {
+      result.classList.remove("highlight");
+    });
+    if (count < 0) {
+      count = searchResults.length - 1;
+    }
+    searchResults[count].classList.add("highlight");
+  } else if (e.keyCode === 8) {
+    count = 0;
+    searchResults.forEach((result) => {
+      result.classList.remove("highlight");
+    });
+  }
+  userInput.value = searchResults[count].innerHTML;
+});
 /**
  * @description - When the user scrolls down, the header will stick to the top of the page
  * and will decrease in size.
