@@ -169,7 +169,6 @@ const userInput = document.querySelector(".input");
 userInput.addEventListener("keyup", () => {
   userInput.focus();
 
-  //if input is not empty
   createSearchResultsDiv();
 });
 
@@ -211,7 +210,6 @@ const populateSearchResultsDiv = (results) => {
       const listItem = document.createElement("li");
       listItem.classList.add("results-li");
       listItem.innerHTML = result.title;
-
       searchResultList.appendChild(listItem);
     }
   });
@@ -219,7 +217,7 @@ const populateSearchResultsDiv = (results) => {
   if (searchResultList.childElementCount < 1) {
     const noResults = document.createElement("li");
     noResults.classList.add("results-li");
-    noResults.innerHTML = "No results";
+    noResults.innerHTML = "No movies with that title";
     searchResultList.appendChild(noResults);
   }
 };
