@@ -128,9 +128,6 @@ header.active {
 .results-li {
   padding: 5px;
 }
-.highlight {
-  background-color: purple;
-}
 /****************************************************************** MAIN PAGE ******************************************************************/
 .main-page {
   margin-top: 120px;
@@ -154,8 +151,9 @@ header.active {
   font-size: 6rem;
   letter-spacing: 5px;
 }
-.movies-description p {
+.movies-description h3 {
   line-height: 2rem;
+  font-weight: 300;
 }
 .movies-description .quote-author {
   margin-top: 20px;

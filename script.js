@@ -205,6 +205,7 @@ const populateSearchResultsDiv = (results) => {
   const searchResultList = document.querySelector(".results-ul");
 
   searchResultList.innerHTML = "";
+
   results.forEach((result) => {
     if (searchResultList.childElementCount < 10) {
       const listItem = document.createElement("li");
@@ -214,37 +215,23 @@ const populateSearchResultsDiv = (results) => {
       searchResultList.appendChild(listItem);
     }
   });
+
+  if (searchResultList.childElementCount < 1) {
+    const noResults = document.createElement("li");
+    noResults.classList.add("results-li");
+    noResults.innerHTML = "No results";
+    searchResultList.appendChild(noResults);
+  }
 };
 
-let count = -1;
 userInput.addEventListener("keydown", (e) => {
   let searchResults = document.querySelectorAll(".results-li");
   if (e.keyCode === 40) {
-    count++;
-    searchResults.forEach((result) => {
-      result.classList.remove("highlight");
-    });
-    if (count > searchResults.length - 1) {
-      count = 0;
-    }
-    searchResults[count].classList.add("highlight");
-  } else if (e.keyCode === 38) {
-    count--;
-    searchResults.forEach((result) => {
-      result.classList.remove("highlight");
-    });
-    if (count < 0) {
-      count = searchResults.length - 1;
-    }
-    searchResults[count].classList.add("highlight");
-  } else if (e.keyCode === 8) {
-    count = 0;
-    searchResults.forEach((result) => {
-      result.classList.remove("highlight");
-    });
+    userInput.value = searchResults[0].innerHTML;
+    searchContainer.querySelector(".results-div").remove();
   }
-  userInput.value = searchResults[count].innerHTML;
 });
+
 /**
  * @description - When the user scrolls down, the header will stick to the top of the page
  * and will decrease in size.
