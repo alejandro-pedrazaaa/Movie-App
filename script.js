@@ -162,7 +162,7 @@ const swiper = new Swiper(".swiper-container", {
 });
 
 /**
- * @description - Makes search input appear and dissapears when user clicks on search button
+ * @description
  */
 const searchContainer = document.querySelector(".search");
 const userInput = document.querySelector(".input");
@@ -173,7 +173,6 @@ userInput.addEventListener("keyup", () => {
 });
 
 const createSearchResultsDiv = () => {
-  // if there is no search results div, create one
   if (!searchContainer.querySelector(".results-div")) {
     const searchResultsDiv = document.createElement("div");
     searchResultsDiv.classList.add("results-div");
@@ -209,6 +208,7 @@ const populateSearchResultsDiv = (results) => {
     if (searchResultList.childElementCount < 10) {
       const listItem = document.createElement("li");
       listItem.classList.add("results-li");
+      listItem.setAttribute("id", result.id);
       listItem.innerHTML = result.title;
       searchResultList.appendChild(listItem);
     }
@@ -222,11 +222,19 @@ const populateSearchResultsDiv = (results) => {
   }
 };
 
+/**
+ * @description
+ */
 userInput.addEventListener("keydown", (e) => {
-  let searchResults = document.querySelectorAll(".results-li");
-  if (e.keyCode === 40) {
-    userInput.value = searchResults[0].innerHTML;
+  const firstMovie = document.querySelectorAll(".results-li");
+  if (e.key === "Enter") {
+    userInput.value = firstMovie[0].innerHTML;
+    const id = firstMovie[0].getAttribute("id");
+
     searchContainer.querySelector(".results-div").remove();
+    userInput.value = "";
+
+    getAndDisplayMovie(id);
   }
 });
 
@@ -259,9 +267,6 @@ const container = document.getElementById("container");
 const displayClickedMovie = async (allMovies) => {
   allMovies.forEach((movie) => {
     movie.addEventListener("dblclick", () => {
-      mainPage.setAttribute("hidden", "true");
-      individualPage.removeAttribute("hidden");
-      container.removeAttribute("hidden");
       const id = movie.getAttribute("id");
 
       getAndDisplayMovie(id);
@@ -278,6 +283,10 @@ const getAndDisplayMovie = async (id) => {
 };
 
 const showMovie = async (movie) => {
+  mainPage.setAttribute("hidden", "true");
+  individualPage.removeAttribute("hidden");
+  container.removeAttribute("hidden");
+
   const {
     poster_path,
     tagline,

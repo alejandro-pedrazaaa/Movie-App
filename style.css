@@ -108,7 +108,7 @@ header.active {
 .input:focus {
   outline: none;
 }
-/****************************************************************** RESULTS FROM SEARCH MENU ******************************************************************/
+/******* Results of Menu Search *******/
 .results-div {
   font-size: 20px;
   width: 400px;
@@ -127,6 +127,9 @@ header.active {
 }
 .results-li {
   padding: 5px;
+}
+.highlight {
+  text-decoration: underline;
 }
 /****************************************************************** MAIN PAGE ******************************************************************/
 .main-page {
