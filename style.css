@@ -132,7 +132,7 @@ header.active {
 }
 /********** Main Page Slider Settings **********/
 .all-sections-container {
-  margin: auto 35px auto 35px;
+  margin: auto 30px auto 30px;
 }
 .individual-section h2 {
   color: white;
@@ -201,7 +201,7 @@ header.active {
 }
 .movie-container {
   display: flex;
-  padding: 30px;
+  padding: 40px 40px 0 40px;
 }
 /********** Poster for Clicked Movie **********/
 .movie-poster {
@@ -211,7 +211,7 @@ header.active {
   height: 550px;
   box-shadow: 0px 0px 90px -25px #fff;
 }
-/********** Individual Movie Info **********/
+/********** Clicked Movie Info **********/
 .movie-info {
   color: white;
   font-family: inherit;
@@ -262,17 +262,17 @@ header.active {
   box-shadow: inset 94px 0 15px 0 rgba(18, 194, 233, 0.75);
   color: white;
 }
-/********** Individual Page Collection/Similar Display **********/
-#collection-similar-container .div-container {
-  padding: 0px 0 40px 0;
-  position: relative;
-  width: 100%;
+/********** Collection/Similar **********/
+#collection-similar-container {
+  margin-bottom: 45px;
 }
-#collection-similar-container .collection-title {
+.collection-similar-title {
   color: white;
   font-family: inherit;
   font-size: 2rem;
   letter-spacing: 3px;
+  margin: auto 35px auto 35px;
+  font-weight: 600;
 }
 /****************************************************************** DIVIDER ******************************************************************/
 .div-container {

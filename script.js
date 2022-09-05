@@ -291,29 +291,32 @@ const showMovie = async (movie) => {
         <p>Released: <span class="released">${releaseDateFormatted}</span></p>
         <p>Want to watch it? click <a href="${homepage}" target="_blank" class="anchor">here</a></p>
       </div>
-    </div>`;
+    </div>
+    <div class="div-container"><div class="divider"></div></div>
+    <h2 class="collection-similar-title"></h2>`;
 
-  hasCollection(belongs_to_collection, id);
+  const collectionOrSimilarTitle = document.querySelector(
+    ".collection-similar-title"
+  );
+  hasCollection(belongs_to_collection, id, collectionOrSimilarTitle);
 };
 
 /**
  * @description - Checks whether the movie has a collection or not
  */
-const hasCollection = async (collection, id) => {
-  const collectionTitle = document.querySelector(".collection-title");
+const hasCollection = async (collection, id, collectionOrSimilarTitle) => {
   if (collection) {
     getMoviesInCollection(collection.id);
-    collectionTitle.innerHTML = collection.name;
+    collectionOrSimilarTitle.innerHTML = collection.name;
   } else if (collection === null) {
-    getMoreLikeThis(id);
-    collectionTitle.innerHTML = "More like this";
+    getMoreSimilar(id);
+    collectionOrSimilarTitle.innerHTML = "More like this";
   }
 };
 
 /**
  * @description - Fetches and displays the movies in the collection
  */
-const wrapper = document.querySelector("#wrapper");
 const getMoviesInCollection = async (id) => {
   const res = await fetch(
     `https://api.themoviedb.org/3/collection/${id}?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`
@@ -326,7 +329,7 @@ const getMoviesInCollection = async (id) => {
 /**
  * @description - Fetches and displays more movies like the one clicked
  */
-const getMoreLikeThis = async (id) => {
+const getMoreSimilar = async (id) => {
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${id}/similar?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1`
   );
