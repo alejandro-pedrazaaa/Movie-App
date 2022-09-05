@@ -9,19 +9,33 @@ const MAIN_PAGE_APIS = [
 const SEARCH_API =
   "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&include_adult=false";
 
-const mainPage = document.querySelector(".main-page");
-const clickedMoviePage = document.querySelector(".clicked-movie-page");
-const collectionOrSimilarContainer = document.getElementById(
-  "collection-similar-container"
-);
-
 /**
- * @description - Clicking the "MoviesApp" logo will reload the page and take user back to the home page
+ * @description - Adds event listener to the "MoviesApp" logo.
+ * When logo is clicked, the user will be redirected to the main page.
  */
 const logo = document.querySelector(".logo");
 logo.addEventListener("click", () => {
   window.location.reload();
 });
+
+/**
+ * @description - When scrolling down, the header will stick to the top and
+ * a footer will appear at the bottom of the page
+ */
+const header = document.querySelector(".header");
+const footer = document.querySelector("footer");
+window.addEventListener("scroll", fixHeader);
+function fixHeader() {
+  if (window.scrollY > header.offsetHeight + 50) {
+    header.classList.add("active");
+    footer.classList.add("active");
+  } else {
+    header.classList.remove("active");
+    footer.classList.remove("active");
+    header.style.transition = "all 0.5s";
+    footer.style.transition = "all 0.5s";
+  }
+}
 
 /**
  * @description - Retreaves and waits for CAROUSEL_API to return data
@@ -52,7 +66,7 @@ const createCarousel = (movies) => {
 };
 
 /**
- * @description - Creates rotating effect on the carousel
+ * @description - Creates rotating effect for the carousel
  */
 const transforms = [
   { x: 0, z: 0, scale: 1, opacity: 1 },
@@ -60,6 +74,7 @@ const transforms = [
   { x: 0, z: 0, scale: 0, opacity: 0 },
   { x: "50%", z: "-50px", scale: 0.8, opacity: 1 },
 ];
+
 const nextTransform = (x) => {
   if (x >= 4 - 1) {
     x = 0;
@@ -68,6 +83,7 @@ const nextTransform = (x) => {
   }
   return x;
 };
+
 const next = (cards) => {
   for (i = 0; i < cards.length; i++) {
     cards[i].style.transform =
@@ -84,6 +100,7 @@ const next = (cards) => {
   }
   transforms.push(transforms.shift());
 };
+
 const rotateCarousel = (cards) => {
   setInterval(() => {
     next(cards);
@@ -102,13 +119,18 @@ const getAndDisplayMovies = async (url, swiperWrapper) => {
   showMovies(data.results, swiperWrapper);
 };
 
+/**
+ * @description - Matches each section on the main page with its corresponding API
+ */
 for (let i = 0; i <= 2; i++) {
   getAndDisplayMovies(MAIN_PAGE_APIS[i], swiperWrappers[i]);
 }
 
+/**
+ * @description - Displays the movies on a swiper slider style layout on the main page
+ */
 const showMovies = (movies, collectionOrSimilarContainer) => {
   movies.forEach((movie) => {
-    // do not allow diplucate movies to be displayed
     if (!collectionOrSimilarContainer.querySelector(`[id="${movie.id}"]`)) {
       const { poster_path, id } = movie;
 
@@ -126,6 +148,10 @@ const showMovies = (movies, collectionOrSimilarContainer) => {
   });
 };
 
+/**
+ * @description - Using a third party library, Swiper, this function creates a slider style layout for the
+ * display of the movies on the main page
+ */
 const swiper = new Swiper(".swiper-container", {
   // slidesPerView: 2,
   // slidesPerGroup: 1,
@@ -169,54 +195,14 @@ const swiper = new Swiper(".swiper-container", {
   },
 });
 
-/**
- * @description
- */
-const searchContainer = document.querySelector(".search");
-const userInput = document.querySelector(".input");
-userInput.addEventListener("keyup", () => {
-  userInput.focus();
-});
-
-// search for movies when user presses enter
-userInput.addEventListener("keyup", (e) => {
-  if (e.keyCode === 13) {
-    const searchInput = userInput.value;
-    if (searchInput) {
-      getSearchResults(SEARCH_API + "&query=" + searchInput);
-    }
-  }
-});
-
-const getSearchResults = async (url) => {
-  const res = await fetch(url);
-  const data = await res.json();
-  showSearchResults(data.results);
-};
-
-/**
- * @description - When the user scrolls down, the header will stick to the top of the page
- * and will decrease in size.
- */
-const header = document.querySelector(".header");
-const footer = document.querySelector("footer");
-window.addEventListener("scroll", fixHeader);
-function fixHeader() {
-  if (window.scrollY > header.offsetHeight + 50) {
-    header.classList.add("active");
-    footer.classList.add("active");
-  } else {
-    header.classList.remove("active");
-    footer.classList.remove("active");
-    header.style.transition = "all 0.5s";
-    footer.style.transition = "all 0.5s";
-  }
-}
-
+const mainPage = document.querySelector(".main-page");
+const clickedMoviePage = document.querySelector(".clicked-movie-page");
+const collectionOrSimilarContainer = document.getElementById(
+  "collection-similar-container"
+);
 /**
  * @description - When the user clicks an image, a new page will open with the movie details.
  */
-
 const displayClickedMovie = async (allMovies) => {
   allMovies.forEach((movie) => {
     movie.addEventListener("dblclick", () => {
@@ -343,4 +329,25 @@ const updateCollectionOrSimilar = (movies) => {
     });
   }),
     (wrapper.innerHTML = "");
+};
+
+const userInput = document.querySelector(".input");
+userInput.addEventListener("keyup", () => {
+  userInput.focus();
+});
+
+// search for movies when user presses enter
+userInput.addEventListener("keyup", (e) => {
+  if (e.keyCode === 13) {
+    const searchInput = userInput.value;
+    if (searchInput) {
+      getSearchResults(SEARCH_API + "&query=" + searchInput);
+    }
+  }
+});
+
+const getSearchResults = async (url) => {
+  const res = await fetch(url);
+  const data = await res.json();
+  showSearchResults(data.results);
 };
