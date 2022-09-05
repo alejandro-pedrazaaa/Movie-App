@@ -196,12 +196,15 @@ const swiper = new Swiper(".swiper-container", {
 });
 
 const mainPage = document.querySelector(".main-page");
-const clickedMoviePage = document.querySelector(".clicked-movie-page");
+const clickedMovieContainer = document.querySelector(
+  ".clicked-movie-container"
+);
 const collectionOrSimilarContainer = document.getElementById(
   "collection-similar-container"
 );
+
 /**
- * @description - When the user clicks an image, a new page will open with the movie details.
+ * @description - Double clicking an image on the main page will get that movie's id
  */
 const displayClickedMovie = async (allMovies) => {
   allMovies.forEach((movie) => {
@@ -213,6 +216,9 @@ const displayClickedMovie = async (allMovies) => {
   });
 };
 
+/**
+ * @description - Using the movie's id, this function will fetch the movie's data
+ */
 const getAndDisplayMovie = async (id) => {
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`
@@ -221,10 +227,19 @@ const getAndDisplayMovie = async (id) => {
   showMovie(data);
 };
 
+/**
+ * @description - Displays the movie on the clicked movie container, and hides the main page
+ */
 const showMovie = async (movie) => {
   mainPage.setAttribute("hidden", "true");
-  clickedMoviePage.removeAttribute("hidden");
+  clickedMovieContainer.removeAttribute("hidden");
   collectionOrSimilarContainer.removeAttribute("hidden");
+
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
 
   const {
     poster_path,
@@ -260,7 +275,7 @@ const showMovie = async (movie) => {
     releaseDate[2]
   }, ${releaseDate[0]}`;
 
-  clickedMoviePage.innerHTML = `
+  clickedMovieContainer.innerHTML = `
     <div class="movie-container">
       <div class="movie-poster">
         <img src="${IMG_PATH + poster_path}">
@@ -281,6 +296,9 @@ const showMovie = async (movie) => {
   hasCollection(belongs_to_collection, id);
 };
 
+/**
+ * @description - Checks whether the movie has a collection or not
+ */
 const hasCollection = async (collection, id) => {
   const collectionTitle = document.querySelector(".collection-title");
   if (collection) {
@@ -292,6 +310,9 @@ const hasCollection = async (collection, id) => {
   }
 };
 
+/**
+ * @description - Fetches and displays the movies in the collection
+ */
 const wrapper = document.querySelector("#wrapper");
 const getMoviesInCollection = async (id) => {
   const res = await fetch(
@@ -302,6 +323,9 @@ const getMoviesInCollection = async (id) => {
   showMovies(movies, wrapper);
 };
 
+/**
+ * @description - Fetches and displays more movies like the one clicked
+ */
 const getMoreLikeThis = async (id) => {
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${id}/similar?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1`
@@ -311,6 +335,10 @@ const getMoreLikeThis = async (id) => {
   showMovies(movies, wrapper);
 };
 
+/**
+ * @description - When a movie on the collection or similar container is clicked,
+ * the page will scroll to the top
+ */
 wrapper.addEventListener("dblclick", () => {
   window.scrollTo({
     top: 0,
@@ -318,36 +346,23 @@ wrapper.addEventListener("dblclick", () => {
     behavior: "smooth",
   });
   const movies = wrapper.querySelectorAll(".movie");
-  updateCollectionOrSimilar(movies);
+  updateCollectionOrSimilarContainer(movies);
 });
 
-const updateCollectionOrSimilar = (movies) => {
+/**
+ * @description - When a movie on the collection or similar container is clicked,
+ * the movie's id will be fetched and passed to the getAndDisplayMovie function
+ */
+const updateCollectionOrSimilarContainer = (movies) => {
   movies.forEach((movie) => {
     movie.addEventListener("dblclick", () => {
       const id = movie.getAttribute("id");
       getAndDisplayMovie(id);
     });
-  }),
-    (wrapper.innerHTML = "");
+  });
 };
 
 const userInput = document.querySelector(".input");
 userInput.addEventListener("keyup", () => {
   userInput.focus();
 });
-
-// search for movies when user presses enter
-userInput.addEventListener("keyup", (e) => {
-  if (e.keyCode === 13) {
-    const searchInput = userInput.value;
-    if (searchInput) {
-      getSearchResults(SEARCH_API + "&query=" + searchInput);
-    }
-  }
-});
-
-const getSearchResults = async (url) => {
-  const res = await fetch(url);
-  const data = await res.json();
-  showSearchResults(data.results);
-};
