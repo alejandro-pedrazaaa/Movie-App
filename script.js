@@ -1,7 +1,22 @@
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
+const CAROUSEL_API =
+  "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&query=avengers";
+const MAIN_PAGE_APIS = [
+  "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
+  "https://api.themoviedb.org/3/movie/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
+  "https://api.themoviedb.org/3/trending/movie/week?api_key=85ade2bd722304de1124d09e0ddfd9b3",
+];
+const SEARCH_API =
+  "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&include_adult=false";
+
+const mainPage = document.querySelector(".main-page");
+const clickedMoviePage = document.querySelector(".clicked-movie-page");
+const collectionOrSimilarContainer = document.getElementById(
+  "collection-similar-container"
+);
 
 /**
- * @description - Clicking on the logo will reload the page to take you back to the home page
+ * @description - Clicking the "MoviesApp" logo will reload the page and take user back to the home page
  */
 const logo = document.querySelector(".logo");
 logo.addEventListener("click", () => {
@@ -9,12 +24,8 @@ logo.addEventListener("click", () => {
 });
 
 /**
- * @description - Retreaves and waits for API data to create the carousel.
+ * @description - Retreaves and waits for CAROUSEL_API to return data
  */
-const CAROUSEL_API =
-  "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&query=avengers";
-const carouselContainer = document.querySelector(".carousel");
-
 async function getAndDisplayCarousel(CAROUSEL_API) {
   const res = await fetch(CAROUSEL_API);
   const data = await res.json();
@@ -22,6 +33,10 @@ async function getAndDisplayCarousel(CAROUSEL_API) {
   createCarousel(data.results);
 }
 
+/**
+ * @description - Creates the carousel and displays it on the page
+ */
+const carouselContainer = document.querySelector(".carousel");
 const createCarousel = (movies) => {
   movies.slice(0, 4).forEach((movie) => {
     const { poster_path } = movie;
@@ -36,13 +51,15 @@ const createCarousel = (movies) => {
   rotateCarousel(cards);
 };
 
+/**
+ * @description - Creates rotating effect on the carousel
+ */
 const transforms = [
   { x: 0, z: 0, scale: 1, opacity: 1 },
   { x: "-50%", z: "-50px", scale: 0.8, opacity: 1 },
   { x: 0, z: 0, scale: 0, opacity: 0 },
   { x: "50%", z: "-50px", scale: 0.8, opacity: 1 },
 ];
-
 const nextTransform = (x) => {
   if (x >= 4 - 1) {
     x = 0;
@@ -51,7 +68,6 @@ const nextTransform = (x) => {
   }
   return x;
 };
-
 const next = (cards) => {
   for (i = 0; i < cards.length; i++) {
     cards[i].style.transform =
@@ -68,7 +84,6 @@ const next = (cards) => {
   }
   transforms.push(transforms.shift());
 };
-
 const rotateCarousel = (cards) => {
   setInterval(() => {
     next(cards);
@@ -78,16 +93,9 @@ const rotateCarousel = (cards) => {
 getAndDisplayCarousel(CAROUSEL_API);
 
 /**
- * @description - Retreaves and waits for data from the to populate the entire landing page with
- * movies and tv shows.
+ * @description - Retreaves and waits for MAIN_PAGE_APIS to return data
  */
-const allAPIs = [
-  "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
-  "https://api.themoviedb.org/3/movie/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
-  "https://api.themoviedb.org/3/trending/movie/week?api_key=85ade2bd722304de1124d09e0ddfd9b3",
-];
 const swiperWrappers = document.querySelectorAll(".swiper-wrapper");
-
 const getAndDisplayMovies = async (url, swiperWrapper) => {
   const res = await fetch(url);
   const data = await res.json();
@@ -95,13 +103,13 @@ const getAndDisplayMovies = async (url, swiperWrapper) => {
 };
 
 for (let i = 0; i <= 2; i++) {
-  getAndDisplayMovies(allAPIs[i], swiperWrappers[i]);
+  getAndDisplayMovies(MAIN_PAGE_APIS[i], swiperWrappers[i]);
 }
 
-const showMovies = (movies, container) => {
+const showMovies = (movies, collectionOrSimilarContainer) => {
   movies.forEach((movie) => {
     // do not allow diplucate movies to be displayed
-    if (!container.querySelector(`[id="${movie.id}"]`)) {
+    if (!collectionOrSimilarContainer.querySelector(`[id="${movie.id}"]`)) {
       const { poster_path, id } = movie;
 
       const movies = document.createElement("div");
@@ -110,7 +118,7 @@ const showMovies = (movies, container) => {
       movies.innerHTML = `<img src="${IMG_PATH + poster_path}">`;
       movies.setAttribute("id", id);
 
-      container.appendChild(movies);
+      collectionOrSimilarContainer.appendChild(movies);
 
       const allMovies = document.querySelectorAll(".swiper-slide");
       displayClickedMovie(allMovies);
@@ -168,75 +176,23 @@ const searchContainer = document.querySelector(".search");
 const userInput = document.querySelector(".input");
 userInput.addEventListener("keyup", () => {
   userInput.focus();
-
-  createSearchResultsDiv();
 });
 
-const createSearchResultsDiv = () => {
-  if (!searchContainer.querySelector(".results-div")) {
-    const searchResultsDiv = document.createElement("div");
-    searchResultsDiv.classList.add("results-div");
-    const searchResultList = document.createElement("ul");
-    searchResultList.classList.add("results-ul");
-    searchResultsDiv.appendChild(searchResultList);
-    searchContainer.appendChild(searchResultsDiv);
-  }
-};
-
-const SEARCH_API =
-  "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&query=";
-
-userInput.addEventListener("keyup", async () => {
-  if (userInput.value.length < 1) {
-    searchContainer.querySelector(".results-div").remove();
-    return;
-  }
-
-  const userInputValue = userInput.value;
-  const res = await fetch(SEARCH_API + userInputValue);
-  const data = await res.json();
-
-  populateSearchResultsDiv(data.results);
-});
-
-const populateSearchResultsDiv = (results) => {
-  const searchResultList = document.querySelector(".results-ul");
-
-  searchResultList.innerHTML = "";
-
-  results.forEach((result) => {
-    if (searchResultList.childElementCount < 10) {
-      const listItem = document.createElement("li");
-      listItem.classList.add("results-li");
-      listItem.setAttribute("id", result.id);
-      listItem.innerHTML = result.title;
-      searchResultList.appendChild(listItem);
+// search for movies when user presses enter
+userInput.addEventListener("keyup", (e) => {
+  if (e.keyCode === 13) {
+    const searchInput = userInput.value;
+    if (searchInput) {
+      getSearchResults(SEARCH_API + "&query=" + searchInput);
     }
-  });
-
-  if (searchResultList.childElementCount < 1) {
-    const noResults = document.createElement("li");
-    noResults.classList.add("results-li");
-    noResults.innerHTML = "No movies with that title";
-    searchResultList.appendChild(noResults);
-  }
-};
-
-/**
- * @description
- */
-userInput.addEventListener("keydown", (e) => {
-  const firstMovie = document.querySelectorAll(".results-li");
-  if (e.key === "Enter") {
-    userInput.value = firstMovie[0].innerHTML;
-    const id = firstMovie[0].getAttribute("id");
-
-    searchContainer.querySelector(".results-div").remove();
-    userInput.value = "";
-
-    getAndDisplayMovie(id);
   }
 });
+
+const getSearchResults = async (url) => {
+  const res = await fetch(url);
+  const data = await res.json();
+  showSearchResults(data.results);
+};
 
 /**
  * @description - When the user scrolls down, the header will stick to the top of the page
@@ -260,9 +216,6 @@ function fixHeader() {
 /**
  * @description - When the user clicks an image, a new page will open with the movie details.
  */
-const mainPage = document.querySelector(".main-page");
-const individualPage = document.querySelector(".individual-page");
-const container = document.getElementById("container");
 
 const displayClickedMovie = async (allMovies) => {
   allMovies.forEach((movie) => {
@@ -284,8 +237,8 @@ const getAndDisplayMovie = async (id) => {
 
 const showMovie = async (movie) => {
   mainPage.setAttribute("hidden", "true");
-  individualPage.removeAttribute("hidden");
-  container.removeAttribute("hidden");
+  clickedMoviePage.removeAttribute("hidden");
+  collectionOrSimilarContainer.removeAttribute("hidden");
 
   const {
     poster_path,
@@ -321,7 +274,7 @@ const showMovie = async (movie) => {
     releaseDate[2]
   }, ${releaseDate[0]}`;
 
-  individualPage.innerHTML = `
+  clickedMoviePage.innerHTML = `
     <div class="movie-container">
       <div class="movie-poster">
         <img src="${IMG_PATH + poster_path}">

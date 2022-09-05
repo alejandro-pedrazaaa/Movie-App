@@ -65,17 +65,7 @@ header.active {
   position: relative;
 }
 .search:after {
-  animation: borderAnimation 3s ease alternate infinite;
-  background: linear-gradient(
-    45deg,
-    #f64f59,
-    #c471ed,
-    #12c2e9,
-    #12c2e9,
-    #c471ed,
-    #f64f59
-  );
-  background-size: 600% 600%;
+  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
   border-radius: 10px;
   content: "";
   height: calc(100% + 6px);
@@ -84,17 +74,6 @@ header.active {
   top: -3px;
   width: calc(100% + 6px);
   z-index: -1;
-}
-@keyframes borderAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 .input {
   background-color: black;
@@ -181,7 +160,7 @@ header.active {
   width: 200px;
   -webkit-box-reflect: below 0 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.9, transparent), to(white));
 }
-/********** Main Page Movies Settings **********/
+/********** Main Page Slider Settings **********/
 .all-sections-container {
   margin: auto 35px auto 35px;
 }
@@ -191,7 +170,7 @@ header.active {
   font-size: 2rem;
   letter-spacing: 3px;
 }
-.container {
+.swiper-container {
   height: auto;
   margin: 0 auto;
   padding-bottom: 35px;
@@ -245,7 +224,7 @@ header.active {
   width: auto;
 }
 /****************************************************************** INDIVIDUAL PAGE ******************************************************************/
-.individual-page {
+.clicked-movie-page {
   margin-top: 120px;
 }
 .movie-container {
