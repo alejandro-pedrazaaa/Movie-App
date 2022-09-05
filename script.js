@@ -362,6 +362,9 @@ const updateCollectionOrSimilarContainer = (movies) => {
   });
 };
 
+/**
+ * @description -
+ */
 const userInput = document.querySelector(".input");
 userInput.addEventListener("keyup", () => {
   userInput.focus();

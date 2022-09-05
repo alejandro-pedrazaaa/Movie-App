@@ -1,11 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;300;400;500;600&display=swap");
-:root {
-  --black-color: #000000;
-  --white-color: #e8e8e8;
-  --pink-color: #f64f59;
-  --purple-color: #c471ed;
-  --blue-color: #12c2e9;
-}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -78,7 +72,7 @@ header.active {
   background-color: black;
   border: 0;
   border-radius: 10px;
-  color: var(--white-color);
+  color: white;
   font-size: 20px;
   padding: 10px;
   width: 400px;
@@ -99,7 +93,7 @@ header.active {
 }
 /******* Movies Quote  *******/
 .movies-description {
-  color: var(--white-color);
+  color: white;
   font-family: inherit;
   width: 55%;
   padding-left: 40px;
@@ -141,7 +135,7 @@ header.active {
   margin: auto 35px auto 35px;
 }
 .individual-section h2 {
-  color: var(--white-color);
+  color: white;
   font-family: inherit;
   font-size: 2rem;
   letter-spacing: 3px;
@@ -201,7 +195,7 @@ header.active {
   height: 100%;
   width: auto;
 }
-/****************************************************************** INDIVIDUAL PAGE ******************************************************************/
+/****************************************************************** CLICKED MOVIE CONTAINER ******************************************************************/
 .clicked-movie-container {
   margin-top: 120px;
 }
@@ -209,7 +203,7 @@ header.active {
   display: flex;
   padding: 30px;
 }
-/********** Poster for Chosen Movie **********/
+/********** Poster for Clicked Movie **********/
 .movie-poster {
   padding: 50px;
 }
@@ -219,7 +213,7 @@ header.active {
 }
 /********** Individual Movie Info **********/
 .movie-info {
-  color: var(--white-color);
+  color: white;
   font-family: inherit;
   padding-left: 50px;
 }
@@ -269,20 +263,16 @@ header.active {
   color: white;
 }
 /********** Individual Page Collection/Similar Display **********/
-#container {
-  margin: 0 50px 90px 50px;
-}
-#container .div-container {
+#collection-similar-container .div-container {
   padding: 0px 0 40px 0;
   position: relative;
   width: 100%;
 }
-.collection-title {
-  color: var(--white-color);
+#collection-similar-container .collection-title {
+  color: white;
   font-family: inherit;
   font-size: 2rem;
   letter-spacing: 3px;
-  padding-bottom: 35px;
 }
 /****************************************************************** DIVIDER ******************************************************************/
 .div-container {
