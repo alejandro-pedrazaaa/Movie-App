@@ -132,7 +132,7 @@ header.active {
 }
 /********** Main Page Slider Settings **********/
 .all-sections-container {
-  margin: auto 30px auto 30px;
+  padding: 35px 30px 35px 30px;
 }
 .individual-section h2 {
   color: white;
@@ -265,6 +265,7 @@ header.active {
 /********** Collection/Similar **********/
 #collection-similar-container {
   margin-bottom: 45px;
+  padding: 35px 30px 35px 30px;
 }
 .collection-similar-title {
   color: white;

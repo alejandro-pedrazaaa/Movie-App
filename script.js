@@ -315,7 +315,7 @@ const hasCollection = async (collection, id, collectionOrSimilarTitle) => {
 };
 
 /**
- * @description - Fetches and displays the movies in the collection
+ * @description - Using the movie's collection id, this function will fetch the movies in the collection
  */
 const getMoviesInCollection = async (id) => {
   const res = await fetch(
@@ -327,7 +327,7 @@ const getMoviesInCollection = async (id) => {
 };
 
 /**
- * @description - Fetches and displays more movies like the one clicked
+ * @description - Using the movie's id, this function will fetch movies similar to the movie that was clicked
  */
 const getMoreSimilar = async (id) => {
   const res = await fetch(
@@ -339,9 +339,9 @@ const getMoreSimilar = async (id) => {
 };
 
 /**
- * @description - When a movie on the collection or similar container is clicked,
- * the page will scroll to the top
+ * @description - Whn the page loads, the page will move to the top
  */
+const wrapper = document.querySelector("#wrapper");
 wrapper.addEventListener("dblclick", () => {
   window.scrollTo({
     top: 0,
@@ -349,20 +349,21 @@ wrapper.addEventListener("dblclick", () => {
     behavior: "smooth",
   });
   const movies = wrapper.querySelectorAll(".movie");
-  updateCollectionOrSimilarContainer(movies);
+  updateCollectionOrSimilar(movies);
 });
 
 /**
- * @description - When a movie on the collection or similar container is clicked,
- * the movie's id will be fetched and passed to the getAndDisplayMovie function
+ * @description - Updates the collection or similar container when the user double clicks on a movie
+ * in the collection or similar container
  */
-const updateCollectionOrSimilarContainer = (movies) => {
+const updateCollectionOrSimilar = (movies) => {
   movies.forEach((movie) => {
     movie.addEventListener("dblclick", () => {
       const id = movie.getAttribute("id");
       getAndDisplayMovie(id);
     });
-  });
+  }),
+    (wrapper.innerHTML = "");
 };
 
 /**
