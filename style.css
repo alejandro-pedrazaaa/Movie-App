@@ -345,6 +345,45 @@ header {
   .quote h3 i {
     font-size: 0.9rem;
   }
+
+  /********** Main Page Slider Settings **********/
+  .all-sections-container {
+    padding: 35px 30px 35px 30px;
+  }
+  .individual-section h2 {
+    color: white;
+    font-family: inherit;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
+  .swiper-container {
+    height: auto;
+    margin: 0 auto;
+    padding-bottom: 35px;
+    padding-top: 35px;
+    position: relative;
+    width: 100%;
+  }
+  .swiper-slide {
+    transition: all 300ms ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .swiper-slide img {
+    margin: auto;
+    max-width: 12rem;
+  }
+  .swiper-slide:hover {
+    transform: scale(1.3);
+    transition: all 300ms ease-in-out;
+    z-index: 1;
+  }
+  .swiper-slide:hover img {
+    cursor: pointer;
+    box-shadow: 0px 0px 60px -25px #fff;
+  }
 }
 /****************************************************************** TABLET RESIZE ******************************************************************/
 /* @media screen and (min-width: 768px) and (max-width: 1023px) {
