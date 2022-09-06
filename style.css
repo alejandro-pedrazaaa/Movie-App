@@ -98,7 +98,6 @@ header {
   font-weight: 200;
 }
 .quote h3 .quote-author {
-  /* move to the left */
   margin-left: auto;
   text-align: right;
   font-weight: 400;
@@ -333,6 +332,28 @@ header {
   .input {
     font-size: 10px;
     padding: 5px;
+  }
+  /******* Main Page *******/
+  .main-page {
+    margin-top: 120px;
+    margin-bottom: 30px;
+  }
+  /******* Quote Container *******/
+  .quote {
+    color: white;
+    display: flex;
+    font-family: inherit;
+    padding: 30px 80px;
+    font-weight: 200;
+  }
+  .quote h3 i {
+    font-size: 2rem;
+    font-weight: 200;
+  }
+  .quote h3 .quote-author {
+    margin-left: auto;
+    text-align: right;
+    font-weight: 400;
   }
 }
 /****************************************************************** TABLET RESIZE ******************************************************************/
