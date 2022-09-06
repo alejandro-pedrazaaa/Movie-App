@@ -200,6 +200,9 @@ const clickedOrSearchContainer = document.querySelector(
 const collectionOrSimilarContainer = document.getElementById(
   "collection-similar-container"
 );
+const searchResultsContainer = document.querySelector(
+  ".search-results-container"
+);
 
 /**
  * @description - Double clicking an image on the main page will get that movie's id
@@ -232,6 +235,7 @@ const showMovie = async (movie) => {
   mainPage.setAttribute("hidden", "true");
   clickedOrSearchContainer.removeAttribute("hidden");
   collectionOrSimilarContainer.removeAttribute("hidden");
+  searchResultsContainer.setAttribute("hidden", "true");
 
   window.scrollTo({
     top: 0,
@@ -372,14 +376,13 @@ search.addEventListener("keyup", (e) => {
   if (e.keyCode === 13) {
     mainPage.setAttribute("hidden", "true");
     collectionOrSimilarContainer.setAttribute("hidden", "true");
-    clickedOrSearchContainer.removeAttribute("hidden");
+    clickedOrSearchContainer.setAttribute("hidden", "true");
+    searchResultsContainer.removeAttribute("hidden");
 
     const div = document.createElement("div");
     div.classList.add("movies-found-container");
-    clickedOrSearchContainer.appendChild(div);
-    const moviesFoundContainer = document.querySelector(
-      ".movies-found-container"
-    );
+    searchResultsContainer.appendChild(div);
+
     getMoviesFound();
   }
 });
