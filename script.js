@@ -194,7 +194,7 @@ const swiper = new Swiper(".swiper-container", {
 });
 
 const mainPage = document.querySelector(".main-page");
-const clickedMovieContainer = document.querySelector(
+const clickedOrSearchContainer = document.querySelector(
   ".clicked-movie-container"
 );
 const collectionOrSimilarContainer = document.getElementById(
@@ -230,7 +230,7 @@ const getAndDisplayMovie = async (id) => {
  */
 const showMovie = async (movie) => {
   mainPage.setAttribute("hidden", "true");
-  clickedMovieContainer.removeAttribute("hidden");
+  clickedOrSearchContainer.removeAttribute("hidden");
   collectionOrSimilarContainer.removeAttribute("hidden");
 
   window.scrollTo({
@@ -273,7 +273,7 @@ const showMovie = async (movie) => {
     releaseDate[2]
   }, ${releaseDate[0]}`;
 
-  clickedMovieContainer.innerHTML = `
+  clickedOrSearchContainer.innerHTML = `
     <div class="movie-container">
       <div class="movie-poster">
         <img src="${IMG_PATH + poster_path}">
@@ -370,38 +370,77 @@ const updateCollectionOrSimilar = (movies) => {
 const search = document.querySelector(".input");
 search.addEventListener("keyup", (e) => {
   if (e.keyCode === 13) {
-    const searchValue = search.value;
-    searchMovies(searchValue);
+    mainPage.setAttribute("hidden", "true");
+    collectionOrSimilarContainer.setAttribute("hidden", "true");
+    clickedOrSearchContainer.removeAttribute("hidden");
+
+    const div = document.createElement("div");
+    div.classList.add("movies-found-container");
+    clickedOrSearchContainer.appendChild(div);
+    const moviesFoundContainer = document.querySelector(
+      ".movies-found-container"
+    );
+    getMoviesFound();
   }
 });
 
 /**
- * @description - Fetches movies based on the user's input
+ * @description - Displays the movies found when the user searches for a movie
  */
-const searchMovies = async (searchValue) => {
+const getMoviesFound = async () => {
+  const search = document.querySelector(".input").value;
   const res = await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&query=${searchValue}&page=1&include_adult=false`
+    `https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&query=${search}&page=1&include_adult=false`
   );
   const data = await res.json();
-  const movies = data.results;
-  displayMoviesFound(movies);
+  const movies = data.results.filter((movie) => movie.poster_path !== null);
+
+  const firstFifteen = movies.slice(0, 15);
+
+  displayMoviesFound(firstFifteen);
 };
 
 /**
- * @description - Hides all of the other containers and displays the movies found container
+ * @description - Create and display movies in rows of 4
  */
 const displayMoviesFound = (movies) => {
-  // hide all other containers and show movies found container
-  mainPage.setAttribute("hidden", "true");
-  clickedMovieContainer.setAttribute("hidden", "true");
-  collectionOrSimilarContainer.setAttribute("hidden", "true");
+  const moviesFoundContainer = document.querySelector(
+    ".movies-found-container"
+  );
+  moviesFoundContainer.innerHTML = "";
 
-  // if there are no movies, display a message
-  if (movies.length === 0) {
-    //create div put text in it and append it to the container
-    const div = document.createElement("div");
-    div.classList.add("no-movies-found");
-    div.innerHTML = "No movies found";
-    searchResultsContainer.appendChild(div);
+  const displaySearchedWord = document.createElement("h2");
+  displaySearchedWord.classList.add("movies-found-title");
+  displaySearchedWord.innerHTML = `Movies found for "${search.value}"`;
+  moviesFoundContainer.appendChild(displaySearchedWord);
+
+  const moviesFound = document.createElement("div");
+  moviesFound.classList.add("movies-found");
+  moviesFoundContainer.appendChild(moviesFound);
+
+  for (let i = 0; i < movies.length; i++) {
+    const { poster_path, id } = movies[i];
+
+    const movie = document.createElement("div");
+    movie.classList.add("movie");
+    movie.setAttribute("id", id);
+    movie.innerHTML = `<img src="${IMG_PATH + poster_path}" alt="${
+      movies[i].title
+    }">`;
+    moviesFound.appendChild(movie);
+
+    movie.addEventListener("dblclick", () => {
+      getAndDisplayMovie(id);
+    });
   }
+
+  clearSearch();
+};
+
+/**
+ * @description - clears the search input when enter key is pressed
+ */
+const clearSearch = () => {
+  const search = document.querySelector(".input");
+  search.value = "";
 };
