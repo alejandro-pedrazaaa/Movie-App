@@ -231,11 +231,7 @@ const showMovie = async (movie) => {
   collectionOrSimilarContainer.removeAttribute("hidden");
   searchResultsContainer.setAttribute("hidden", "true");
 
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: "smooth",
-  });
+  goToTop();
 
   const {
     poster_path,
@@ -339,11 +335,7 @@ const getMoreSimilar = async (id) => {
  */
 const wrapper = document.querySelector("#wrapper");
 wrapper.addEventListener("dblclick", () => {
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: "smooth",
-  });
+  goToTop();
   const movies = wrapper.querySelectorAll(".movie");
   updateCollectionOrSimilar(movies);
 });
@@ -377,12 +369,14 @@ search.addEventListener("keyup", (e) => {
     div.classList.add("movies-found-container");
     searchResultsContainer.appendChild(div);
 
+    wrapper.innerHTML = "";
+    goToTop();
     getMoviesFound();
   }
 });
 
 /**
- * @description - Displays the movies found when the user searches for a movie
+ * @description - Fetches the movies that match the search query
  */
 const getMoviesFound = async () => {
   const search = document.querySelector(".input").value;
@@ -392,13 +386,11 @@ const getMoviesFound = async () => {
   const data = await res.json();
   const movies = data.results.filter((movie) => movie.poster_path !== null);
 
-  const firstFifteen = movies.slice(0, 15);
-
-  displayMoviesFound(firstFifteen);
+  displayMoviesFound(movies);
 };
 
 /**
- * @description - Create and display movies in rows of 4
+ * @description - Creates and displays movies that were found
  */
 const displayMoviesFound = (movies) => {
   const moviesFoundContainer = document.querySelector(
@@ -432,6 +424,17 @@ const displayMoviesFound = (movies) => {
   }
 
   clearSearch();
+};
+
+/**
+ * @description - Helper function to move the page to the top
+ */
+const goToTop = () => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
 };
 
 /**
