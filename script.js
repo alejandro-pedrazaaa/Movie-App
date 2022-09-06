@@ -223,7 +223,7 @@ const getAndDisplayMovie = async (id) => {
 };
 
 /**
- * @description - Displays the movie on the clicked movie container, and hides the main page
+ * @description - Displays clicked movie container, and hides the main page container
  */
 const showMovie = async (movie) => {
   mainPage.setAttribute("hidden", "true");
@@ -290,6 +290,7 @@ const showMovie = async (movie) => {
   const collectionOrSimilarTitle = document.querySelector(
     ".collection-similar-title"
   );
+
   hasCollection(belongs_to_collection, id, collectionOrSimilarTitle);
 };
 
@@ -331,7 +332,7 @@ const getMoreSimilar = async (id) => {
 };
 
 /**
- * @description - When the page loads, the page will move to the top
+ * @description - Adds event listener to movies on the collection or similar container
  */
 const wrapper = document.querySelector("#wrapper");
 wrapper.addEventListener("dblclick", () => {
@@ -355,7 +356,7 @@ const updateCollectionOrSimilar = (movies) => {
 };
 
 /**
- * @description - Event listener for enter key
+ * @description - Adds event listener for enter key
  */
 const search = document.querySelector(".input");
 search.addEventListener("keyup", (e) => {
@@ -438,7 +439,7 @@ const goToTop = () => {
 };
 
 /**
- * @description - clears the search input when enter key is pressed
+ * @description - Helper function to clear the search input
  */
 const clearSearch = () => {
   const search = document.querySelector(".input");
