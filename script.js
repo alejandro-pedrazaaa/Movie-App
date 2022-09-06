@@ -13,6 +13,7 @@ const MAIN_PAGE_APIS = [
  */
 const logo = document.querySelector(".logo");
 logo.addEventListener("click", () => {
+  goToTop();
   window.location.reload();
 });
 
@@ -151,39 +152,33 @@ const showMovies = (movies, collectionOrSimilarContainer) => {
  * display of the movies on the main page
  */
 const swiper = new Swiper(".swiper-container", {
-  // slidesPerView: 2,
-  // slidesPerGroup: 1,
-  centeredSlides: true,
   loop: true,
   breakpoints: {
-    // when window width is >= 600px
-    600: {
+    300: {
       slidesPerView: 2,
-      slidesPerGroup: 2,
-      spaceBetween: 5,
-      centeredSlides: true,
+      spaceBetween: 0,
+      centeredSlides: false,
     },
-    // when window width is >= 900px
-    900: {
+    600: {
       slidesPerView: 3,
-      slidesPerGroup: 3,
-      spaceBetween: 5,
+      spaceBetween: 0,
       centeredSlides: false,
     },
-    // when window width is >= 1200px
-    1200: {
+    900: {
       slidesPerView: 4,
-      slidesPerGroup: 4,
-      spaceBetween: 5,
+      spaceBetween: 0,
       centeredSlides: false,
     },
-    // when window width is >= 1500px
+    1200: {
+      slidesPerView: 5,
+      spaceBetween: 0,
+      centeredSlides: false,
+    },
     1500: {
       slidesPerView: 6,
       spaceBetween: 0,
       centeredSlides: false,
     },
-    // when window width is >= 1800px
   },
 });
 
