@@ -48,7 +48,6 @@ header.active {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 /******* Search Container *******/
 .search {
   background: black;
@@ -252,15 +251,15 @@ header.active {
   font-weight: 300;
 }
 .movie-info .anchor {
-  text-decoration: none;
   box-shadow: inset 0 0 0 0 #f64f59;
   color: white;
+  text-decoration: none;
   transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 .movie-info .anchor:hover {
-  font-weight: 300;
-  box-shadow: inset 94px 0 15px 0 rgba(18, 194, 233, 0.75);
   color: white;
+  box-shadow: inset 94px 0 15px 0 rgba(18, 194, 233, 0.75);
+  font-weight: 300;
 }
 /********** Collection/Similar **********/
 #collection-similar-container {
@@ -271,9 +270,9 @@ header.active {
   color: white;
   font-family: inherit;
   font-size: 2rem;
+  font-weight: 600;
   letter-spacing: 3px;
   margin: auto 35px auto 35px;
-  font-weight: 600;
 }
 /****************************************************************** DIVIDER ******************************************************************/
 .div-container {
@@ -296,40 +295,3 @@ header.active {
   margin: 0 auto;
   width: 90%;
 }
-/******* Loading icon *******/
-.loader {
-  background: linear-gradient(to left, #f64f59, #c471ed, #12c2e9);
-  /* Show only 10px from the border */
-  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #fff 0);
-  mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #fff 0);
-  border-radius: 50%;
-  position: fixed;
-  inset: calc(50% - 50px);
-  animation: rot 2s linear infinite;
-}
-@keyframes rot {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-/* 320px — 480px: Mobile devices */
-/* 481px — 768px: iPads, Tablets */
-/* 769px — 1024px: Small screens, laptops */
-/* 1025px — 1200px: Desktops, large screens */
-
-/* @media screen and (max-width: 599px) {
-  .swiper-slide img {
-    max-width: 14rem;
-  }
-  .swiper-button-next,
-  .swiper-button-prev {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .swiper-slide img {
-    max-width: 10.5rem;
-    border-radius: 2px;
-  }
-} */
