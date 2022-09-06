@@ -263,7 +263,7 @@ header.active {
 }
 /********** Collection/Similar **********/
 #collection-similar-container {
-  margin-bottom: 45px;
+  margin-bottom: 55px;
   padding: 35px 30px 35px 30px;
 }
 .collection-similar-title {
@@ -274,6 +274,7 @@ header.active {
   letter-spacing: 3px;
   margin: auto 35px auto 35px;
 }
+/****************************************************************** MOVIES FOUND CONTAINER ******************************************************************/
 /****************************************************************** DIVIDER ******************************************************************/
 .div-container {
   padding: 35px 0 40px 0;

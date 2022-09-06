@@ -6,8 +6,6 @@ const MAIN_PAGE_APIS = [
   "https://api.themoviedb.org/3/movie/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
   "https://api.themoviedb.org/3/trending/movie/week?api_key=85ade2bd722304de1124d09e0ddfd9b3",
 ];
-const SEARCH_API =
-  "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&include_adult=false";
 
 /**
  * @description - Adds event listener to the "MoviesApp" logo.
@@ -339,7 +337,7 @@ const getMoreSimilar = async (id) => {
 };
 
 /**
- * @description - Whn the page loads, the page will move to the top
+ * @description - When the page loads, the page will move to the top
  */
 const wrapper = document.querySelector("#wrapper");
 wrapper.addEventListener("dblclick", () => {
@@ -367,9 +365,43 @@ const updateCollectionOrSimilar = (movies) => {
 };
 
 /**
- * @description -
+ * @description - Event listener for enter key
  */
-const userInput = document.querySelector(".input");
-userInput.addEventListener("keyup", () => {
-  userInput.focus();
+const search = document.querySelector(".input");
+search.addEventListener("keyup", (e) => {
+  if (e.keyCode === 13) {
+    const searchValue = search.value;
+    searchMovies(searchValue);
+  }
 });
+
+/**
+ * @description - Fetches movies based on the user's input
+ */
+const searchMovies = async (searchValue) => {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&query=${searchValue}&page=1&include_adult=false`
+  );
+  const data = await res.json();
+  const movies = data.results;
+  displayMoviesFound(movies);
+};
+
+/**
+ * @description - Hides all of the other containers and displays the movies found container
+ */
+const displayMoviesFound = (movies) => {
+  // hide all other containers and show movies found container
+  mainPage.setAttribute("hidden", "true");
+  clickedMovieContainer.setAttribute("hidden", "true");
+  collectionOrSimilarContainer.setAttribute("hidden", "true");
+
+  // if there are no movies, display a message
+  if (movies.length === 0) {
+    //create div put text in it and append it to the container
+    const div = document.createElement("div");
+    div.classList.add("no-movies-found");
+    div.innerHTML = "No movies found";
+    searchResultsContainer.appendChild(div);
+  }
+};
