@@ -1,6 +1,6 @@
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
-const CAROUSEL_API =
-  "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&query=avengers";
+// const CAROUSEL_API =
+//   "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&query=avengers";
 const MAIN_PAGE_APIS = [
   "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
   "https://api.themoviedb.org/3/movie/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
@@ -35,78 +35,6 @@ function fixHeader() {
     footer.style.transition = "all 0.5s";
   }
 }
-
-/**
- * @description - Retreaves and waits for CAROUSEL_API to return data
- */
-async function getAndDisplayCarousel(CAROUSEL_API) {
-  const res = await fetch(CAROUSEL_API);
-  const data = await res.json();
-
-  createCarousel(data.results);
-}
-
-/**
- * @description - Creates the carousel and displays it on the page
- */
-const carouselContainer = document.querySelector(".carousel");
-const createCarousel = (movies) => {
-  movies.slice(0, 4).forEach((movie) => {
-    const { poster_path } = movie;
-    const cards = document.createElement("div");
-
-    cards.classList.add("card");
-    cards.style.backgroundImage = `url(${IMG_PATH + poster_path})`;
-    carouselContainer.appendChild(cards);
-  });
-
-  const cards = document.querySelectorAll(".card");
-  rotateCarousel(cards);
-};
-
-/**
- * @description - Creates rotating effect for the carousel
- */
-const transforms = [
-  { x: 0, z: 0, scale: 1, opacity: 1 },
-  { x: "-50%", z: "-50px", scale: 0.8, opacity: 1 },
-  { x: 0, z: 0, scale: 0, opacity: 0 },
-  { x: "50%", z: "-50px", scale: 0.8, opacity: 1 },
-];
-
-const nextTransform = (x) => {
-  if (x >= 4 - 1) {
-    x = 0;
-  } else {
-    x++;
-  }
-  return x;
-};
-
-const next = (cards) => {
-  for (i = 0; i < cards.length; i++) {
-    cards[i].style.transform =
-      "translateX(" +
-      transforms[nextTransform(i)].x +
-      ")" +
-      "translateZ(" +
-      transforms[nextTransform(i)].z +
-      ")" +
-      "scale(" +
-      transforms[nextTransform(i)].scale +
-      ")";
-    cards[i].style.opacity = transforms[nextTransform(i)].opacity;
-  }
-  transforms.push(transforms.shift());
-};
-
-const rotateCarousel = (cards) => {
-  setInterval(() => {
-    next(cards);
-  }, 3500);
-};
-
-getAndDisplayCarousel(CAROUSEL_API);
 
 /**
  * @description - Retreaves and waits for MAIN_PAGE_APIS to return data

@@ -15,22 +15,27 @@ header {
   background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
     transparent no-repeat;
   background-color: black;
-  background-size: 100% 1px;
-  display: flex;
+  background-size: 100% 2px;
   height: 120px;
-  justify-content: space-between;
-  left: 0;
-  padding-bottom: 1px;
   position: fixed;
-  right: 0;
   top: 0;
-  width: 100%;
   z-index: 2;
 }
-header.active {
+.header {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+}
+.header.active {
   height: 90px;
 }
 /******* MoviesApp Logo *******/
+.logo-container {
+  width: 50%;
+  display: flex;
+}
 .logo {
   background: #800080;
   background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
@@ -42,30 +47,27 @@ header.active {
   font-size: 3.5rem;
   font-weight: 600;
   letter-spacing: 5px;
-  margin: 5%;
+  margin-left: 5%;
+  overflow: hidden;
   -moz-background-clip: text;
   -fox-background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 /******* Search Container *******/
+.search-container {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
 .search {
   background: black;
   border-radius: 10px;
-  margin: 5%;
   padding: 1px;
   position: relative;
-}
-.search:after {
   background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
-  border-radius: 10px;
-  content: "";
-  height: calc(100% + 6px);
-  left: -3px;
-  position: absolute;
-  top: -3px;
-  width: calc(100% + 6px);
-  z-index: -1;
+  margin-right: 5%;
+  overflow: hidden;
 }
 .input {
   background-color: black;
@@ -74,7 +76,6 @@ header.active {
   color: white;
   font-size: 20px;
   padding: 10px;
-  width: 400px;
 }
 .input:focus {
   outline: none;
@@ -84,50 +85,19 @@ header.active {
   margin-top: 120px;
   margin-bottom: 30px;
 }
-/******* Quote and carousel container *******/
-.quote-and-carousel {
-  display: flex;
-  height: 350px;
-  width: 100%;
-}
-/******* Movies Quote  *******/
-.movies-description {
+/******* Quote Container *******/
+.quote {
   color: white;
-  font-family: inherit;
-  width: 55%;
-  padding-left: 40px;
-  padding-top: 20px;
-}
-.movies-description h1 {
-  font-size: 6rem;
-  letter-spacing: 5px;
-}
-.movies-description h3 {
-  line-height: 2rem;
-  font-weight: 300;
-}
-.movies-description .quote-author {
-  margin-top: 20px;
-}
-/******* Avengers Carousel *******/
-.carousel {
-  align-items: baseline;
   display: flex;
-  justify-content: center;
-  padding-top: 40px;
-  transform-style: preserve-3d;
-  width: 45%;
+  flex-direction: column;
+  font-family: inherit;
+  /* border: 3px solid white; */
 }
-.card {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 300px;
-  position: absolute;
-  transition: 1s;
-  transform-style: preserve-3d;
-  width: 200px;
-  -webkit-box-reflect: below 0 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.9, transparent), to(white));
+.quote h1 {
+  /* border: 1px solid #f64f59; */
+}
+.quote blockquote {
+  /* border: 1px solid green; */
 }
 /********** Main Page Slider Settings **********/
 .all-sections-container {
@@ -335,8 +305,82 @@ header.active {
   margin: 0 auto;
   width: 90%;
 }
-/****************************************************************** SMARTPHONE RESIZE ******************************************************************/
-@media screen and (min-width: 320px) and (max-width: 767px) {
+
+/****************************************************************** SMARTPHONE MEDIA QUERIES ******************************************************************/
+@media screen and (max-width: 320px) {
+  * {
+    overflow-x: hidden;
+  }
+  header {
+    align-items: center;
+    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
+      transparent no-repeat;
+    background-color: black;
+    background-size: 100% 2px;
+    height: 120px;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+  }
+  .header {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .header.active {
+    height: 90px;
+  }
+  /******* MoviesApp Logo *******/
+  .logo-container {
+    width: 50%;
+    display: flex;
+  }
+  .logo {
+    background: #800080;
+    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
+    background: --webkit-linear-gradient(right, #f64f59, #c471ed, #12c2e9);
+    background-clip: text;
+    background-size: 100%;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 3.5rem;
+    font-weight: 600;
+    letter-spacing: 5px;
+    margin-left: 5%;
+    overflow: hidden;
+    -moz-background-clip: text;
+    -fox-background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /******* Search Container *******/
+  .search-container {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .search {
+    background: black;
+    border-radius: 10px;
+    padding: 1px;
+    position: relative;
+    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
+    margin-right: 5%;
+    overflow: hidden;
+  }
+  .input {
+    background-color: black;
+    border: 0;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+  }
+  .input:focus {
+    outline: none;
+  }
 }
 /****************************************************************** TABLET RESIZE ******************************************************************/
 /* @media screen and (min-width: 768px) and (max-width: 1023px) {
