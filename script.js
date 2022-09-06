@@ -179,17 +179,11 @@ const swiper = new Swiper(".swiper-container", {
     },
     // when window width is >= 1500px
     1500: {
-      slidesPerView: 7,
-      spaceBetween: 1,
+      slidesPerView: 6,
+      spaceBetween: 0,
       centeredSlides: false,
     },
     // when window width is >= 1800px
-    1800: {
-      slidesPerView: 6,
-      slidesPerGroup: 6,
-      spaceBetween: 5,
-      centeredSlides: true,
-    },
   },
 });
 
