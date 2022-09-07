@@ -371,32 +371,8 @@ header {
     box-shadow: none;
   }
   /********** Footer **********/
-  .footer {
-    background: linear-gradient(to left, #f64f59, #c471ed, #12c2e9);
-    bottom: 0;
-    display: flex;
-    height: 0px;
-    justify-content: center;
-    position: fixed;
-    width: 100%;
-    z-index: 2;
-  }
   .footer.active {
-    height: 30px;
-  }
-  .footer-container {
-    bottom: 0;
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    width: 99%;
-  }
-  .footer-container p {
-    font-family: inherit;
-  }
-  .tmdb {
-    height: 100%;
-    width: auto;
+    height: 20px;
   }
   /********** Divider **********/
   .div-container {
