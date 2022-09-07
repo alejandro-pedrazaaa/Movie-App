@@ -44,7 +44,7 @@ header {
   background-size: 100%;
   cursor: pointer;
   font-family: inherit;
-  font-size: 3.5rem;
+  font-size: 4rem;
   font-weight: 600;
   letter-spacing: 5px;
   margin-left: 5%;
@@ -74,7 +74,7 @@ header {
   border: 0;
   border-radius: 10px;
   color: white;
-  font-size: 20px;
+  font-size: 1rem;
   padding: 10px;
 }
 .input:focus {
@@ -110,7 +110,7 @@ header {
   color: white;
   font-family: inherit;
   font-size: 2rem;
-  letter-spacing: 3px;
+  letter-spacing: 5px;
   margin-bottom: 20px;
 }
 .swiper-container {
@@ -169,7 +169,7 @@ footer.active {
   color: white;
   display: flex;
   font-family: inherit;
-  font-size: 1.2rem;
+  font-size: 1rem;
   white-space: nowrap;
 }
 .tmdb-container {
@@ -220,15 +220,14 @@ footer.active {
 }
 .movie-info h2 {
   font-family: inherit;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 500;
-  letter-spacing: 1px;
+  letter-spacing: 5px;
 }
 .movie-info p {
   font-family: inherit;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 100;
-  letter-spacing: 2px;
   padding: 15px 125px 0 0;
 }
 .movie-info .overview::first-letter {
@@ -260,7 +259,7 @@ footer.active {
   font-family: inherit;
   font-size: 2rem;
   font-weight: 600;
-  letter-spacing: 3px;
+  letter-spacing: 5px;
   margin: auto 35px 20px 35px;
 }
 /****************************************************************** MOVIES FOUND CONTAINER ******************************************************************/
@@ -272,7 +271,7 @@ footer.active {
   color: white;
   font-family: inherit;
   font-size: 2rem;
-  letter-spacing: 3px;
+  letter-spacing: 5px;
   margin-left: 35px;
   padding-top: 20px;
 }
@@ -325,81 +324,6 @@ footer.active {
 }
 
 /****************************************************************** SMARTPHONE MEDIA QUERIES ******************************************************************/
-@media screen and (min-width: 320px) {
-  html {
-    overflow-x: hidden;
-  }
-  header {
-    height: 80px;
-  }
-  .header.active {
-    height: 60px;
-  }
-  /******* MoviesApp Logo *******/
-  .logo {
-    font-size: 1.5rem;
-    letter-spacing: 0px;
-  }
-  /******* Search Container *******/
-  .search {
-    display: flex;
-  }
-  .input {
-    font-size: 10px;
-    padding: 5px;
-  }
-  /******* Main Page *******/
-  .main-page {
-    margin-top: 80px;
-    margin-bottom: 40px;
-  }
-  /******* Quote Container *******/
-  .quote {
-    padding: 5px 20px;
-  }
-  .quote h3 i {
-    font-size: 0.7rem;
-  }
-  /********** Main Page Slider Settings **********/
-  .all-sections-container {
-    padding: 0 0 0 0;
-  }
-  .individual-section h2 {
-    font-size: 1rem;
-    letter-spacing: 0;
-    margin-bottom: 10px;
-    margin-left: 10px;
-  }
-  .swiper-container {
-    padding-bottom: 0;
-    padding-top: 0;
-  }
-  .swiper-slide img {
-    max-width: 5rem;
-  }
-  .swiper-slide:hover {
-    transform: none;
-    transition: none;
-  }
-  .swiper-slide:hover img {
-    cursor: none;
-    box-shadow: none;
-  }
-  /********** Footer **********/
-  footer.active {
-    height: 20px;
-  }
-  .text-container p {
-    font-size: 0.7rem;
-  }
-  .tmdb-container img {
-    height: 20px;
-  }
-  /********** Divider **********/
-  .div-container {
-    padding: 25px 0 25px 0;
-  }
-}
 
 /****************************************************************** TABLET RESIZE ******************************************************************/
 /* @media only screen and (min-width : 768px) { 
