@@ -327,6 +327,7 @@ footer.active {
   html {
     overflow-x: hidden;
   }
+  /******* HEADER*******/
   header {
     height: 80px;
   }
@@ -346,7 +347,7 @@ footer.active {
     font-size: 0.7rem;
     padding: 5px;
   }
-  /******* Main Page *******/
+  /******* MAIN PAGE *******/
   .main-page {
     margin-top: 80px;
     margin-bottom: 30px;
@@ -383,7 +384,7 @@ footer.active {
     cursor: none;
     box-shadow: none;
   }
-  /********** Footer **********/
+  /********** FOOTER **********/
   footer.active {
     height: 20px;
   }
@@ -393,12 +394,11 @@ footer.active {
   .tmdb-container img {
     height: 20px;
   }
-  /********** Divider **********/
+  /********** DIVIDER **********/
   .div-container {
     padding: 20px 0 20px 0;
   }
 }
-
 /****************************************************************** TABLET RESIZE ******************************************************************/
 /* @media only screen and (min-width : 768px) { 
 }*/
