@@ -4,8 +4,8 @@
 
 ## Description
 
-Application that was inspired by the ["50projects50days"](https://github.com/bradtraversy/40projects40days)
-challenge by [Brad Traversy](https://github.com/bradtraversy). With the use of APIs, this app fetches information on the latest movies, popular movies, and highest rated movies for the main screen. When the user clicks on any movie poster, a new page loads with information about the movie. Also, in that page the user can find either a collection of the movies related to the movie, or similar movies. The application is resposive to the width of the screen. 
+This application was inspired by the ["50projects50days"](https://github.com/bradtraversy/40projects40days)
+challenge by [Brad Traversy](https://github.com/bradtraversy). With the use of APIs, this app fetches information on the latest, most popular, and highest rated movies for the main screen. When the user clicks on any movie poster, a new page loads with information about that movie. Also, in that page the user can find either a collection of the movies related to the movie or similar movies. The application is resposive to the width of the screen. 
 
 ## Getting Started
 
