@@ -192,23 +192,29 @@ const showMovie = async (movie) => {
 
   clickedOrSearchContainer.innerHTML = `
     <div class="movie-container">
-      <div class="movie-poster">
-        <img src="${IMG_PATH + poster_path}">
+      <div class="movie-poster-container">
+        <div class="movie-poster">
+          <img src="${IMG_PATH + poster_path}">
+        </div>
       </div>
       <div class="movie-info">
         <h1>${title}</h1>
         <div class="movie-div">
           <div class="div"></div>
         </div>
-        <h2>${tagline}<h2>
-        <p class="overview">${overview}</p>
-        <p>Rating: <span class="rating">${voteAverage}</span></p>
-        <p>Released: <span class="released">${releaseDateFormatted}</span></p>
-        <p>Want to watch it? click <a href="${homepage}" target="_blank" class="anchor">here</a></p>
+        <div class="movie-details">
+          <p><span class="emphasize">${tagline}</span?<p>
+          <p class="overview">${overview}</p>
+          <p>Rating: <span class="emphasize">${voteAverage}</span></p>
+          <p>Released: <span class="emphasize">${releaseDateFormatted}</span></p>
+          <p>Want to watch it? click <a href="${homepage}" target="_blank" class="anchor emphasize">here</a></p>
+        </div>
       </div>
     </div>
-    <div class="div-container"><div class="divider"></div></div>
-    <h2 class="collection-similar-title"></h2>`;
+    <div class="divider-collection-similar">
+      <div class="div-container"><div class="divider"></div></div>
+      <h2 class="collection-similar-title"></h2>
+    </div>`;
 
   const collectionOrSimilarTitle = document.querySelector(
     ".collection-similar-title"
@@ -286,7 +292,6 @@ search.addEventListener("keyup", (e) => {
   if (e.keyCode === 13) {
     mainPage.setAttribute("hidden", "true");
     collectionOrSimilarContainer.setAttribute("hidden", "true");
-    clickedOrSearchContainer.setAttribute("hidden", "true");
     searchResultsContainer.removeAttribute("hidden");
 
     const div = document.createElement("div");

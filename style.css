@@ -109,7 +109,7 @@ header {
 .individual-section h2 {
   color: white;
   font-family: inherit;
-  font-size: 2rem;
+  font-size: 2.5rem;
   letter-spacing: 5px;
   margin-bottom: 20px;
 }
@@ -186,60 +186,58 @@ footer.active {
 /****************************************************************** CLICKED MOVIE CONTAINER ******************************************************************/
 .clicked-movie-container {
   margin-top: 120px;
+  display: flex;
+  flex-direction: column;
 }
 .movie-container {
   display: flex;
-  padding: 40px 40px 0 40px;
+  padding: 50px;
+  width: 100%;
 }
 /********** Poster for Clicked Movie **********/
-.movie-poster {
-  padding: 50px;
+.movie-poster-container {
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .movie-poster img {
-  height: 550px;
+  height: 600px;
   box-shadow: 0px 0px 90px -25px #fff;
 }
 /********** Clicked Movie Info **********/
 .movie-info {
   color: white;
   font-family: inherit;
-  padding-left: 50px;
+  width: 65%;
+  display: flex;
+  flex-direction: column;
 }
 .movie-info h1 {
   font-family: inherit;
   font-size: 3rem;
 }
-.movie-div {
-  padding: 0 0 30px 0;
+.movie-info .movie-div {
+  width: 100%;
 }
 .div {
   background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9, transparent)
     left bottom transparent no-repeat;
   padding: 2px;
-  width: 80%;
 }
-.movie-info h2 {
-  font-family: inherit;
-  font-size: 2rem;
-  font-weight: 500;
-  letter-spacing: 5px;
-}
-.movie-info p {
+.movie-info .movie-details p {
+  margin-top: 20px;
   font-family: inherit;
   font-size: 1.5rem;
   font-weight: 100;
-  padding: 15px 125px 0 0;
+  letter-spacing: 5px;
 }
-.movie-info .overview::first-letter {
+.movie-info .emphasize {
+  font-size: 2rem;
   font-weight: 600;
 }
-.movie-info .rating,
-.movie-info .released {
-  font-size: 2rem;
-  font-weight: 300;
-}
 .movie-info .anchor {
-  box-shadow: inset 0 0 0 0 #f64f59;
   color: white;
   text-decoration: none;
   transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -248,18 +246,27 @@ footer.active {
   color: white;
   box-shadow: inset 0 -2px 0 0 white;
 }
-/********** Collection/Similar **********/
-#collection-similar-container {
-  margin-bottom: 55px;
-  padding: 35px 30px 35px 30px;
+/********** Divider/Collection-Similar Container **********/
+.divider-collection-similar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.collection-similar-title {
+/********** Collection/Similar **********/
+.divider-collection-similar .div-container {
+  width: 100%;
+}
+.divider-collection-similar .collection-similar-title {
   color: white;
   font-family: inherit;
   font-size: 2rem;
   font-weight: 600;
   letter-spacing: 5px;
-  margin: auto 35px 20px 35px;
+}
+/********** Collection/Similar Container **********/
+#collection-similar-container {
+  margin-bottom: 55px;
+  padding: 35px 30px 35px 30px;
 }
 /****************************************************************** MOVIES FOUND CONTAINER ******************************************************************/
 .movies-found-container {
@@ -323,82 +330,7 @@ footer.active {
 }
 
 /****************************************************************** SMARTPHONE MEDIA QUERIES ******************************************************************/
-@media screen and (min-width: 320px) {
-  html {
-    overflow-x: hidden;
-  }
-  /******* HEADER*******/
-  header {
-    height: 80px;
-  }
-  .header.active {
-    height: 60px;
-  }
-  /******* MoviesApp Logo *******/
-  .logo {
-    font-size: 2rem;
-    letter-spacing: 0px;
-  }
-  /******* Search Container *******/
-  .search {
-    display: flex;
-  }
-  .input {
-    font-size: 0.7rem;
-    padding: 5px;
-  }
-  /******* MAIN PAGE *******/
-  .main-page {
-    margin-top: 80px;
-    margin-bottom: 30px;
-  }
-  /******* Quote Container *******/
-  .quote {
-    padding: 10px 20px;
-  }
-  .quote h3 i {
-    font-size: 1rem;
-  }
-  /********** Main Page Slider Settings **********/
-  .all-sections-container {
-    padding: 0 0 0 0;
-  }
-  .individual-section h2 {
-    font-size: 1rem;
-    letter-spacing: 0;
-    margin-bottom: 10px;
-    margin-left: 10px;
-  }
-  .swiper-container {
-    padding-bottom: 0;
-    padding-top: 0;
-  }
-  .swiper-slide img {
-    max-width: 6.5rem;
-  }
-  .swiper-slide:hover {
-    transform: none;
-    transition: none;
-  }
-  .swiper-slide:hover img {
-    cursor: none;
-    box-shadow: none;
-  }
-  /********** FOOTER **********/
-  footer.active {
-    height: 20px;
-  }
-  .text-container p {
-    font-size: 0.7rem;
-  }
-  .tmdb-container img {
-    height: 20px;
-  }
-  /********** DIVIDER **********/
-  .div-container {
-    padding: 20px 0 20px 0;
-  }
-}
+
 /****************************************************************** TABLET RESIZE ******************************************************************/
 /* @media only screen and (min-width : 768px) { 
 }*/
