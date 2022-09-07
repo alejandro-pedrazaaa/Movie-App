@@ -90,7 +90,7 @@ header {
   color: white;
   display: flex;
   font-family: inherit;
-  padding: 30px 80px;
+  padding: 50px 80px;
   font-weight: 200;
 }
 .quote h3 i {
@@ -369,11 +369,12 @@ header {
     cursor: none;
     box-shadow: none;
   }
+  /********** Divider **********/
+  .div-container {
+    padding: 25px 0 25px 0;
+  }
 }
-/********** Divider **********/
-.div-container {
-  padding: 25px 0 25px 0;
-}
+
 /****************************************************************** TABLET RESIZE ******************************************************************/
 /* @media screen and (min-width: 768px) and (max-width: 1023px) {
 } */
