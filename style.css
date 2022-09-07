@@ -191,32 +191,33 @@ footer.active {
 }
 .movie-container {
   display: flex;
-  padding: 50px;
+  padding: 30px;
   width: 100%;
 }
 /********** Poster for Clicked Movie **********/
 .movie-poster-container {
-  width: 35%;
+  width: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .movie-poster img {
-  height: 600px;
+  height: 550px;
   box-shadow: 0px 0px 90px -25px #fff;
 }
 /********** Clicked Movie Info **********/
 .movie-info {
   color: white;
   font-family: inherit;
-  width: 65%;
+  width: 70%;
   display: flex;
   flex-direction: column;
+  margin-left: 5%;
 }
 .movie-info h1 {
   font-family: inherit;
-  font-size: 3rem;
+  font-size: 3.5rem;
 }
 .movie-info .movie-div {
   width: 100%;
@@ -235,7 +236,7 @@ footer.active {
 }
 .movie-info .emphasize {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 400;
 }
 .movie-info .anchor {
   color: white;
@@ -265,9 +266,25 @@ footer.active {
 }
 /********** Collection/Similar Container **********/
 #collection-similar-container {
-  margin-bottom: 55px;
-  padding: 35px 30px 35px 30px;
+  border: 1px solid white;
 }
+#collection-similar-container .swiper-container {
+  height: auto;
+  margin: 0 auto;
+  padding-bottom: 35px;
+  padding-top: 35px;
+  position: relative;
+  width: 100%;
+  border: 1px solid #f64f59;
+}
+#collection-similar-container .swiper-slide {
+  transition: all 300ms ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #f64f59;
+}
+
 /****************************************************************** MOVIES FOUND CONTAINER ******************************************************************/
 .movies-found-container {
   margin-top: 120px;

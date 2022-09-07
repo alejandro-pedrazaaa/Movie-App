@@ -85,50 +85,37 @@ const swiper = new Swiper(".swiper-container", {
     300: {
       slidesPerView: 3,
       spaceBetween: 0,
-      centeredSlides: false,
     },
     500: {
       slidesPerView: 3,
       spaceBetween: 0,
-      centeredSlides: false,
     },
     700: {
       slidesPerView: 4,
       spaceBetween: 0,
-      centeredSlides: false,
     },
     900: {
       slidesPerView: 5,
       spaceBetween: 0,
-      centeredSlides: false,
     },
     1100: {
       slidesPerView: 6,
       spaceBetween: 0,
-      centeredSlides: false,
     },
   },
 });
 
 const mainPage = document.querySelector(".main-page");
-const clickedOrSearchContainer = document.querySelector(
-  ".clicked-movie-container"
-);
-const collectionOrSimilarContainer = document.getElementById(
-  "collection-similar-container"
-);
-const searchResultsContainer = document.querySelector(
-  ".search-results-container"
-);
 
 /**
- * @description - Double clicking an image on the main page will get that movie's id
+ * @description - Clicking an image on the main page will get that movie's id
  */
 const displayClickedMovie = async (allMovies) => {
   allMovies.forEach((movie) => {
     movie.addEventListener("click", () => {
       const id = movie.getAttribute("id");
 
+      mainPage.innerHTML = "";
       getAndDisplayMovie(id);
     });
   });
@@ -149,11 +136,6 @@ const getAndDisplayMovie = async (id) => {
  * @description - Displays clicked movie container, and hides the main page container
  */
 const showMovie = async (movie) => {
-  mainPage.setAttribute("hidden", "true");
-  clickedOrSearchContainer.removeAttribute("hidden");
-  collectionOrSimilarContainer.removeAttribute("hidden");
-  searchResultsContainer.setAttribute("hidden", "true");
-
   goToTop();
 
   const {
@@ -190,7 +172,7 @@ const showMovie = async (movie) => {
     releaseDate[2]
   }, ${releaseDate[0]}`;
 
-  clickedOrSearchContainer.innerHTML = `
+  mainPage.innerHTML = `
     <div class="movie-container">
       <div class="movie-poster-container">
         <div class="movie-poster">
@@ -211,10 +193,21 @@ const showMovie = async (movie) => {
         </div>
       </div>
     </div>
+
     <div class="divider-collection-similar">
       <div class="div-container"><div class="divider"></div></div>
-      <h2 class="collection-similar-title"></h2>
+      <div class="collection-similar-title-container">
+        <h2 class="collection-similar-title"></h2>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="swiper-container" id="collection-similar-container">
+        <div class="swiper-wrapper" id="wrapper"></div>
+      </div>
     </div>`;
+
+  const swiperWrapper = document.querySelector(".swiper-wrapper");
 
   const collectionOrSimilarTitle = document.querySelector(
     ".collection-similar-title"
@@ -263,10 +256,10 @@ const getMoreSimilar = async (id) => {
 /**
  * @description - Adds event listener to movies on the collection or similar container
  */
-const wrapper = document.querySelector("#wrapper");
-wrapper.addEventListener("click", () => {
+const swiperContainer = document.querySelector(".swiper-container");
+swiperContainer.addEventListener("click", () => {
   goToTop();
-  const movies = wrapper.querySelectorAll(".movie");
+  const movies = swiperContainer.querySelectorAll(".movie");
   updateCollectionOrSimilar(movies);
 });
 
@@ -281,7 +274,7 @@ const updateCollectionOrSimilar = (movies) => {
       getAndDisplayMovie(id);
     });
   }),
-    (wrapper.innerHTML = "");
+    (swiperContainer.innerHTML = "");
 };
 
 /**
@@ -290,15 +283,8 @@ const updateCollectionOrSimilar = (movies) => {
 const search = document.querySelector(".input");
 search.addEventListener("keyup", (e) => {
   if (e.keyCode === 13) {
-    mainPage.setAttribute("hidden", "true");
-    collectionOrSimilarContainer.setAttribute("hidden", "true");
-    searchResultsContainer.removeAttribute("hidden");
+    mainPage.innerHTML = "";
 
-    const div = document.createElement("div");
-    div.classList.add("movies-found-container");
-    searchResultsContainer.appendChild(div);
-
-    wrapper.innerHTML = "";
     goToTop();
     getMoviesFound();
   }
@@ -322,19 +308,10 @@ const getMoviesFound = async () => {
  * @description - Creates and displays movies that were found
  */
 const displayMoviesFound = (movies) => {
-  const moviesFoundContainer = document.querySelector(
-    ".movies-found-container"
-  );
-  moviesFoundContainer.innerHTML = "";
-
   const displaySearchedWord = document.createElement("h2");
   displaySearchedWord.classList.add("movies-found-title");
   displaySearchedWord.innerHTML = `Movies found for "${search.value}"`;
-  moviesFoundContainer.appendChild(displaySearchedWord);
-
-  const moviesFound = document.createElement("div");
-  moviesFound.classList.add("movies-found");
-  moviesFoundContainer.appendChild(moviesFound);
+  mainPage.appendChild(displaySearchedWord);
 
   for (let i = 0; i < movies.length; i++) {
     const { poster_path, id } = movies[i];
@@ -345,7 +322,7 @@ const displayMoviesFound = (movies) => {
     movie.innerHTML = `<img src="${IMG_PATH + poster_path}" alt="${
       movies[i].title
     }">`;
-    moviesFound.appendChild(movie);
+    mainPage.appendChild(movie);
 
     movie.addEventListener("click", () => {
       getAndDisplayMovie(id);
