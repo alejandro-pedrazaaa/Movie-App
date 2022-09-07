@@ -141,31 +141,46 @@ header {
   box-shadow: 0px 0px 60px -25px #fff;
 }
 /****************************************************************** FOOTER ******************************************************************/
-.footer {
+footer {
   background: linear-gradient(to left, #f64f59, #c471ed, #12c2e9);
   bottom: 0;
-  display: flex;
   height: 0px;
-  justify-content: center;
   position: fixed;
   width: 100%;
   z-index: 2;
 }
-.footer.active {
+footer.active {
   height: 30px;
 }
 .footer-container {
-  bottom: 0;
+  align-items: center;
   display: flex;
   gap: 10px;
   justify-content: flex-end;
-  width: 99%;
+  width: 100%;
 }
-.footer-container p {
+.text-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.text-container p {
+  align-self: center;
+  color: white;
+  display: flex;
   font-family: inherit;
+  font-size: 1.2rem;
+  white-space: nowrap;
 }
-.tmdb {
-  height: 100%;
+.tmdb-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.tmdb-container img {
+  align-self: center;
+  display: flex;
+  height: 30px;
   width: auto;
 }
 /****************************************************************** CLICKED MOVIE CONTAINER ******************************************************************/
@@ -371,6 +386,15 @@ header {
     box-shadow: none;
   }
   /********** Footer **********/
+  footer.active {
+    height: 20px;
+  }
+  .text-container p {
+    font-size: 0.7rem;
+  }
+  .tmdb-container img {
+    height: 20px;
+  }
   /********** Divider **********/
   .div-container {
     padding: 25px 0 25px 0;
