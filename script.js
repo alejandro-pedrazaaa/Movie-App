@@ -83,7 +83,7 @@ const swiper = new Swiper(".swiper-container", {
   loop: true,
   breakpoints: {
     300: {
-      slidesPerView: 2,
+      slidesPerView: 3,
       spaceBetween: 0,
       centeredSlides: false,
     },
@@ -126,7 +126,7 @@ const searchResultsContainer = document.querySelector(
  */
 const displayClickedMovie = async (allMovies) => {
   allMovies.forEach((movie) => {
-    movie.addEventListener("dblclick", () => {
+    movie.addEventListener("click", () => {
       const id = movie.getAttribute("id");
 
       getAndDisplayMovie(id);
@@ -258,7 +258,7 @@ const getMoreSimilar = async (id) => {
  * @description - Adds event listener to movies on the collection or similar container
  */
 const wrapper = document.querySelector("#wrapper");
-wrapper.addEventListener("dblclick", () => {
+wrapper.addEventListener("click", () => {
   goToTop();
   const movies = wrapper.querySelectorAll(".movie");
   updateCollectionOrSimilar(movies);
@@ -270,7 +270,7 @@ wrapper.addEventListener("dblclick", () => {
  */
 const updateCollectionOrSimilar = (movies) => {
   movies.forEach((movie) => {
-    movie.addEventListener("dblclick", () => {
+    movie.addEventListener("click", () => {
       const id = movie.getAttribute("id");
       getAndDisplayMovie(id);
     });
@@ -342,7 +342,7 @@ const displayMoviesFound = (movies) => {
     }">`;
     moviesFound.appendChild(movie);
 
-    movie.addEventListener("dblclick", () => {
+    movie.addEventListener("click", () => {
       getAndDisplayMovie(id);
     });
   }
