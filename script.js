@@ -87,22 +87,22 @@ const swiper = new Swiper(".swiper-container", {
       spaceBetween: 0,
       centeredSlides: false,
     },
-    600: {
+    500: {
       slidesPerView: 3,
       spaceBetween: 0,
       centeredSlides: false,
     },
-    900: {
+    700: {
       slidesPerView: 4,
       spaceBetween: 0,
       centeredSlides: false,
     },
-    1200: {
+    900: {
       slidesPerView: 5,
       spaceBetween: 0,
       centeredSlides: false,
     },
-    1500: {
+    1100: {
       slidesPerView: 6,
       spaceBetween: 0,
       centeredSlides: false,

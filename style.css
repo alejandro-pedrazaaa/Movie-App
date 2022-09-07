@@ -308,6 +308,7 @@ header {
   margin: 0 auto;
   width: 90%;
 }
+
 /****************************************************************** SMARTPHONE MEDIA QUERIES ******************************************************************/
 @media screen and (min-width: 320px) {
   html {
@@ -370,33 +371,11 @@ header {
     box-shadow: none;
   }
   /********** Footer **********/
-  .footer {
-    background: linear-gradient(to left, #f64f59, #c471ed, #12c2e9);
-    bottom: 0;
-    display: flex;
-    height: 0px;
-    justify-content: center;
-    position: fixed;
-    width: 100%;
-    z-index: 2;
-  }
   .footer.active {
     height: 20px;
   }
-  .footer-container {
-    bottom: 0;
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    width: 99%;
-  }
-  .footer-container p {
-    font-family: inherit;
-    font-size: 1rem;
-  }
   .tmdb {
-    height: 60%; /*  */
-    width: auto;
+    height: 60%;
   }
   /********** Divider **********/
   .div-container {
@@ -405,8 +384,11 @@ header {
 }
 
 /****************************************************************** TABLET RESIZE ******************************************************************/
-/* @media screen and (min-width: 768px) and (max-width: 1023px) {
+/* @media only screen and (min-width : 768px) { 
+}*/
+/****************************************************************** LAPTOP RESIZE ******************************************************************/
+/* @media only screen and (min-width: 1200px) {
 } */
 /****************************************************************** DESKTOP RESIZE ******************************************************************/
-/* @media screen and (min-width: 1024px) {
+/* @media only screen and (min-width: 1600px) {
 } */
