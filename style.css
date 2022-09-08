@@ -270,7 +270,7 @@ footer.active {
   height: 350px;
   margin: 50px;
   transition: 300ms;
-  width: auto;
+  width: 230px;
 }
 .movie img {
   height: 100%;
@@ -439,14 +439,12 @@ footer.active {
   .movies-found-container {
     padding-bottom: 0;
     margin-bottom: 20px;
-    border: 2px solid palevioletred;
   }
   .movies-found-container .movie {
     height: 150px;
     margin: 10px;
     width: 100px;
   }
-
   /*********************************** DIVIDER ***********************************/
   .div-container {
     padding: 25px 0 25px 0;
