@@ -379,7 +379,6 @@ footer.active {
   /******* Clicked Movie Poster *******/
   .movie-poster-container {
     padding-top: 25px;
-    padding-bottom: 15px;
     width: 100%;
   }
   .movie-poster img {
