@@ -1,6 +1,4 @@
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
-// const CAROUSEL_API =
-//   "https://api.themoviedb.org/3/search/movie?api_key=85ade2bd722304de1124d09e0ddfd9b3&query=avengers";
 const MAIN_PAGE_APIS = [
   "https://api.themoviedb.org/3/movie/popular?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
   "https://api.themoviedb.org/3/movie/top_rated?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1&region=US",
@@ -295,30 +293,6 @@ const getMoreSimilar = async (id, swiperWrapper) => {
 };
 
 /**
- * @description - Adds event listener to movies on the collection or similar container
- */
-// swiperWrappers.addEventListener("click", () => {
-//   goToTop();
-//   const movies = swiperWrapper.querySelectorAll(".swiper-slide");
-//   console.log(movies);
-//   updateCollectionOrSimilar(movies);
-// });
-
-/**
- * @description - Updates the collection or similar container when the user double clicks on a movie
- * in the collection or similar container
- */
-// const updateCollectionOrSimilar = (movies) => {
-//   movies.forEach((movie) => {
-//     movie.addEventListener("click", () => {
-//       const id = movie.getAttribute("id");
-//       getAndDisplayMovie(id);
-//     });
-//   }),
-//     (swiperWrapper.innerHTML = "");
-// };
-
-/**
  * @description - Adds event listener for enter key
  */
 const search = document.querySelector(".input");
@@ -351,7 +325,7 @@ const getMoviesFound = async () => {
  */
 const displayMoviesFound = (movies) => {
   const displaySearchedWord = document.createElement("h2");
-  displaySearchedWord.classList.add("movies-found-title");
+  displaySearchedWord.classList.add("section-title");
   displaySearchedWord.innerHTML = `Movies found for "${search.value}"`;
 
   const displaySearchedWordContainer = document.createElement("div");
