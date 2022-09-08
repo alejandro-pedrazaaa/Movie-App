@@ -354,6 +354,11 @@ footer.active {
   .movie:hover {
     transform: none;
   }
+  .swiper-slide:hover img,
+  .movie:hover img {
+    box-shadow: none;
+  }
+
   /*********************************** FOOTER ***********************************/
   footer.active {
     height: 20px;
@@ -462,23 +467,6 @@ footer.active {
   /*********************************** DIVIDER ***********************************/
   .div-container {
     padding: 25px 0 25px 0;
-    position: relative;
-    width: 100%;
-  }
-  .divider {
-    background: linear-gradient(
-        to right,
-        transparent,
-        #f64f59,
-        #c471ed,
-        #12c2e9,
-        transparent
-      )
-      left bottom transparent no-repeat;
-    border-radius: 5px;
-    padding: 2px;
-    margin: 0 auto;
-    width: 90%;
   }
 }
 /*********************************** TABLET RESIZE ***********************************/
