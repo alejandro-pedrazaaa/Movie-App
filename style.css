@@ -437,14 +437,16 @@ footer.active {
   }
   /******* Movies Found Container *******/
   .movies-found-container {
-    padding: 0 10px 0 10px;
+    padding-bottom: 0;
     margin-bottom: 20px;
+    border: 2px solid palevioletred;
   }
   .movies-found-container .movie {
-    height: 130px;
+    height: 150px;
     margin: 10px;
-    width: auto;
+    width: 100px;
   }
+
   /*********************************** DIVIDER ***********************************/
   .div-container {
     padding: 25px 0 25px 0;
