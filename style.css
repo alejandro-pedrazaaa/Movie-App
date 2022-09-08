@@ -335,7 +335,10 @@ footer.active {
   }
   /******* Swiper/Slider Settings *******/
   .all-sections-container {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+  }
+  .individual-section {
+    padding: 0 10px 0 10px;
   }
   .section-title {
     font-size: 1.2rem;
