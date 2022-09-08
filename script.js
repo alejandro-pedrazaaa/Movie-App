@@ -251,10 +251,9 @@ const getMoreSimilar = async (id) => {
 /**
  * @description - Adds event listener to movies on the collection or similar container
  */
-const swiperContainer = document.querySelector(".swiper-container");
-swiperContainer.addEventListener("click", () => {
+swipperWrapper.addEventListener("click", () => {
   goToTop();
-  const movies = swiperContainer.querySelectorAll(".movie");
+  const movies = swipperWrapper.querySelectorAll(".movie");
   updateCollectionOrSimilar(movies);
 });
 
@@ -269,7 +268,7 @@ const updateCollectionOrSimilar = (movies) => {
       getAndDisplayMovie(id);
     });
   }),
-    (swiperContainer.innerHTML = "");
+    (swipperWrapper.innerHTML = "");
 };
 
 /**
