@@ -280,7 +280,7 @@ const search = document.querySelector(".input");
 search.addEventListener("keyup", (e) => {
   if (e.keyCode === 13) {
     mainPage.innerHTML = "";
-    swipperContainer.setAttribute("hidden", "");
+    // swipperContainer.setAttribute("hidden", "");
 
     goToTop();
     getMoviesFound();
