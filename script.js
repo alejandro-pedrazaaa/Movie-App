@@ -106,6 +106,8 @@ const swiper = new Swiper(".swiper-container", {
 });
 
 const mainPage = document.querySelector(".main-page");
+const swipperContainer = document.querySelector("#swiper-container");
+const swipperWrapper = document.querySelector("#swiper-wrapper");
 
 /**
  * @description - Clicking an image on the main page will get that movie's id
@@ -116,6 +118,7 @@ const displayClickedMovie = async (allMovies) => {
       const id = movie.getAttribute("id");
 
       mainPage.innerHTML = "";
+      swipperContainer.removeAttribute("hidden");
       getAndDisplayMovie(id);
     });
   });
@@ -199,15 +202,7 @@ const showMovie = async (movie) => {
       <div class="collection-similar-title-container">
         <h2 class="collection-similar-title"></h2>
       </div>
-    </div>
-
-    <div class="container">
-      <div class="swiper-container" id="collection-similar-container">
-        <div class="swiper-wrapper" id="wrapper"></div>
-      </div>
     </div>`;
-
-  const swiperWrapper = document.querySelector(".swiper-wrapper");
 
   const collectionOrSimilarTitle = document.querySelector(
     ".collection-similar-title"
@@ -238,7 +233,7 @@ const getMoviesInCollection = async (id) => {
   );
   const data = await res.json();
   const movies = data.parts;
-  showMovies(movies, wrapper);
+  showMovies(movies, swipperWrapper);
 };
 
 /**
@@ -250,7 +245,7 @@ const getMoreSimilar = async (id) => {
   );
   const data = await res.json();
   const movies = data.results;
-  showMovies(movies, wrapper);
+  showMovies(movies, swipperWrapper);
 };
 
 /**
