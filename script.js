@@ -81,7 +81,7 @@ const swiper = new Swiper(".swiper-container", {
   loop: true,
   breakpoints: {
     300: {
-      slidesPerView: 3,
+      slidesPerView: 2,
       spaceBetween: 0,
     },
     500: {
@@ -227,7 +227,7 @@ createSwiperSliderEffect = (swiperContainer) => {
     loop: true,
     breakpoints: {
       300: {
-        slidesPerView: 3,
+        slidesPerView: 2,
         spaceBetween: 0,
       },
       500: {
