@@ -113,12 +113,13 @@ const swipperWrapper = document.querySelector("#swiper-wrapper");
  * @description - Clicking an image on the main page will get that movie's id
  */
 const displayClickedMovie = async (allMovies) => {
+  swipperContainer.removeAttribute("hidden");
   allMovies.forEach((movie) => {
     movie.addEventListener("click", () => {
       const id = movie.getAttribute("id");
 
       mainPage.innerHTML = "";
-      swipperContainer.removeAttribute("hidden");
+
       getAndDisplayMovie(id);
     });
   });
@@ -253,7 +254,8 @@ const getMoreSimilar = async (id) => {
  */
 swipperWrapper.addEventListener("click", () => {
   goToTop();
-  const movies = swipperWrapper.querySelectorAll(".movie");
+  const movies = swipperWrapper.querySelectorAll(".swiper-slide");
+  console.log(movies);
   updateCollectionOrSimilar(movies);
 });
 
@@ -278,6 +280,7 @@ const search = document.querySelector(".input");
 search.addEventListener("keyup", (e) => {
   if (e.keyCode === 13) {
     mainPage.innerHTML = "";
+    swipperContainer.setAttribute("hidden", "");
 
     goToTop();
     getMoviesFound();
@@ -305,23 +308,33 @@ const displayMoviesFound = (movies) => {
   const displaySearchedWord = document.createElement("h2");
   displaySearchedWord.classList.add("movies-found-title");
   displaySearchedWord.innerHTML = `Movies found for "${search.value}"`;
-  mainPage.appendChild(displaySearchedWord);
 
-  for (let i = 0; i < movies.length; i++) {
-    const { poster_path, id } = movies[i];
+  const displaySearchedWordContainer = document.createElement("div");
+  displaySearchedWordContainer.classList.add("display-searched-word-container");
 
-    const movie = document.createElement("div");
-    movie.classList.add("movie");
-    movie.setAttribute("id", id);
-    movie.innerHTML = `<img src="${IMG_PATH + poster_path}" alt="${
-      movies[i].title
+  displaySearchedWordContainer.appendChild(displaySearchedWord);
+  mainPage.appendChild(displaySearchedWordContainer);
+
+  const movieContainer = document.createElement("div");
+  movieContainer.classList.add("movies-found-container");
+
+  movies.forEach((movie) => {
+    const { poster_path, id } = movie;
+
+    const movieDiv = document.createElement("div");
+    movieDiv.classList.add("movie");
+    movieDiv.setAttribute("id", id);
+    movieDiv.innerHTML = `<img src="${IMG_PATH + poster_path}" alt="${
+      movie.title
     }">`;
-    mainPage.appendChild(movie);
 
-    movie.addEventListener("click", () => {
+    movieContainer.appendChild(movieDiv);
+    mainPage.appendChild(movieContainer);
+
+    movieDiv.addEventListener("click", () => {
       getAndDisplayMovie(id);
     });
-  }
+  });
 
   clearSearch();
 };
