@@ -443,8 +443,8 @@ footer.active {
     justify-content: space-evenly;
     padding-bottom: 0; /**/
     margin-bottom: 20px; /**/
-    border: 2px solid green;
-    width: 100%;
+    border: 2px solid palevioletred;
+    width: 100%; /**/
   }
   .movie {
     background-position: center;
@@ -454,7 +454,7 @@ footer.active {
     height: 150px; /**/
     margin: 10px; /**/
     transition: 300ms;
-    width: auto;
+    width: 100px; /**/
   }
   .movie img {
     height: 100%;
