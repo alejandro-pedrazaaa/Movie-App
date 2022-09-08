@@ -424,6 +424,9 @@ footer.active {
   .movie-info .anchor:hover {
     box-shadow: none;
   }
+  .movie-container .div-container {
+    padding: 15px 0 10px 0;
+  }
   /*********************************** MOVIES FOUND CONTAINER ***********************************/
   /******* Movies Found Title *******/
   .display-searched-word-container {

@@ -191,9 +191,8 @@ const showMovie = async (movie) => {
           <p>Want to watch it? click <a href="${homepage}" target="_blank" class="anchor emphasize">here</a></p>
         </div>
       </div>
+      <div class="div-container"><div class="divider"></div></div>
     </div>
-
-    <div class="div-container"><div class="divider"></div></div>
 
     <div class="all-sections-container">
     <div class="individual-section">
