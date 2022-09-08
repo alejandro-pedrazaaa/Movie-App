@@ -433,7 +433,7 @@ footer.active {
   .display-searched-word-container {
     display: flex;
     margin-top: 90px; /**/
-    padding: 10px 0 10px 10px; /**/
+    padding: 10px 0 0 10px; /**/
   }
   /******* Movies Found Container *******/
   .movies-found-container {
@@ -443,7 +443,8 @@ footer.active {
     justify-content: space-evenly;
     padding-bottom: 0; /**/
     margin-bottom: 20px; /**/
-    border: 2px solid #f64f59;
+    border: 2px solid green;
+    width: 100%;
   }
   .movie {
     background-position: center;
