@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;300;400;500;600&display=swap");
 
-******* {
+* {
   box-sizing: border-box;
   margin: 0;
 }
@@ -304,182 +304,60 @@ footer.active {
   }
   /*********************************** HEADER ***********************************/
   header {
-    align-items: center;
-    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9) left bottom
-      transparent no-repeat;
-    background-color: black;
-    background-size: 100% 2px;
-    height: 140px;
-    position: fixed;
-    top: 0;
-    z-index: 2;
-  }
-  .header {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 100%;
+    height: 90px;
   }
   .header.active {
-    height: 100px;
+    height: 60px;
   }
   /******* MoviesApp Logo *******/
-  .logo-container {
-    width: 50%;
-    display: flex;
-  }
   .logo {
-    background: #800080;
-    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
-    background: --webkit-linear-gradient(right, #f64f59, #c471ed, #12c2e9);
-    background-clip: text;
-    background-size: 100%;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 4.5rem;
-    font-weight: 600;
-    letter-spacing: 5px;
-    margin-left: 5%;
-    overflow: hidden;
-    -moz-background-clip: text;
-    -fox-background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 2rem;
+    letter-spacing: 0;
   }
   /******* Search Container *******/
-  .search-container {
-    width: 50%;
-    display: flex;
-    justify-content: flex-end;
-  }
   .search {
-    background: black;
-    border-radius: 10px;
-    padding: 1px;
-    position: relative;
-    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
-    margin-right: 5%;
-    overflow: hidden;
+    display: flex;
   }
   .input {
-    background-color: black;
-    border: 0;
-    border-radius: 10px;
-    color: white;
-    font-size: 1.5rem;
-    padding: 10px;
-  }
-  .input:focus {
-    outline: none;
+    font-size: 0.7rem;
+    padding: 6px;
   }
   /*********************************** MAIN PAGE ***********************************/
   .main-page {
-    margin-top: 140px;
+    margin-top: 90px;
   }
   /******* Quote Container *******/
   .quote {
-    color: white;
-    display: flex;
-    font-family: inherit;
-    padding: 50px 100px 0 100px;
-    font-weight: 200;
-    flex-direction: column;
+    padding: 5px 25px 0 25px;
   }
   .quote h3 i {
-    font-size: 2rem;
-    font-weight: 200;
-  }
-  .quote h3 .quote-author {
-    margin-left: auto;
-    text-align: right;
-    font-weight: 600;
+    font-size: 1rem;
   }
   /******* Swiper/Slider Settings *******/
   .all-sections-container {
-    margin-bottom: 70px;
-  }
-  .individual-section {
-    padding: 0 25px 0 25px;
+    margin-bottom: 40px;
   }
   .section-title {
-    color: white;
-    font-family: inherit;
-    font-size: 2.5rem;
-    letter-spacing: 5px;
+    font-size: 1.2rem;
+    letter-spacing: 0;
   }
   .swiper-container {
-    height: auto;
-    padding: 50px 0 25px 0;
-    position: relative;
-    width: 100%;
-  }
-  .swiper-slide {
-    transition: all 300ms ease-in-out;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 10px 0 10px 0;
   }
   .swiper-slide img {
-    margin: auto;
-    max-width: 12rem;
-  }
-  .swiper-slide:hover,
-  .movie:hover {
-    transform: scale(1.3);
-    transition: all 300ms ease-in-out;
-    z-index: 1;
-  }
-  .swiper-slide:hover img,
-  .movie:hover img,
-  .movie-poster img {
-    cursor: pointer;
-    box-shadow: 0px 0px 60px -25px #fff;
+    max-width: 9rem;
   }
   /*********************************** FOOTER ***********************************/
-  footer {
-    background: linear-gradient(to left, #f64f59, #c471ed, #12c2e9);
-    bottom: 0;
-    height: 0px;
-    position: fixed;
-    width: 100%;
-    z-index: 2;
-  }
   footer.active {
-    height: 30px;
-  }
-  .footer-container {
-    align-items: center;
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    width: 100%;
+    height: 20px;
   }
   /******* Powered By: *******/
-  .text-container {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-  }
   .text-container p {
-    align-self: center;
-    color: white;
-    display: flex;
-    font-family: inherit;
-    font-size: 1rem;
-    white-space: nowrap;
+    font-size: 0.8rem;
   }
   /******* TMDB Logo *******/
-  .tmdb-container {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-  }
   .tmdb-container img {
-    align-self: center;
-    display: flex;
-    height: 30px;
-    width: auto;
+    height: 15px;
   }
   /*********************************** CLICKED MOVIE CONTAINER ***********************************/
   .movie-container {
@@ -576,7 +454,7 @@ footer.active {
   }
   /*********************************** DIVIDER ***********************************/
   .div-container {
-    padding: 35px 0 35px 0;
+    padding: 25px 0 25px 0;
     position: relative;
     width: 100%;
   }
