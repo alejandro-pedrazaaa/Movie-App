@@ -262,7 +262,7 @@ footer.active {
   padding-bottom: 30px;
   margin-bottom: 30px;
 }
-.movie {
+.movies-found-container .movie {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -432,33 +432,18 @@ footer.active {
   /******* Movies Found Title *******/
   .display-searched-word-container {
     display: flex;
-    margin-top: 90px; /**/
-    padding: 10px 0 0 10px; /**/
+    margin-top: 90px;
+    padding: 10px 0 0 10px;
   }
   /******* Movies Found Container *******/
   .movies-found-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    padding-bottom: 0; /**/
-    margin-bottom: 20px; /**/
-    border: 2px solid palevioletred;
-    width: 100%; /**/
+    padding: 0 10px 0 10px;
+    margin-bottom: 20px;
   }
-  .movie {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    cursor: pointer;
-    height: 150px; /**/
-    margin: 10px; /**/
-    transition: 300ms;
-    width: 100px; /**/
-  }
-  .movie img {
-    height: 100%;
-    width: 100%;
+  .movies-found-container .movie {
+    height: 130px;
+    margin: 10px;
+    width: auto;
   }
   /*********************************** DIVIDER ***********************************/
   .div-container {
