@@ -106,14 +106,11 @@ const swiper = new Swiper(".swiper-container", {
 });
 
 const mainPage = document.querySelector(".main-page");
-const swipperContainer = document.querySelector("#swiper-container");
-const swipperWrapper = document.querySelector("#swiper-wrapper");
-
 /**
  * @description - Clicking an image on the main page will get that movie's id
  */
 const displayClickedMovie = async (allMovies) => {
-  swipperContainer.removeAttribute("hidden");
+  // swipperContainer.removeAttribute("hidden");
   allMovies.forEach((movie) => {
     movie.addEventListener("click", () => {
       const id = movie.getAttribute("id");
@@ -198,29 +195,77 @@ const showMovie = async (movie) => {
       </div>
     </div>
 
-    <div class="divider-collection-similar">
-      <div class="div-container"><div class="divider"></div></div>
-      <div class="collection-similar-title-container">
-        <h2 class="collection-similar-title"></h2>
+    <div class="div-container"><div class="divider"></div></div>
+
+    <div class="all-sections-container">
+    <div class="individual-section">
+      <h2 class="section-title"></h2>
+      <div class="swiper-container">
+        <div class="swiper-wrapper"></div>
       </div>
+    </div>
     </div>`;
 
-  const collectionOrSimilarTitle = document.querySelector(
-    ".collection-similar-title"
-  );
+  const collectionOrSimilarTitle = document.querySelector(".section-title");
+  const swiperContainer = document.querySelector(".swiper-container");
+  const swiperWrapper = document.querySelector(".swiper-wrapper");
 
-  hasCollection(belongs_to_collection, id, collectionOrSimilarTitle);
+  createSwiperSliderEffect(swiperContainer);
+
+  hasCollection(
+    belongs_to_collection,
+    id,
+    collectionOrSimilarTitle,
+    swiperWrapper
+  );
+};
+
+/**
+ * @description - Using library Swiper, this function creates a slider style layout for the
+ * display of similar or collection movies
+ */
+createSwiperSliderEffect = (swiperContainer) => {
+  const swiper = new Swiper(swiperContainer, {
+    loop: true,
+    breakpoints: {
+      300: {
+        slidesPerView: 3,
+        spaceBetween: 0,
+      },
+      500: {
+        slidesPerView: 3,
+        spaceBetween: 0,
+      },
+      700: {
+        slidesPerView: 4,
+        spaceBetween: 0,
+      },
+      900: {
+        slidesPerView: 5,
+        spaceBetween: 0,
+      },
+      1100: {
+        slidesPerView: 6,
+        spaceBetween: 0,
+      },
+    },
+  });
 };
 
 /**
  * @description - Checks whether the movie has a collection or not
  */
-const hasCollection = async (collection, id, collectionOrSimilarTitle) => {
+const hasCollection = async (
+  collection,
+  id,
+  collectionOrSimilarTitle,
+  swiperWrapper
+) => {
   if (collection) {
-    getMoviesInCollection(collection.id);
+    getMoviesInCollection(collection.id, swiperWrapper);
     collectionOrSimilarTitle.innerHTML = collection.name;
   } else if (collection === null) {
-    getMoreSimilar(id);
+    getMoreSimilar(id, swiperWrapper);
     collectionOrSimilarTitle.innerHTML = "More like this";
   }
 };
@@ -228,50 +273,50 @@ const hasCollection = async (collection, id, collectionOrSimilarTitle) => {
 /**
  * @description - Using the movie's collection id, this function will fetch the movies in the collection
  */
-const getMoviesInCollection = async (id) => {
+const getMoviesInCollection = async (id, swiperWrapper) => {
   const res = await fetch(
     `https://api.themoviedb.org/3/collection/${id}?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US`
   );
   const data = await res.json();
   const movies = data.parts;
-  showMovies(movies, swipperWrapper);
+  showMovies(movies, swiperWrapper);
 };
 
 /**
  * @description - Using the movie's id, this function will fetch movies similar to the movie that was clicked
  */
-const getMoreSimilar = async (id) => {
+const getMoreSimilar = async (id, swiperWrapper) => {
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${id}/similar?api_key=85ade2bd722304de1124d09e0ddfd9b3&language=en-US&page=1`
   );
   const data = await res.json();
   const movies = data.results;
-  showMovies(movies, swipperWrapper);
+  showMovies(movies, swiperWrapper);
 };
 
 /**
  * @description - Adds event listener to movies on the collection or similar container
  */
-swipperWrapper.addEventListener("click", () => {
-  goToTop();
-  const movies = swipperWrapper.querySelectorAll(".swiper-slide");
-  console.log(movies);
-  updateCollectionOrSimilar(movies);
-});
+// swiperWrappers.addEventListener("click", () => {
+//   goToTop();
+//   const movies = swiperWrapper.querySelectorAll(".swiper-slide");
+//   console.log(movies);
+//   updateCollectionOrSimilar(movies);
+// });
 
 /**
  * @description - Updates the collection or similar container when the user double clicks on a movie
  * in the collection or similar container
  */
-const updateCollectionOrSimilar = (movies) => {
-  movies.forEach((movie) => {
-    movie.addEventListener("click", () => {
-      const id = movie.getAttribute("id");
-      getAndDisplayMovie(id);
-    });
-  }),
-    (swipperWrapper.innerHTML = "");
-};
+// const updateCollectionOrSimilar = (movies) => {
+//   movies.forEach((movie) => {
+//     movie.addEventListener("click", () => {
+//       const id = movie.getAttribute("id");
+//       getAndDisplayMovie(id);
+//     });
+//   }),
+//     (swiperWrapper.innerHTML = "");
+// };
 
 /**
  * @description - Adds event listener for enter key
