@@ -431,17 +431,33 @@ footer.active {
   /*********************************** MOVIES FOUND CONTAINER ***********************************/
   /******* Movies Found Title *******/
   .display-searched-word-container {
-    margin-top: 90px;
-    padding: 10px 0 0 10px;
-    border: 4px solid #f64f59;
+    display: flex;
+    margin-top: 90px; /**/
+    padding: 10px 0 10px 10px; /**/
   }
   /******* Movies Found Container *******/
   .movies-found-container {
-    margin-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-bottom: 0; /**/
+    margin-bottom: 20px; /**/
+    border: 2px solid #f64f59;
   }
   .movie {
-    height: 150px;
-    margin: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    height: 150px; /**/
+    margin: 10px; /**/
+    transition: 300ms;
+    width: auto;
+  }
+  .movie img {
+    height: 100%;
+    width: 100%;
   }
   /*********************************** DIVIDER ***********************************/
   .div-container {
