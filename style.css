@@ -347,6 +347,10 @@ footer.active {
   .swiper-slide img {
     max-width: 9rem;
   }
+  .swiper-slide:hover,
+  .movie:hover {
+    transform: none;
+  }
   /*********************************** FOOTER ***********************************/
   footer.active {
     height: 20px;
