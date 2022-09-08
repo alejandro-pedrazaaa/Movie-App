@@ -433,6 +433,7 @@ footer.active {
   .display-searched-word-container {
     margin-top: 90px;
     padding: 10px 0 10px 10px;
+    border: 4px solid #f64f59;
   }
   /******* Movies Found Container *******/
   .movies-found-container {
