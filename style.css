@@ -83,7 +83,6 @@ header {
 /****************************************************************** MAIN PAGE ******************************************************************/
 .main-page {
   margin-top: 120px;
-  margin-bottom: 60px;
 }
 /******* Quote Container *******/
 .quote {
@@ -106,6 +105,7 @@ header {
 /********** Main Page Slider Settings **********/
 .all-sections-container {
   padding: 0 30px 0 30px;
+  margin-bottom: 60px;
 }
 .individual-section .section-title {
   color: white;
@@ -253,28 +253,24 @@ footer.active {
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding: 0 30px 0 30px;
 }
 /********** Collection/Similar **********/
 .divider-collection-similar .div-container {
   width: 100%;
 }
 .divider-collection-similar .collection-similar-title {
+  font-weight: 600;
   color: white;
   font-family: inherit;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 2.5rem;
   letter-spacing: 5px;
 }
 /********** Collection/Similar Container **********/
-#swiper-container {
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-  padding-bottom: 35px;
-  padding-top: 35px;
-  position: relative;
+#swiper-wrapper {
+  margin-bottom: 60px;
+  margin-top: 15px;
 }
-
 /****************************************************************** MOVIES FOUND CONTAINER ******************************************************************/
 .movies-found-container {
   margin-top: 120px;
