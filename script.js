@@ -246,6 +246,14 @@ createSwiperSliderEffect = (swiperContainer) => {
         slidesPerView: 6,
         spaceBetween: 0,
       },
+      1300: {
+        slidesPerView: 7,
+        spaceBetween: 0,
+      },
+      1500: {
+        slidesPerView: 8,
+        spaceBetween: 0,
+      },
     },
   });
 };

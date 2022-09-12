@@ -454,10 +454,149 @@ footer.active {
 }
 /********************************************************************** TABLET MEDIA QUERIES **********************************************************************/
 @media only screen and (min-width: 768px) {
-}
-/********************************************************************** LAPTOP MEDIA QUERIES **********************************************************************/
-@media only screen and (min-width: 1200px) {
-}
-/********************************************************************** DESKTOP MEDIA QUERIES **********************************************************************/
-@media only screen and (min-width: 1600px) {
+  html {
+    overflow-x: hidden;
+  }
+  /*********************************** HEADER ***********************************/
+  header {
+    height: 120px;
+  }
+  .header.active {
+    height: 80px;
+  }
+  /******* MoviesApp Logo *******/
+  .logo {
+    font-size: 3rem;
+    letter-spacing: 5px;
+  }
+  /******* Search Container *******/
+  .search {
+    display: flex;
+  }
+  .input {
+    font-size: 1rem;
+    padding: 5px;
+  }
+  /*********************************** MAIN PAGE ***********************************/
+  .main-page {
+    margin-top: 120px;
+  }
+  /******* Quote Container *******/
+  .quote {
+    padding: 5px 25px 0 25px;
+  }
+  .quote h3 i {
+    font-size: 1.5rem;
+  }
+  /******* Swiper/Slider Settings *******/
+  .all-sections-container {
+    margin-bottom: 45px;
+  }
+  .individual-section {
+    padding: 0 10px 0 10px;
+  }
+  .section-title {
+    font-size: 2rem;
+    letter-spacing: 0;
+  }
+  .swiper-container {
+    padding: 10px 0 10px 0;
+  }
+  .swiper-slide img {
+    max-width: 10rem;
+    transition: 300ms;
+  }
+  .swiper-slide:hover,
+  .movie:hover {
+    transform: none;
+  }
+  .swiper-slide:hover img,
+  .movie:hover img {
+    box-shadow: none;
+  }
+  /*********************************** FOOTER ***********************************/
+  footer.active {
+    height: 30px;
+  }
+  /******* Powered By: *******/
+  .text-container p {
+    font-size: 1.2rem;
+  }
+  /******* TMDB Logo *******/
+  .tmdb-container img {
+    height: 25px;
+  }
+  /*********************************** CLICKED MOVIE CONTAINER ***********************************/
+  .movie-container {
+    padding: 0;
+    flex-direction: column;
+  }
+  /******* Clicked Movie Poster *******/
+  .movie-poster-container {
+    padding-top: 25px;
+    width: 100%;
+  }
+  .movie-poster img {
+    height: 350px;
+  }
+  /******* Clicked Movie Info *******/
+  .movie-info {
+    width: 100%;
+    margin-left: 0;
+    padding: 0 25px 0 25px;
+  }
+  .movie-info h1 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  .movie-info .movie-div {
+    padding: 10px 0 10px 0;
+  }
+  .movie-info .movie-div .div {
+    background: linear-gradient(
+        to right,
+        transparent,
+        #f64f59,
+        #c471ed,
+        #12c2e9,
+        transparent
+      )
+      left bottom transparent no-repeat;
+  }
+  .movie-info .movie-details p {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    letter-spacing: 0;
+    text-align: justify;
+  }
+  .movie-info .emphasize,
+  .movie-info p::first-letter {
+    font-size: 1.5rem;
+  }
+  .movie-info .anchor {
+    transition: none;
+  }
+  .movie-info .anchor:hover {
+    box-shadow: none;
+  }
+  .movie-container .div-container {
+    padding: 15px 0 10px 0;
+  }
+  /*********************************** MOVIES FOUND CONTAINER ***********************************/
+  /******* Movies Found Title *******/
+  .display-searched-word-container {
+    display: flex;
+    margin-top: 120px;
+    padding: 10px 0 10px 10px;
+  }
+  /******* Movies Found Container *******/
+  .movies-found-container .movie {
+    height: 300px;
+    margin: 25px;
+    width: 200px;
+  }
+  /*********************************** DIVIDER ***********************************/
+  .div-container {
+    padding: 25px 0 25px 0;
+  }
 }
