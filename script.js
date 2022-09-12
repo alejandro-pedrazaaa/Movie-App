@@ -230,28 +230,20 @@ createSwiperSliderEffect = (swiperContainer) => {
         slidesPerView: 2,
         spaceBetween: 0,
       },
-      500: {
+      600: {
         slidesPerView: 3,
         spaceBetween: 0,
       },
-      700: {
+      900: {
         slidesPerView: 4,
         spaceBetween: 0,
       },
-      900: {
+      1200: {
         slidesPerView: 5,
         spaceBetween: 0,
       },
-      1100: {
-        slidesPerView: 6,
-        spaceBetween: 0,
-      },
-      1300: {
-        slidesPerView: 7,
-        spaceBetween: 0,
-      },
       1500: {
-        slidesPerView: 8,
+        slidesPerView: 6,
         spaceBetween: 0,
       },
     },
